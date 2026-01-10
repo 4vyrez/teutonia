@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Karlsruher Burschenschaft Teutonia - Gegründet 1843. Die älteste Burschenschaft an einer technischen Universität. Ca. 20 Studenten und 170 Alumni am KIT.">
+    <title>KB! Teutonia | Karlsruher Burschenschaft seit 1843</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <!-- Navigation - Floating Pill Design -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#hero" class="nav__logo">
+                <span class="nav__logo-emblem">KB!</span>
+                <span class="nav__logo-text">Teutonia</span>
+            </a>
+
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="#about" class="nav__link">Über Uns</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#history" class="nav__link">Geschichte</a>
+                    </li>
+                    <li class="nav__item nav__item--has-dropdown">
+                        <a href="#community" class="nav__link">
+                            Gemeinschaft
+                            <svg class="nav__dropdown-icon" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg>
+                        </a>
+                        <div class="nav__dropdown">
+                            <a href="studium.html" class="nav__dropdown-link">
+                                <span class="nav__dropdown-icon-wrap">📚</span>
+                                <span>Studium</span>
+                            </a>
+                            <a href="karriere.html" class="nav__dropdown-link">
+                                <span class="nav__dropdown-icon-wrap">💼</span>
+                                <span>Karriere</span>
+                            </a>
+                            <a href="veranstaltungen.html" class="nav__dropdown-link">
+                                <span class="nav__dropdown-icon-wrap">🎉</span>
+                                <span>Veranstaltungen</span>
+                            </a>
+                            <a href="freundschaft.html" class="nav__dropdown-link">
+                                <span class="nav__dropdown-icon-wrap">❤️</span>
+                                <span>Freundschaft</span>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#university" class="nav__link">KIT</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#house" class="nav__link">Unser Haus</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#contact" class="nav__link nav__link--cta">Kontakt</a>
+                    </li>
+                </ul>
+
+                <button class="nav__close" id="nav-close">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <button class="nav__toggle" id="nav-toggle" aria-label="Menü öffnen">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="hero">
+            <div class="hero__background"></div>
+            <div class="hero__particles" id="particles"></div>
+            <div class="hero__content container">
+                <div class="hero__badge">
+                    <span class="hero__badge-dot"></span>
+                    Gegründet 10. Oktober 1843
+                </div>
+                <h1 class="hero__title">
+                    Karlsruher Burschenschaft<br>
+                    <span class="hero__title-accent">Teutonia</span>
+                </h1>
+                <p class="hero__motto">"Freiheit, Ehre, Vaterland"</p>
+                <p class="hero__subtitle">
+                    Die erste Burschenschaft und älteste an einer technischen Universität in Deutschland.
+                </p>
+                <div class="hero__stats">
+                    <div class="hero__stat">
+                        <span class="hero__stat-number">180+</span>
+                        <span class="hero__stat-label">Jahre Tradition</span>
+                    </div>
+                    <div class="hero__stat">
+                        <span class="hero__stat-number">~23</span>
+                        <span class="hero__stat-label">Aktive Studenten</span>
+                    </div>
+                    <div class="hero__stat">
+                        <span class="hero__stat-number">170+</span>
+                        <span class="hero__stat-label">Alumni</span>
+                    </div>
+                </div>
+                <div class="hero__cta">
+                    <a href="#about" class="btn btn--primary">
+                        <span>Mehr erfahren</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                    <a href="#contact" class="btn btn--outline">Kontakt aufnehmen</a>
+                </div>
+            </div>
+            <a href="#about" class="hero__scroll">
+                <span>Entdecken</span>
+                <div class="hero__scroll-icon"></div>
+            </a>
+        </section>
+
+        <!-- About Section -->
+        <section class="section section--light" id="about">
+            <div class="container">
+                <div class="section__header">
+                    <span class="section__label">Über Uns</span>
+                    <h2 class="section__title">Wer wir sind</h2>
+                </div>
+                <div class="about__grid">
+                    <div class="about__content">
+                        <p class="about__text about__text--lead">
+                            Die Karlsruher Burschenschaft Teutonia verbindet Studenten und Absolventen des KIT – seit
+                            über 180 Jahren.
+                        </p>
+                        <p class="about__text">
+                            Als erste Burschenschaft in Karlsruhe wurden wir am 10. Oktober 1843 gegründet. Ein
+                            liberal-freiheitlicher Geist prägt uns bis heute.
+                        </p>
+                        <p class="about__text">
+                            Aktuell gehören zur Teutonia <strong>rund 23 Studierende</strong> aus verschiedensten
+                            Fachrichtungen und <strong>über 170 Alte Herren</strong> (Alumni). Gemeinsam fördern wir den
+                            Austausch zwischen Generationen und Disziplinen.
+                        </p>
+                        <p class="about__text">
+                            Wir sind fakultativ schlagend – das Fechten ist bei uns optional. Dennoch erlernt jedes
+                            Mitglied den Korbschläger als Teil unserer Tradition.
+                        </p>
+                    </div>
+                    <div class="about__values">
+                        <div class="value-card">
+                            <div class="value-card__icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.5">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                    <circle cx="9" cy="7" r="4" />
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+                                </svg>
+                            </div>
+                            <h3 class="value-card__title">Gemeinschaft</h3>
+                            <p class="value-card__text">Lebenslange Freundschaften zwischen Generationen – von Studenten
+                                bis zu Berufstätigen in Wissenschaft, Wirtschaft und Politik.</p>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-card__icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.5">
+                                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                                </svg>
+                            </div>
+                            <h3 class="value-card__title">Bildung</h3>
+                            <p class="value-card__text">Breitgefächerte Bildung durch Seminare, Vorträge und kulturelle
+                                Veranstaltungen. Akademische Exzellenz durch interdisziplinären Austausch.</p>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-card__icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.5">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                </svg>
+                            </div>
+                            <h3 class="value-card__title">Freiheit & Ehre</h3>
+                            <p class="value-card__text">Verbundenheit mit den Gedanken und Zielen der Urburschenschaft
+                                von 1815. Einsatz für liberale und demokratische Werte.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- History Section - Interactive Timeline -->
+        <section class="section section--dark" id="history">
+            <div class="container">
+                <div class="section__header section__header--light">
+                    <span class="section__label">Geschichte</span>
+                    <h2 class="section__title">Über 180 Jahre Tradition</h2>
+                    <p class="section__subtitle">Klicke auf einen Zeitpunkt, um mehr zu erfahren</p>
+                </div>
+                <div class="timeline-interactive">
+                    <div class="timeline__line"></div>
+                    <div class="timeline__progress" id="timeline-progress"></div>
+
+                    <div class="timeline__item" data-year="1843">
+                        <div class="timeline__marker">
+                            <span class="timeline__year">1843</span>
+                        </div>
+                        <div class="timeline__card">
+                            <div class="timeline__card-header">
+                                <h3 class="timeline__title">Gründung der Teutonia</h3>
+                                <span class="timeline__date">10. Oktober 1843</span>
+                            </div>
+                            <div class="timeline__card-body">
+                                <p>Die Karlsruher Burschenschaft Teutonia wird von ehemaligen Mitgliedern des Corps
+                                    Franconia gegründet. Ein liberal-freiheitlicher Geist prägt die Gründer – sie sind
+                                    begeistert von den Idealen der Burschenschaftsbewegung. Schnell wächst die
+                                    Verbindung: Zeitweise ist ein Viertel aller Karlsruher Studenten Mitglied der
+                                    Teutonia.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline__item" data-year="1848">
+                        <div class="timeline__marker">
+                            <span class="timeline__year">1848</span>
+                        </div>
+                        <div class="timeline__card">
+                            <div class="timeline__card-header">
+                                <h3 class="timeline__title">Revolution & Verbot</h3>
+                                <span class="timeline__date">1848–1849</span>
+                            </div>
+                            <div class="timeline__card-body">
+                                <p>Die Teutonen beteiligen sich aktiv an der Revolution von 1848/49. Ein größerer und
+                                    radikalerer Teil der Burschenschaft kämpft in den Reihen der Badischen Volksarmee
+                                    für die deutsche Verfassung und einen geeinten deutschen Nationalstaat. Nach dem
+                                    Scheitern der Revolution wird die Burschenschaft 1849 verboten. Viele Mitglieder
+                                    kehren nicht zurück, wandern aus oder meiden die Heimat.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline__item" data-year="1857">
+                        <div class="timeline__marker">
+                            <span class="timeline__year">1857</span>
+                        </div>
+                        <div class="timeline__card">
+                            <div class="timeline__card-header">
+                                <h3 class="timeline__title">Wiedergründung</h3>
+                                <span class="timeline__date">1857</span>
+                            </div>
+                            <div class="timeline__card-body">
+                                <p>Nach Jahren im Verborgenen wird die Teutonia wiedergegründet und bekennt sich
+                                    öffentlich zum Burschenschaftswesen. Es beginnen vermehrt "Verabredungsmensuren" mit
+                                    anderen Karlsruher Korporationen. Die Verbindung wächst erneut und ist bis in die
+                                    1930er Jahre oft die stärkste lokale Burschenschaft.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline__item" data-year="1877">
+                        <div class="timeline__marker">
+                            <span class="timeline__year">1877</span>
+                        </div>
+                        <div class="timeline__card">
+                            <div class="timeline__card-header">
+                                <h3 class="timeline__title">Tochterverbindungen</h3>
+                                <span class="timeline__date">1877–1893</span>
+                            </div>
+                            <div class="timeline__card-body">
+                                <p>Aus der Teutonia gehen mehrere neue Burschenschaften hervor: 1877 gründen Mitglieder
+                                    die Burschenschaft Germania Karlsruhe. 1888 folgt die Burschenschaft Cimbria (später
+                                    nach Berlin verlegt). 1893 gründen Teutonen gemeinsam mit Germania-Mitgliedern die
+                                    Münchner Burschenschaft Stauffia, die bis heute existiert.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline__item" data-year="1937">
+                        <div class="timeline__marker">
+                            <span class="timeline__year">1937</span>
+                        </div>
+                        <div class="timeline__card">
+                            <div class="timeline__card-header">
+                                <h3 class="timeline__title">NS-Zeit & Gleichschaltung</h3>
+                                <span class="timeline__date">1937–1945</span>
+                            </div>
+                            <div class="timeline__card-body">
+                                <p>Im Zuge der "Gleichschaltung" durch das NS-Regime wird die Teutonia offiziell
+                                    aufgelöst. Sie existiert jedoch als "Kameradschaft Egerland" gemeinsam mit der
+                                    Tochterverbindung Germania bis 1945 weiter.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline__item" data-year="1950">
+                        <div class="timeline__marker">
+                            <span class="timeline__year">1950</span>
+                        </div>
+                        <div class="timeline__card">
+                            <div class="timeline__card-header">
+                                <h3 class="timeline__title">Wiedererstehung</h3>
+                                <span class="timeline__date">1947–1950</span>
+                            </div>
+                            <div class="timeline__card-body">
+                                <p>1947 finden sich ehemalige Mitglieder von Teutonia, Germania und Egerland im
+                                    "Karlsruher Studentenclub Universitas" zusammen. Die Teutonia spielt 1949/50 eine
+                                    führende Rolle bei der Wiederherstellung der Deutschen Burschenschaft (DB). 1950
+                                    nimmt die "Universitas" offiziell wieder den Namen Karlsruher Burschenschaft
+                                    Teutonia an – mit den traditionellen Farben, dem Zirkel und dem Wahlspruch.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline__item" data-year="1971">
+                        <div class="timeline__marker">
+                            <span class="timeline__year">1971</span>
+                        </div>
+                        <div class="timeline__card">
+                            <div class="timeline__card-header">
+                                <h3 class="timeline__title">Fakultativ Schlagend</h3>
+                                <span class="timeline__date">1971</span>
+                            </div>
+                            <div class="timeline__card-body">
+                                <p>Die Praxis der Bestimmungsmensur wird abgeschafft. Die Teutonia wird zur "fakultativ
+                                    schlagenden" Verbindung – das Fechten von Mensuren ist seitdem optional. Dennoch
+                                    erlernt jedes Mitglied weiterhin den Umgang mit dem Korbschläger als Teil der
+                                    Tradition.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline__item timeline__item--active" data-year="heute">
+                        <div class="timeline__marker">
+                            <span class="timeline__year">Heute</span>
+                        </div>
+                        <div class="timeline__card">
+                            <div class="timeline__card-header">
+                                <h3 class="timeline__title">Lebendige Tradition</h3>
+                                <span class="timeline__date">Gegenwart</span>
+                            </div>
+                            <div class="timeline__card-body">
+                                <p>Die Karlsruher Burschenschaft Teutonia verbindet heute ca. 20 Studenten mit über 170
+                                    Alumni aus Wissenschaft, Wirtschaft und Politik. Wir leben unsere Werte "Freiheit,
+                                    Ehre, Vaterland" und pflegen Traditionen, die über Generationen Bestand haben – im
+                                    Herzen von Karlsruhe, direkt am KIT.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community Section -->
+        <section class="section section--light" id="community">
+            <div class="container">
+                <div class="section__header">
+                    <span class="section__label">Gemeinschaft</span>
+                    <h2 class="section__title">Mehr als nur Studium</h2>
+                    <p class="section__subtitle section__subtitle--dark">Entdecke die vier Säulen unserer Gemeinschaft
+                    </p>
+                </div>
+                <div class="expandable-cards">
+                    <div class="expand-card">
+                        <div class="expand-card__header">
+                            <div class="expand-card__icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.5">
+                                    <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                                    <path d="M6 12v5c0 1.1 2.9 3 6 3s6-1.9 6-3v-5" />
+                                </svg>
+                            </div>
+                            <h3 class="expand-card__title">Studium</h3>
+                            <div class="expand-card__indicator">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <polyline points="6 9 12 15 18 9" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="expand-card__body">
+                            <ul class="expand-card__list">
+                                <li>Interdisziplinärer Austausch</li>
+                                <li>Unterstützung von Alumni</li>
+                                <li>Gemeinsame Lerngruppen</li>
+                                <li>Arbeitsräume & Bibliothek</li>
+                            </ul>
+                            <a href="studium.html" class="expand-card__button">
+                                Mehr erfahren
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="expand-card">
+                        <div class="expand-card__header">
+                            <div class="expand-card__icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.5">
+                                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                                </svg>
+                            </div>
+                            <h3 class="expand-card__title">Karriere</h3>
+                            <div class="expand-card__indicator">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <polyline points="6 9 12 15 18 9" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="expand-card__body">
+                            <ul class="expand-card__list">
+                                <li>Starkes Alumni-Netzwerk</li>
+                                <li>Kontakte in Wirtschaft & Forschung</li>
+                                <li>Berufliche Orientierung</li>
+                                <li>Praktika & Jobangebote</li>
+                            </ul>
+                            <a href="karriere.html" class="expand-card__button">
+                                Mehr erfahren
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="expand-card">
+                        <div class="expand-card__header">
+                            <div class="expand-card__icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.5">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                                    <line x1="16" y1="2" x2="16" y2="6" />
+                                    <line x1="8" y1="2" x2="8" y2="6" />
+                                    <line x1="3" y1="10" x2="21" y2="10" />
+                                </svg>
+                            </div>
+                            <h3 class="expand-card__title">Veranstaltungen</h3>
+                            <div class="expand-card__indicator">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <polyline points="6 9 12 15 18 9" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="expand-card__body">
+                            <ul class="expand-card__list">
+                                <li>Vorträge & Diskussionsabende</li>
+                                <li>Bälle & studentische Feiern</li>
+                                <li>Wandern, Skifahren, Segeln</li>
+                                <li>Stammtische & Reisen</li>
+                            </ul>
+                            <a href="veranstaltungen.html" class="expand-card__button">
+                                Mehr erfahren
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="expand-card">
+                        <div class="expand-card__header">
+                            <div class="expand-card__icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.5">
+                                    <path
+                                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                                </svg>
+                            </div>
+                            <h3 class="expand-card__title">Freundschaft</h3>
+                            <div class="expand-card__indicator">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <polyline points="6 9 12 15 18 9" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="expand-card__body">
+                            <ul class="expand-card__list">
+                                <li>Lebenslange Verbundenheit</li>
+                                <li>Gegenseitige Besuche & Feiern</li>
+                                <li>Rückhalt in allen Lebenslagen</li>
+                                <li>Generationsübergreifend</li>
+                            </ul>
+                            <a href="freundschaft.html" class="expand-card__button">
+                                Mehr erfahren
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- University Section -->
+        <section class="section section--gradient" id="university">
+            <div class="container">
+                <div class="section__header section__header--light">
+                    <span class="section__label">Unsere Alma Mater</span>
+                    <h2 class="section__title">Karlsruher Institut für Technologie</h2>
+                </div>
+                <div class="university__content">
+                    <div class="university__text">
+                        <p class="university__lead">
+                            Das KIT geht auf die "Polytechnische Schule Karlsruhe" zurück, gegründet am 7. Oktober 1825
+                            – damit ist sie die <strong>älteste Technische Hochschule Deutschlands</strong>.
+                        </p>
+                        <p>
+                            1885 wurde das Polytechnikum zur Technischen Hochschule erhoben, 1900 erhielt sie das
+                            Promotionsrecht. Die "Fridericiana", benannt nach Großherzog Friedrich I., wurde 1967 zur
+                            Universität erhoben.
+                        </p>
+                        <p>
+                            Die Fridericiana gründete 1969 die erste Fakultät für Chemieingenieurwesen und 1972 die
+                            erste Fakultät für Informatik in Deutschland. 2006 wurde sie zur "Elite-Universität"
+                            ernannt. Das heutige KIT entstand aus dem Zusammenschluss mit dem Forschungszentrum
+                            Karlsruhe.
+                        </p>
+                        <div class="university__famous">
+                            <h4>Berühmte Persönlichkeiten</h4>
+                            <div class="university__tags">
+                                <span class="tag">Karl Benz</span>
+                                <span class="tag">Heinrich Hertz</span>
+                                <span class="tag">Fritz Haber</span>
+                                <span class="tag">August Thyssen</span>
+                                <span class="tag">Dietmar Hopp</span>
+                                <span class="tag">Dieter Zetsche</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="university__stats">
+                        <div class="stat-card">
+                            <span class="stat-card__number">1825</span>
+                            <span class="stat-card__label">Gründung</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-card__number">1.</span>
+                            <span class="stat-card__label">TH Deutschlands</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-card__number">2006</span>
+                            <span class="stat-card__label">Elite-Uni Status</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- House Section -->
+        <section class="section section--light" id="house">
+            <div class="container">
+                <div class="section__header">
+                    <span class="section__label">Unser Haus</span>
+                    <h2 class="section__title">Treffpunkt unseres Bundes</h2>
+                </div>
+                <div class="house__intro">
+                    <p>Zentrum unseres Gemeinschaftslebens ist unser Verbindungshaus in der Karlsruher Oststadt, in
+                        unmittelbarer Nähe zur Universität. Von hier aus lässt sich jedes Universitätsgebäude innerhalb
+                        von 15 Minuten erreichen.</p>
+                </div>
+                <div class="house__grid">
+                    <div class="house-feature">
+                        <div class="house-feature__icon">🏛️</div>
+                        <h3 class="house-feature__title">Festsaal</h3>
+                        <p class="house-feature__text">Hier organisieren wir Vorträge, Bälle, studentische Feiern und
+                            Semesterpartys. Auch Hochschulgruppen sind zu Diskussionsabenden eingeladen.</p>
+                    </div>
+                    <div class="house-feature">
+                        <div class="house-feature__icon">🛏️</div>
+                        <h3 class="house-feature__title">20 Zimmer</h3>
+                        <p class="house-feature__text">Günstiges Wohnen direkt am KIT. Die studierenden Mitglieder leben
+                            gemeinsam, verwalten das Haus und planen Veranstaltungen.</p>
+                    </div>
+                    <div class="house-feature">
+                        <div class="house-feature__icon">☀️</div>
+                        <h3 class="house-feature__title">Loggia & Garten</h3>
+                        <p class="house-feature__text">Unsere Terrasse mit Sitzgarnitur und Grill. Im Sommer der
+                            perfekte Ort für gemeinsame Grillabende und Freizeitaktivitäten.</p>
+                    </div>
+                    <div class="house-feature">
+                        <div class="house-feature__icon">🍺</div>
+                        <h3 class="house-feature__title">Bar & Fernsehecke</h3>
+                        <p class="house-feature__text">Abendlicher Treffpunkt für Geburtstage, spontane Feten oder zum
+                            Verfolgen sportlicher Highlights in gemütlicher Atmosphäre.</p>
+                    </div>
+                    <div class="house-feature">
+                        <div class="house-feature__icon">☕</div>
+                        <h3 class="house-feature__title">Kaffeeecke</h3>
+                        <p class="house-feature__text">Beliebter Treffpunkt nach dem Essen. Hier werden die wichtigen
+                            Dinge des Lebens besprochen, Zeitung gelesen und Kaffee genossen.</p>
+                    </div>
+                    <div class="house-feature">
+                        <div class="house-feature__icon">🍽️</div>
+                        <h3 class="house-feature__title">Mittagstisch</h3>
+                        <p class="house-feature__text">Um 13:15 Uhr Alternative zur Mensa: Unser Koch bereitet das Essen
+                            zu, das wir gemeinsam in angenehmer Runde genießen.</p>
+                    </div>
+                    <div class="house-feature">
+                        <div class="house-feature__icon">🎱</div>
+                        <h3 class="house-feature__title">Billardtisch</h3>
+                        <p class="house-feature__text">Direkt neben der Kaffeeecke – ideal, um die Zeit bis zur nächsten
+                            Übung zu überbrücken.</p>
+                    </div>
+                    <div class="house-feature">
+                        <div class="house-feature__icon">📚</div>
+                        <h3 class="house-feature__title">Lern- und Arbeitsräume</h3>
+                        <p class="house-feature__text">Büro, Lernzimmer und Zeichenzimmer. Während der Klausurphasen der
+                            zentrale Lernort – mit Unterstützung von höheren Semestern.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="section section--dark" id="contact">
+            <div class="container">
+                <div class="section__header section__header--light">
+                    <span class="section__label">Kontakt</span>
+                    <h2 class="section__title">Interesse geweckt?</h2>
+                </div>
+                <div class="contact__grid">
+                    <div class="contact__info">
+                        <p class="contact__intro">
+                            Wir freuen uns über dein Interesse! Schreib uns eine Nachricht oder besuche uns einfach bei
+                            einer unserer Veranstaltungen. Der Grundstein für die Mitgliedschaft wird während der
+                            Studienzeit in Karlsruhe gelegt – melde dich, um mehr zu erfahren.
+                        </p>
+                        <div class="contact__details">
+                            <div class="contact__item">
+                                <div class="contact__icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                        <circle cx="12" cy="10" r="3" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <strong>Adresse</strong>
+                                    <p>Karlsruher Burschenschaft Teutonia<br>Karlsruher Oststadt<br>76131 Karlsruhe</p>
+                                </div>
+                            </div>
+                            <div class="contact__item">
+                                <div class="contact__icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <path
+                                            d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                        <polyline points="22,6 12,13 2,6" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <strong>E-Mail</strong>
+                                    <p>kontakt@kbteutonia.de</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contact__social">
+                            <a href="https://www.facebook.com/KB.Teutonia/" class="social-link" target="_blank"
+                                rel="noopener">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                                </svg>
+                                Facebook
+                            </a>
+                            <a href="https://www.instagram.com/teutoniakarlsruhe/" class="social-link" target="_blank"
+                                rel="noopener">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                                </svg>
+                                Instagram
+                            </a>
+                        </div>
+                    </div>
+                    <form class="contact__form" id="contact-form" action="https://formspree.io/f/theorei@icloud.com"
+                        method="POST">
+                        <input type="hidden" name="_subject" value="Neue Nachricht von KB Teutonia Website">
+                        <div class="form__group">
+                            <label for="name" class="form__label">Name</label>
+                            <input type="text" id="name" name="name" class="form__input" placeholder="Dein Name"
+                                required>
+                        </div>
+                        <div class="form__group">
+                            <label for="email" class="form__label">E-Mail</label>
+                            <input type="email" id="email" name="email" class="form__input" placeholder="deine@email.de"
+                                required>
+                        </div>
+                        <div class="form__group">
+                            <label for="subject" class="form__label">Betreff</label>
+                            <input type="text" id="subject" name="subject" class="form__input"
+                                placeholder="Worum geht es?">
+                        </div>
+                        <div class="form__group">
+                            <label for="message" class="form__label">Nachricht</label>
+                            <textarea id="message" name="message" class="form__textarea" rows="5"
+                                placeholder="Deine Nachricht..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn--primary btn--full">
+                            <span>Nachricht senden</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <line x1="22" y1="2" x2="11" y2="13" />
+                                <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__brand">
+                    <span class="footer__logo">KB! Teutonia</span>
+                    <p class="footer__tagline">Karlsruher Burschenschaft seit 1843</p>
+                    <p class="footer__motto">"Freiheit, Ehre, Vaterland"</p>
+                </div>
+                <div class="footer__nav">
+                    <div class="footer__col">
+                        <h4>Navigation</h4>
+                        <a href="#about">Über Uns</a>
+                        <a href="#history">Geschichte</a>
+                        <a href="#community">Gemeinschaft</a>
+                    </div>
+                    <div class="footer__col">
+                        <h4>Mehr</h4>
+                        <a href="#university">KIT</a>
+                        <a href="#house">Unser Haus</a>
+                        <a href="#contact">Kontakt</a>
+                    </div>
+                </div>
+                <div class="footer__social">
+                    <h4>Folge uns</h4>
+                    <div class="footer__social-links">
+                        <a href="https://www.facebook.com/KB.Teutonia/" target="_blank" rel="noopener"
+                            aria-label="Facebook">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                            </svg>
+                        </a>
+                        <a href="https://www.instagram.com/teutoniakarlsruhe/" target="_blank" rel="noopener"
+                            aria-label="Instagram">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer__member-access">
+                    <h4>Für Mitglieder</h4>
+                    <a href="mitgliederbereich.html" class="footer__member-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                        </svg>
+                        Mitgliederbereich
+                    </a>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2025 Karlsruher Burschenschaft Teutonia. Alle Rechte vorbehalten.</p>
+                <div class="footer__colors">
+                    <span class="footer__color footer__color--red"></span>
+                    <span class="footer__color footer__color--gold"></span>
+                    <span class="footer__color footer__color--black"></span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

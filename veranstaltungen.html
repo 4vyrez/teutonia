@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Veranstaltungen bei der Karlsruher Burschenschaft Teutonia - Events, Bälle, Ausflüge und mehr">
+    <title>Veranstaltungen | KB Teutonia Karlsruhe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <header class="header header--scrolled">
+        <nav class="nav container">
+            <a href="index.html" class="nav__logo">
+                <span class="nav__logo-emblem">KB!</span>
+                <span class="nav__logo-text">Teutonia</span>
+            </a>
+
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="index.html#about" class="nav__link">Über Uns</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="index.html#history" class="nav__link">Geschichte</a>
+                    </li>
+                    <li class="nav__item nav__item--has-dropdown">
+                        <a href="index.html#community" class="nav__link active">
+                            Gemeinschaft
+                            <svg class="nav__dropdown-icon" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg>
+                        </a>
+                        <div class="nav__dropdown">
+                            <a href="studium.html" class="nav__dropdown-link">
+                                <span class="nav__dropdown-icon-wrap">📚</span>
+                                <span>Studium</span>
+                            </a>
+                            <a href="karriere.html" class="nav__dropdown-link">
+                                <span class="nav__dropdown-icon-wrap">💼</span>
+                                <span>Karriere</span>
+                            </a>
+                            <a href="veranstaltungen.html" class="nav__dropdown-link nav__dropdown-link--active">
+                                <span class="nav__dropdown-icon-wrap">🎉</span>
+                                <span>Veranstaltungen</span>
+                            </a>
+                            <a href="freundschaft.html" class="nav__dropdown-link">
+                                <span class="nav__dropdown-icon-wrap">❤️</span>
+                                <span>Freundschaft</span>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav__item">
+                        <a href="index.html#university" class="nav__link">KIT</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="index.html#house" class="nav__link">Unser Haus</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="index.html#contact" class="nav__link nav__link--cta">Kontakt</a>
+                    </li>
+                </ul>
+
+                <button class="nav__close" id="nav-close">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <button class="nav__toggle" id="nav-toggle" aria-label="Menü öffnen">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Subpage Hero -->
+        <section class="subpage-hero subpage-hero--events">
+            <div class="subpage-hero__background"></div>
+            <div class="container">
+                <a href="index.html#community" class="subpage-hero__back">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7" />
+                    </svg>
+                    Zurück zur Übersicht
+                </a>
+                <div class="subpage-hero__icon">🎉</div>
+                <h1 class="subpage-hero__title">Veranstaltungen</h1>
+                <p class="subpage-hero__subtitle">Ein Semesterprogramm voller Höhepunkte</p>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <section class="section section--light">
+            <div class="container">
+                <div class="subpage-content">
+                    <div class="subpage-content__main">
+                        <h2>Mehr als nur Vorlesungen</h2>
+                        <p class="lead">Das Studium ist mehr als Bücher und Prüfungen. Bei der Teutonia erlebst du ein
+                            abwechslungsreiches Programm aus Bildung, Sport, Kultur und Geselligkeit – jedes Semester
+                            aufs Neue.</p>
+
+                        <h3>Bildung & Diskussion</h3>
+                        <p>Regelmäßig laden wir Referenten ein, die über aktuelle Themen aus Politik, Wirtschaft und
+                            Wissenschaft sprechen. Diese Vorträge bieten die Möglichkeit, über den Tellerrand des
+                            eigenen Studiums hinauszublicken und kontroverse Themen in einem offenen Rahmen zu
+                            diskutieren.</p>
+
+                        <h3>Festlichkeiten & Bälle</h3>
+                        <p>Zu den Höhepunkten des Jahres gehören unsere traditionellen Bälle und Festveranstaltungen.
+                            Hier treffen sich Aktive und Alte Herren in festlicher Atmosphäre. Der Stiftungsfestball zum
+                            Jahrestag der Gründung ist dabei ein besonderes Highlight.</p>
+
+                        <h3>Sport & Abenteuer</h3>
+                        <p>Ob Wanderwochenenden im Schwarzwald, Skifahren in den Alpen oder Segeltörns – bei uns kommt
+                            der sportliche Ausgleich nicht zu kurz. Diese gemeinsamen Erlebnisse schweißen zusammen und
+                            schaffen Erinnerungen für ein ganzes Leben.</p>
+
+                        <div class="subpage-quote">
+                            <blockquote>
+                                "Die Skifreizeit in Österreich war unglaublich. Tagsüber auf der Piste, abends
+                                geselliges Beisammensein – diese Woche werde ich nie vergessen."
+                            </blockquote>
+                            <cite>— Aktiver Student</cite>
+                        </div>
+
+                        <h3>Stammtische & informelle Treffen</h3>
+                        <p>Neben den großen Veranstaltungen gibt es regelmäßige Stammtische, Spieleabende und spontane
+                            Zusammenkünfte. Hier entstehen oft die besten Gespräche und engsten Freundschaften.</p>
+
+                        <h3>Kulturelle Ausflüge</h3>
+                        <p>Gemeinsame Besuche von Theater, Oper oder Konzerten gehören ebenso zum Programm wie
+                            Städtereisen zu befreundeten Verbindungen in ganz Deutschland und Europa.</p>
+                    </div>
+
+                    <aside class="subpage-content__sidebar">
+                        <div class="sidebar-card">
+                            <h4>Jahreshighlights</h4>
+                            <ul class="sidebar-list">
+                                <li><strong>Stiftungsfest:</strong> Oktober</li>
+                                <li><strong>Weihnachtsfeier:</strong> Dezember</li>
+                                <li><strong>Skifreizeit:</strong> Januar/Februar</li>
+                                <li><strong>Semesterball:</strong> Juli</li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-card sidebar-card--cta">
+                            <h4>Interesse geweckt?</h4>
+                            <p>Lerne uns bei einem unverbindlichen Besuch kennen!</p>
+                            <a href="index.html#contact" class="btn btn--primary btn--sm">Kontakt aufnehmen</a>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Links -->
+        <section class="section section--dark">
+            <div class="container">
+                <h3 class="section__title section__title--sm">Weitere Bereiche</h3>
+                <div class="related-links">
+                    <a href="studium.html" class="related-link">
+                        <span class="related-link__icon">📚</span>
+                        <span class="related-link__text">Studium</span>
+                    </a>
+                    <a href="karriere.html" class="related-link">
+                        <span class="related-link__icon">💼</span>
+                        <span class="related-link__text">Karriere</span>
+                    </a>
+                    <a href="freundschaft.html" class="related-link">
+                        <span class="related-link__icon">❤️</span>
+                        <span class="related-link__text">Freundschaft</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__brand">
+                    <div class="footer__logo">
+                        <span class="nav__logo-emblem">KB!</span>
+                        <span>Karlsruher Burschenschaft Teutonia</span>
+                    </div>
+                    <p class="footer__motto">"Freiheit, Ehre, Vaterland"</p>
+                </div>
+                <div class="footer__links">
+                    <a href="index.html#about">Über Uns</a>
+                    <a href="index.html#history">Geschichte</a>
+                    <a href="index.html#community">Gemeinschaft</a>
+                    <a href="index.html#contact">Kontakt</a>
+                </div>
+                <div class="footer__member-access">
+                    <h4>Für Mitglieder</h4>
+                    <a href="mitgliederbereich.html" class="footer__member-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                        </svg>
+                        Mitgliederbereich
+                    </a>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2024 Karlsruher Burschenschaft Teutonia. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

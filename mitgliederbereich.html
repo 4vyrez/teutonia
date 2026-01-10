@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mitgliederbereich der Karlsruher Burschenschaft Teutonia">
+    <title>Mitgliederbereich | KB! Teutonia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/mitglieder-v3.css">
+</head>
+
+<body>
+    <!-- Login Section -->
+    <section class="login-page" id="login-section">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="login-header">
+                    <div class="login-logo">KB! Teutonia</div>
+                    <h1>Mitgliederbereich</h1>
+                </div>
+
+                <form class="login-form" id="login-form">
+                    <div class="form-group">
+                        <label for="login-name">Nachname</label>
+                        <input type="text" id="login-name" name="name" placeholder="Dein Nachname" required>
+                        <span class="form-hint">Oder vollständiger Name bei Doppelungen</span>
+                    </div>
+
+                    <div class="form-group" id="password-group">
+                        <label for="login-password">Passwort</label>
+                        <input type="password" id="login-password" name="password" placeholder="Passwort">
+                    </div>
+
+                    <div class="form-group hidden" id="new-password-group">
+                        <label for="new-password">Neues Passwort erstellen</label>
+                        <input type="password" id="new-password" placeholder="Mind. 6 Zeichen">
+                    </div>
+
+                    <div class="form-group hidden" id="confirm-password-group">
+                        <label for="confirm-password">Passwort bestätigen</label>
+                        <input type="password" id="confirm-password" placeholder="Wiederholen">
+                    </div>
+
+                    <div class="login-error" id="login-error"></div>
+
+                    <button type="submit" class="btn-primary" id="login-btn">Anmelden</button>
+                </form>
+
+                <a href="index.html" class="login-back">← Zurück zur Hauptseite</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section class="dashboard hidden" id="dashboard-section">
+        <!-- Header -->
+        <header class="dash-header">
+            <div class="dash-brand">
+                <a href="index.html">KB! Teutonia</a>
+            </div>
+            <div class="dash-user">
+                <span class="user-name" id="user-name">Name</span>
+                <span class="user-role" id="user-role">Rolle</span>
+                <button class="btn-logout" id="logout-btn">Logout</button>
+            </div>
+        </header>
+
+        <!-- Admin Debug Bar (only for Systemadmin) -->
+        <div class="debug-bar hidden" id="debug-bar">
+            <label>Ansicht wechseln:</label>
+            <select id="debug-user-select">
+                <option value="">-- Eigene Ansicht --</option>
+            </select>
+        </div>
+
+        <!-- Alert Bar for pending confirmations -->
+        <div class="alert-bar" id="alert-bar">
+            <span id="alert-text">Du hast <strong>3 unbestätigte</strong> Veranstaltungen</span>
+            <button class="btn-small" onclick="scrollToEvents()">Jetzt bestätigen</button>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="dash-nav">
+            <button class="nav-tab active" data-tab="events">Veranstaltungen</button>
+            <button class="nav-tab" data-tab="meals">Essen</button>
+            <button class="nav-tab admin-only" data-tab="expenses">Ausgaben</button>
+            <button class="nav-tab admin-only" data-tab="members">Mitglieder</button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="dash-main">
+            <!-- Announcements Section -->
+            <div class="announcements-container hidden" id="announcements-container">
+                <!-- Dynamically populated -->
+            </div>
+
+            <!-- Events Tab -->
+            <div class="tab-content active" id="tab-events">
+                <div class="section-header">
+                    <h2>Veranstaltungen</h2>
+                    <div class="section-actions">
+                        <button class="btn-secondary va-only" id="add-event-btn">+ Neue Veranstaltung</button>
+                    </div>
+                </div>
+
+                <!-- Upcoming Events -->
+                <div class="events-section" id="upcoming-events">
+                    <h3>Kommende Veranstaltungen</h3>
+                    <table class="events-table" id="events-table">
+                        <thead>
+                            <tr>
+                                <th>Veranstaltung</th>
+                                <th>Datum</th>
+                                <th>Uhrzeit</th>
+                                <th>Ort</th>
+                                <th>Status</th>
+                                <th>Aktion</th>
+                            </tr>
+                        </thead>
+                        <tbody id="events-body">
+                            <!-- Dynamic rows -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Past Events (collapsed by default) -->
+                <details class="past-events-section">
+                    <summary>Vergangene Veranstaltungen</summary>
+                    <table class="events-table events-table--past">
+                        <thead>
+                            <tr>
+                                <th>Veranstaltung</th>
+                                <th>Datum</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="past-events-body">
+                            <!-- Dynamic rows -->
+                        </tbody>
+                    </table>
+                </details>
+            </div>
+
+            <!-- Meals Tab -->
+            <div class="tab-content" id="tab-meals">
+                <div class="section-header">
+                    <h2>Essensliste</h2>
+                    <div class="kw-nav">
+                        <button class="btn-icon" id="prev-kw">&larr;</button>
+                        <span id="current-kw">KW 50</span>
+                        <button class="btn-icon" id="next-kw">&rarr;</button>
+                    </div>
+                </div>
+
+                <table class="meals-table" id="meals-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Montag<br><span class="date" id="date-mon"></span></th>
+                            <th>Dienstag<br><span class="date" id="date-tue"></span></th>
+                            <th>Mittwoch<br><span class="date" id="date-wed"></span></th>
+                            <th>Donnerstag<br><span class="date" id="date-thu"></span></th>
+                            <th>Freitag<br><span class="date" id="date-fri"></span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="row-menu">
+                            <td class="row-label">Menü</td>
+                            <td id="menu-0">-</td>
+                            <td id="menu-1">-</td>
+                            <td id="menu-2">-</td>
+                            <td id="menu-3">-</td>
+                            <td id="menu-4">-</td>
+                        </tr>
+                        <tr class="row-team koch-only">
+                            <td class="row-label">Kochteam</td>
+                            <td id="team-0">-</td>
+                            <td id="team-1">-</td>
+                            <td id="team-2">-</td>
+                            <td id="team-3">-</td>
+                            <td id="team-4">-</td>
+                        </tr>
+                        <tr class="row-signup">
+                            <td class="row-label">Anmeldung</td>
+                            <td id="signup-0"></td>
+                            <td id="signup-1"></td>
+                            <td id="signup-2"></td>
+                            <td id="signup-3"></td>
+                            <td id="signup-4"></td>
+                        </tr>
+                        <tr class="row-count">
+                            <td class="row-label">Angemeldet</td>
+                            <td id="count-0">0</td>
+                            <td id="count-1">0</td>
+                            <td id="count-2">0</td>
+                            <td id="count-3">0</td>
+                            <td id="count-4">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="meals-legend">
+                    <span class="legend-item">Aktiv: 3€</span>
+                    <span class="legend-item">Später: 6€</span>
+                    <span class="legend-item">Gast: +3€</span>
+                    <span class="legend-item">Reste: +2.50€</span>
+                </div>
+
+                <!-- Personal Expense Summary -->
+                <div class="personal-expense-card" id="personal-expense-card">
+                    <div class="expense-card-header">
+                        <h3>Deine Kosten</h3>
+                        <span class="expense-period" id="expense-period-label">Letzte 4 Wochen</span>
+                    </div>
+                    <div class="expense-card-body">
+                        <div class="expense-item">
+                            <span class="expense-label">Essen</span>
+                            <span class="expense-value" id="my-meals-cost">0.00€</span>
+                        </div>
+                        <div class="expense-item">
+                            <span class="expense-label">Getränke</span>
+                            <span class="expense-value" id="my-drinks-cost">0.00€</span>
+                        </div>
+                        <div class="expense-item">
+                            <span class="expense-label">Sonstiges</span>
+                            <span class="expense-value" id="my-other-cost">0.00€</span>
+                        </div>
+                        <div class="expense-item expense-total">
+                            <span class="expense-label">Gesamt</span>
+                            <span class="expense-value" id="my-total-cost">0.00€</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expenses Tab (Aktivenkasse only) -->
+            <div class="tab-content" id="tab-expenses">
+                <div class="section-header">
+                    <h2>Ausgaben-Übersicht</h2>
+                </div>
+
+                <div class="expenses-filter-bar">
+                    <label for="expense-period">Zeitraum:</label>
+                    <div class="styled-select">
+                        <select id="expense-period">
+                            <option value="1">Letzte Woche</option>
+                            <option value="4" selected>Letzte 4 Wochen</option>
+                            <option value="8">Letzte 8 Wochen</option>
+                            <option value="12">Letzte 12 Wochen</option>
+                            <option value="all">Gesamter Zeitraum</option>
+                        </select>
+                    </div>
+                </div>
+
+                <table class="expenses-table">
+                    <thead>
+                        <tr>
+                            <th>Mitglied</th>
+                            <th>Essen</th>
+                            <th>Getränke</th>
+                            <th>Sonstiges</th>
+                            <th>Gesamt</th>
+                        </tr>
+                    </thead>
+                    <tbody id="expenses-body">
+                        <!-- Dynamic rows -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Members Tab (Admin only) -->
+            <div class="tab-content" id="tab-members">
+                <div class="section-header">
+                    <h2>Mitglieder</h2>
+                    <button class="btn-secondary" id="add-member-btn">+ Mitglied hinzufügen</button>
+                </div>
+
+                <div class="members-filters">
+                    <label><input type="checkbox" id="filter-bursche" checked> Burschen</label>
+                    <label><input type="checkbox" id="filter-fux" checked> Füxe</label>
+                    <label><input type="checkbox" id="filter-inaktiv"> Inaktive</label>
+                </div>
+
+                <table class="members-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Admin-Rolle</th>
+                            <th>Passwort</th>
+                            <th>Aktionen</th>
+                        </tr>
+                    </thead>
+                    <tbody id="members-body">
+                        <!-- Dynamic rows -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </section>
+
+    <!-- Event Detail Modal -->
+    <div class="modal hidden" id="event-modal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="event-modal-title">Veranstaltung</h3>
+                <button class="modal-close" onclick="closeEventModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="event-info">
+                    <p><strong>Datum:</strong> <span id="event-date"></span></p>
+                    <p><strong>Uhrzeit:</strong> <span id="event-time"></span></p>
+                    <p><strong>Treffpunkt:</strong> <span id="event-meeting"></span></p>
+                    <p><strong>Ort:</strong> <span id="event-location"></span></p>
+                </div>
+
+                <div class="event-signup">
+                    <h4>Deine Anmeldung</h4>
+                    <div class="signup-buttons">
+                        <button class="signup-btn" data-status="ja">Ja</button>
+                        <button class="signup-btn" data-status="nein">Nein</button>
+                        <button class="signup-btn" data-status="vielleicht">Vielleicht</button>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="event-extras">Extras (z.B. komme später, fahre mit Auto)</label>
+                        <input type="text" id="event-extras" placeholder="Optional">
+                    </div>
+
+                    <button class="btn-primary" id="confirm-event-btn">Bestätigen</button>
+                </div>
+
+                <div class="event-attendees">
+                    <h4>Anmeldungen</h4>
+                    <div class="attendees-list" id="event-attendees-list">
+                        <!-- Dynamic content -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Meal Edit Modal (Koch only) -->
+    <div class="modal hidden" id="meal-modal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="meal-modal-title">Essen bearbeiten</h3>
+                <button class="modal-close" onclick="closeMealModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Vorspeise (optional)</label>
+                    <input type="text" id="meal-vorspeise">
+                </div>
+                <div class="form-group">
+                    <label>Hauptgericht</label>
+                    <input type="text" id="meal-hauptgericht" required>
+                </div>
+                <div class="form-group">
+                    <label>Nachspeise (optional)</label>
+                    <input type="text" id="meal-nachspeise">
+                </div>
+                <div class="form-group">
+                    <label>Kochteam</label>
+                    <input type="text" id="meal-kochteam">
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select id="meal-status">
+                        <option value="active">Aktiv</option>
+                        <option value="canceled">Ausgefallen</option>
+                        <option value="sick">Krank</option>
+                    </select>
+                </div>
+                <button class="btn-primary" onclick="saveMeal()">Speichern</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Event Create/Edit Modal (VA only) -->
+    <div class="modal hidden" id="add-event-modal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="add-event-modal-title">Neue Veranstaltung</h3>
+                <button class="modal-close" onclick="closeAddEventModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="add-event-id">
+
+                <div class="form-group">
+                    <label for="add-event-title">Titel</label>
+                    <input type="text" id="add-event-title" required placeholder="z.B. Burschentag">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="add-event-date">Datum</label>
+                        <input type="date" id="add-event-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="add-event-end-date">Enddatum (optional)</label>
+                        <input type="date" id="add-event-end-date">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="add-event-time">Uhrzeit</label>
+                        <input type="time" id="add-event-time" placeholder="20:00">
+                    </div>
+                    <div class="form-group">
+                        <label for="add-event-meeting-time">Treffzeit</label>
+                        <input type="time" id="add-event-meeting-time" placeholder="19:30">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="add-event-location">Ort</label>
+                    <input type="text" id="add-event-location" placeholder="z.B. Auf dem Haus">
+                </div>
+
+                <div class="modal-actions">
+                    <button class="btn-secondary" onclick="closeAddEventModal()">Abbrechen</button>
+                    <button class="btn-danger hidden" id="delete-event-btn"
+                        onclick="deleteCurrentEvent()">Löschen</button>
+                    <button class="btn-primary" onclick="saveNewEvent()">Speichern</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Member Edit Modal -->
+    <div class="modal hidden" id="member-modal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content modal-content--wide">
+            <div class="modal-header">
+                <h3 id="member-modal-title">Mitglied bearbeiten</h3>
+                <button class="modal-close" onclick="closeMemberModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="member-id">
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="member-firstname">Vorname</label>
+                        <input type="text" id="member-firstname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="member-surname">Nachname</label>
+                        <input type="text" id="member-surname" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="member-type">Mitgliedsstatus</label>
+                        <select id="member-type">
+                            <option value="fux">Fux</option>
+                            <option value="bursche">Aktiver Bursche</option>
+                            <option value="inaktiv">Inaktiver Bursche</option>
+                            <option value="employee">Angestellter</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="member-admin-role">Admin-Rolle (optional)</label>
+                        <select id="member-admin-role">
+                            <option value="">Keine</option>
+                            <option value="systemadmin">Systemadmin</option>
+                            <option value="va">Veranstaltungsleiter</option>
+                            <option value="koch">Koch</option>
+                            <option value="aktivenkasse">Aktivenkasse</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h4>Passwort</h4>
+                    <div class="password-status" id="member-password-status">
+                        <!-- Shows if password is set or not -->
+                    </div>
+                    <button class="btn-secondary btn-small" id="reset-password-btn" onclick="resetMemberPassword()">
+                        Passwort zurücksetzen
+                    </button>
+                </div>
+
+                <div class="modal-actions">
+                    <button class="btn-secondary" onclick="closeMemberModal()">Abbrechen</button>
+                    <button class="btn-danger" id="delete-member-btn" onclick="confirmDeleteMember()">Löschen</button>
+                    <button class="btn-primary" onclick="saveMember()">Speichern</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/mitglieder-v3.js"></script>
+</body>
+
+</html>
