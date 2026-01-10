@@ -6,7 +6,7 @@ Connects to Neon PostgreSQL database and provides REST API for the dashboard
 
 import os
 import json
-from datetime import datetime, date
+from datetime import datetime, date, time as datetime_time
 from decimal import Decimal
 from flask import Flask, request, jsonify
 from flask_cors import CORS
@@ -29,6 +29,8 @@ def json_serial(obj):
     """JSON serializer for objects not serializable by default json code"""
     if isinstance(obj, (datetime, date)):
         return obj.isoformat()
+    if isinstance(obj, datetime_time):
+        return obj.strftime('%H:%M')
     if isinstance(obj, Decimal):
         return float(obj)
     raise TypeError(f"Type {type(obj)} not serializable")
@@ -517,7 +519,8 @@ def health_check():
 if __name__ == '__main__':
     print("Starting KB! Teutonia API Server...")
     print(f"DATABASE_URL: {DATABASE_URL[:50]}...")  # Debug: show first 50 chars
-    print("API available at http://localhost:5000")
-    app.run(debug=False, host='0.0.0.0', port=5000)
+    print("API available at http://localhost:5001")
+    app.run(debug=False, host='0.0.0.0', port=5001)
+
 
 
