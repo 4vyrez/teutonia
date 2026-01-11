@@ -1044,7 +1044,7 @@ async function handleLogin(e) {
         });
 
         if (users.length === 0) {
-            showError('Benutzer nicht gefunden');
+            showError('Benutzer nicht gefunden. Bitte vollständigen Namen eingeben (z.B. "Theo Reichert")');
             return;
         }
 

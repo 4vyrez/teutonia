@@ -73,17 +73,18 @@ def get_member(member_id):
 
 @app.route('/api/members/login', methods=['POST'])
 def login_member():
-    """Login by surname"""
+    """Login by full name only"""
     try:
         data = request.json
         name = data.get('name', '').strip()
         
         conn = get_db()
         cur = conn.cursor()
+        # Match full_name only (case-insensitive)
         cur.execute("""
             SELECT * FROM allowed_members 
-            WHERE LOWER(surname) = LOWER(%s) OR LOWER(full_name) = LOWER(%s)
-        """, (name, name))
+            WHERE LOWER(full_name) = LOWER(%s)
+        """, (name,))
         members = cur.fetchall()
         conn.close()
         
