@@ -13,6 +13,8 @@ from flask_cors import CORS
 import psycopg2
 from psycopg2.extras import RealDictCursor
 
+import requests
+import icalendar
 app = Flask(__name__)
 CORS(app)
 
@@ -122,21 +124,39 @@ def update_member(member_id):
     """Update member"""
     try:
         data = request.json
+        conn = get_db()
+        cur = conn.cursor()
+        
+        # Get current member data first to construct full_name if needed
+        cur.execute("SELECT * FROM allowed_members WHERE id = %s", (member_id,))
+        current_member = cur.fetchone()
+        
+        if not current_member:
+            conn.close()
+            return jsonify({'error': 'Member not found'}), 404
+            
         updates = []
         values = []
         
-        for key in ['first_name', 'surname', 'member_type', 'admin_role', 'password_hash']:
+        # Check if name fields are being updated
+        first_name = data.get('first_name', current_member['first_name'])
+        surname = data.get('surname', current_member['surname'])
+        
+        # Always update full_name if either name part changes or is in request
+        if 'first_name' in data or 'surname' in data:
+            data['full_name'] = f"{first_name} {surname}".strip()
+        
+        for key in ['first_name', 'surname', 'member_type', 'admin_role', 'password_hash', 'full_name']:
             if key in data:
                 updates.append(f"{key} = %s")
                 values.append(data[key])
         
         if not updates:
+            conn.close()
             return jsonify({'error': 'No fields to update'}), 400
         
         values.append(member_id)
         
-        conn = get_db()
-        cur = conn.cursor()
         cur.execute(f"""
             UPDATE allowed_members 
             SET {', '.join(updates)}
@@ -147,9 +167,7 @@ def update_member(member_id):
         conn.commit()
         conn.close()
         
-        if member:
-            return jsonify(to_json(member))
-        return jsonify({'error': 'Member not found'}), 404
+        return jsonify(to_json(member))
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
@@ -499,6 +517,51 @@ def create_expense():
         conn.close()
         return jsonify(to_json(expense)), 201
     except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# ============================================
+# Google Calendar API
+# ============================================
+
+@app.route('/api/calendar-events', methods=['GET'])
+def get_calendar_events():
+    """Fetch and parse Google Calendar events"""
+    try:
+        url = "https://calendar.google.com/calendar/ical/2c089ae9f60a46e7e0176a1651089a9b7b95a23907d8f899b5dffcba12d4edb6%40group.calendar.google.com/public/basic.ics"
+        response = requests.get(url)
+        response.raise_for_status()
+        
+        cal = icalendar.Calendar.from_ical(response.content)
+        events = []
+        
+        for component in cal.walk():
+            if component.name == "VEVENT":
+                start_dt = component.get('dtstart').dt
+                end_dt = component.get('dtend').dt if component.get('dtend') else None
+                
+                # Convert date objects to datetime for consistency if needed, 
+                # but isoformat() handles both usually.
+                
+                event = {
+                    'summary': str(component.get('summary')),
+                    'start': start_dt.isoformat() if hasattr(start_dt, 'isoformat') else str(start_dt),
+                    'end': end_dt.isoformat() if end_dt and hasattr(end_dt, 'isoformat') else str(end_dt),
+                    'location': str(component.get('location')) if component.get('location') else None,
+                    'description': str(component.get('description')) if component.get('description') else None
+                }
+                events.append(event)
+        
+        # Sort events by start date
+        events.sort(key=lambda x: x['start'])
+        
+        # Filter for future events only (optional but good for display)
+        # For now, return all and let frontend decide or just return all 
+        now = datetime.now().isoformat()
+        future_events = [e for e in events if e['start'] >= now[:10]] # Simple string comparison for basic date filtering
+        
+        return jsonify(future_events)
+    except Exception as e:
+        print(f"Error fetching calendar: {e}")
         return jsonify({'error': str(e)}), 500
 
 # ============================================
