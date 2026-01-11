@@ -192,6 +192,9 @@ def delete_member(member_id):
 def get_events():
     """Get all events with registrations"""
     try:
+        # Sync with Google Calendar first
+        sync_google_events()
+        
         conn = get_db()
         cur = conn.cursor()
         cur.execute("SELECT * FROM events ORDER BY date ASC")
@@ -207,7 +210,91 @@ def get_events():
         conn.close()
         return jsonify(to_json(events))
     except Exception as e:
+        print(f"Error in get_events: {e}")
         return jsonify({'error': str(e)}), 500
+
+def sync_google_events():
+    """Sync events from public Google Calendar to DB"""
+    try:
+        url = "https://calendar.google.com/calendar/ical/2c089ae9f60a46e7e0176a1651089a9b7b95a23907d8f899b5dffcba12d4edb6%40group.calendar.google.com/public/basic.ics"
+        response = requests.get(url, timeout=5)
+        if response.status_code != 200:
+            print(f"Google Calendar sync failed: {response.status_code}")
+            return
+
+        cal = icalendar.Calendar.from_ical(response.content)
+        conn = get_db()
+        cur = conn.cursor()
+        
+        now = datetime.now()
+        
+        for component in cal.walk():
+            if component.name == "VEVENT":
+                try:
+                    uid = str(component.get('uid'))
+                    summary = str(component.get('summary'))
+                    start_dt = component.get('dtstart').dt
+                    end_dt = component.get('dtend').dt if component.get('dtend') else None
+                    location = str(component.get('location')) if component.get('location') else ''
+                    description = str(component.get('description')) if component.get('description') else ''
+                    
+                    # Normalize dates
+                    if not isinstance(start_dt, datetime):
+                        # Convert date to datetime at midnight if needed, OR keep as date string
+                        # The DB schema likely expects specific format. 
+                        # Let's check typical DB usage: 'date' column usually DATE type, 'time' column TIME type.
+                        # But Google events can be datetime.
+                        # Adjusting for existing schema: title, date, end_date, time, meeting_time, location
+                        
+                        db_date = start_dt # It's a date object
+                        db_time = None
+                    else:
+                        db_date = start_dt.date()
+                        db_time = start_dt.time()
+
+                    if end_dt:
+                        if isinstance(end_dt, datetime):
+                            db_end_date = end_dt.date()
+                        else:
+                            db_end_date = end_dt
+                    else:
+                        db_end_date = None
+
+                    # Get a valid user ID for created_by (e.g., system admin or first user)
+                    # Cache this if possible, or just query once per sync
+                    cur.execute("SELECT id FROM allowed_members ORDER BY id ASC LIMIT 1")
+                    sys_user = cur.fetchone()
+                    sys_user_id = sys_user['id'] if sys_user else 1 # Fallback to 1 if empty (unlikely)
+
+                    # Upsert event
+                    cur.execute("""
+                        INSERT INTO events (title, date, end_date, time, location, created_by, external_id, category)
+                        VALUES (%s, %s, %s, %s, %s, %s, %s, 'extern')
+                        ON CONFLICT (external_id) 
+                        DO UPDATE SET title = EXCLUDED.title, 
+                                      date = EXCLUDED.date, 
+                                      end_date = EXCLUDED.end_date, 
+                                      time = EXCLUDED.time, 
+                                      location = EXCLUDED.location,
+                                      updated_at = NOW()
+                    """, (
+                        summary, 
+                        db_date, 
+                        db_end_date, 
+                        db_time, 
+                        location, 
+                        sys_user_id,
+                        uid
+                    ))
+                except Exception as ev_e:
+                    print(f"Error syncing event {summary}: {ev_e}")
+                    continue
+                    
+        conn.commit()
+        conn.close()
+    except Exception as e:
+        print(f"Sync error: {e}")
+
 
 @app.route('/api/events', methods=['POST'])
 def create_event():
