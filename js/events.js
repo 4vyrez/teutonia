@@ -20,8 +20,12 @@ async function fetchEvents(container) {
             </div>
         `;
 
-        // Use the Flask API endpoint
-        const response = await fetch('http://localhost:5001/api/calendar-events');
+        // Determine API base URL
+        const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        // For local dev, assume backend is on port 5001. For prod (Vercel), use relative path.
+        const apiBase = isLocal ? 'http://localhost:5001' : '';
+
+        const response = await fetch(`${apiBase}/api/calendar_events`);
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);

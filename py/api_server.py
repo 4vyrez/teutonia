@@ -523,7 +523,7 @@ def create_expense():
 # Google Calendar API
 # ============================================
 
-@app.route('/api/calendar-events', methods=['GET'])
+@app.route('/api/calendar_events', methods=['GET'])
 def get_calendar_events():
     """Fetch and parse Google Calendar events"""
     try:
