@@ -6,7 +6,8 @@
 // ============================================
 // Configuration
 // ============================================
-const API_URL = 'http://localhost:5001/api';
+const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+const API_URL = isLocal ? 'http://localhost:5001/api' : '/api';
 const SESSION_KEY = 'teutonia_session_v5';
 
 // Member Types

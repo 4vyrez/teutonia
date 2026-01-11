@@ -24,8 +24,10 @@ async function fetchEvents(container) {
         const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
         // For local dev, assume backend is on port 5001. For prod (Vercel), use relative path.
         const apiBase = isLocal ? 'http://localhost:5001' : '';
+        const apiUrl = `${apiBase}/api/calendar_events`;
+        container.dataset.apiUrl = apiUrl;
 
-        const response = await fetch(`${apiBase}/api/calendar_events`);
+        const response = await fetch(apiUrl);
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -39,6 +41,8 @@ async function fetchEvents(container) {
         container.innerHTML = `
             <div class="events-error">
                 <p>Termine konnten nicht geladen werden.</p>
+                <p class="error-detail" style="font-size: 0.8em; opacity: 0.7; margin: 5px 0;">${error.message}</p>
+                <p class="error-detail" style="font-size: 0.8em; opacity: 0.7;">API: ${container.dataset.apiUrl || 'Unknown'}</p>
                 <button onclick="location.reload()" class="btn btn--sm btn--outline">Erneut versuchen</button>
             </div>
         `;
