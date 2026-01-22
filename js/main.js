@@ -126,7 +126,7 @@ function updateTimelineProgress() {
     const timelineRect = timeline.getBoundingClientRect();
     const timelineTop = timeline.offsetTop;
     const timelineHeight = timeline.offsetHeight;
-    const scrollY = window.pageYOffset;
+    const scrollY = window.pageYOffset
     const windowHeight = window.innerHeight;
 
     // Calculate progress through timeline section

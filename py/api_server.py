@@ -192,8 +192,12 @@ def delete_member(member_id):
 def get_events():
     """Get all events with registrations"""
     try:
-        # Sync with Google Calendar first
-        sync_google_events()
+        # Sync with Google Calendar first (non-blocking attempt)
+        try:
+            sync_google_events()
+        except Exception as sync_e:
+            print(f"Warning: Calendar sync failed: {sync_e}")
+            # Continue to show cached events even if sync fails
         
         conn = get_db()
         cur = conn.cursor()
@@ -211,7 +215,8 @@ def get_events():
         return jsonify(to_json(events))
     except Exception as e:
         print(f"Error in get_events: {e}")
-        return jsonify({'error': str(e)}), 500
+        # Return HTTP 500 with clear message
+        return jsonify({'error': str(e), 'details': 'Failed to fetch events from database'}), 500
 
 def sync_google_events():
     """Sync events from public Google Calendar to DB"""
