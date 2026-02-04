@@ -48,29 +48,34 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.35 0.1 20);
-  /* Deeper Red for Teutonia */
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
 
-  /* Teutonia specific */
-  --gold: oklch(0.75 0.15 85);
-  --gold-foreground: oklch(0.2 0.05 85);
+  /* Light Mode (Classic) */
+  --background: oklch(0.98 0.01 85);
+  /* Creamy/Paper White */
+  --foreground: oklch(0.15 0.02 85);
+  /* Dark Brown/Gray */
+
+  --primary: oklch(0.45 0.15 25);
+  /* Teutonia Red */
+  --primary-foreground: oklch(0.98 0 0);
+
+  --muted: oklch(0.95 0.01 85);
+  --muted-foreground: oklch(0.4 0.02 85);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.15 0.02 85);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0.02 85);
+
+  --border: oklch(0.9 0.02 85);
+  --input: oklch(0.9 0.02 85);
+  --ring: oklch(0.45 0.15 25);
+  /* Focus ring is Red */
+
+  /* Teutonia Colors */
+  --gold: oklch(0.7 0.15 80);
+  --gold-foreground: oklch(0.2 0.05 80);
 
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -88,29 +93,39 @@
 }
 
 .dark {
-  --background: oklch(0.05 0 0);
-  /* Ultra dark background */
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.1 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.1 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.6 0.15 25);
-  /* Bright Red */
-  --primary-foreground: oklch(0.1 0 0);
-  --secondary: oklch(0.2 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.2 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.2 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  /* V3 Dark Mode: Deep Red / Industrial Gray Gradient base */
+  /* We implement the gradient in body, here we define the base tokens */
 
-  --gold: oklch(0.75 0.15 85);
-  --gold-foreground: oklch(0.1 0.05 85);
+  --background: oklch(0.12 0.01 20);
+  /* Dark Warm Gray, not Black */
+  --foreground: oklch(0.95 0 0);
+
+  --card: oklch(0.15 0.02 20);
+  /* Slightly lighter gray/red tint */
+  --card-foreground: oklch(0.95 0 0);
+
+  --popover: oklch(0.15 0.02 20);
+  --popover-foreground: oklch(0.95 0 0);
+
+  --primary: oklch(0.55 0.15 25);
+  /* Vibrant Red */
+  --primary-foreground: oklch(0.98 0 0);
+
+  --muted: oklch(0.2 0.02 20);
+  --muted-foreground: oklch(0.7 0.02 20);
+
+  --accent: oklch(0.2 0.02 20);
+  --accent-foreground: oklch(0.95 0 0);
+
+  --destructive: oklch(0.5 0.2 25);
+
+  --border: oklch(0.25 0.02 20);
+  --input: oklch(0.25 0.02 20);
+  --ring: oklch(0.55 0.15 25);
+
+  --gold: oklch(0.75 0.14 80);
+  /* Muted Metallic Gold */
+  --gold-foreground: oklch(0.15 0.02 20);
 
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
@@ -135,30 +150,22 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* V3 Background Gradient for Dark Section */
+  .dark body {
+    background-image: linear-gradient(to bottom, oklch(0.08 0.03 20), oklch(0.12 0.01 20));
+    background-attachment: fixed;
+  }
 }
 
 @layer utilities {
   .bg-grid-white {
-    background-size: 40px 40px;
-    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  }
-
-  .bg-grid-pattern {
-    background-size: 40px 40px;
-    background-image: linear-gradient(to right, currentColor 1px, transparent 1px),
-      linear-gradient(to bottom, currentColor 1px, transparent 1px);
-  }
-
-  .text-glow {
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-  }
-
-  .text-glow-gold {
-    text-shadow: 0 0 15px rgba(var(--gold), 0.5);
+    background-size: 50px 50px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   }
 
   .glass-card {
-    @apply bg-black/40 backdrop-blur-md border border-white/10 shadow-xl;
+    @apply bg-[#1a1515]/60 backdrop-blur-xl border border-white/5 shadow-2xl;
   }
 }
