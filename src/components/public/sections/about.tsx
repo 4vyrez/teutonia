@@ -1,71 +1,81 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Users, Calendar, BookOpen } from 'lucide-react';
+import { Users, GraduationCap, Trophy, Globe, Sparkles } from 'lucide-react';
+import { cn } from '@/lib/utils';
+
+const bentoItems = [
+    {
+        title: "Lebenslange Freundschaft",
+        description: "Ein Bund fürs Leben. Von den ersten Tagen im Studium bis weit in den Ruhestand.",
+        icon: Users,
+        className: "md:col-span-2 bg-gradient-to-br from-red-950/50 to-black",
+        delay: 0.1
+    },
+    {
+        title: "Exzellenz",
+        description: "Bestleistung in Studium und Beruf.",
+        icon: Trophy,
+        className: "md:col-span-1 bg-black",
+        delay: 0.2
+    },
+    {
+        title: "Tradition & Zukunft",
+        description: "Werte aus 1843, gelebt im Heute.",
+        icon: Sparkles,
+        className: "md:col-span-1 bg-black",
+        delay: 0.3
+    },
+    {
+        title: "Akademische Bildung",
+        description: "Über den Tellerrand hinaus. Seminare, Vorträge und Training.",
+        icon: GraduationCap,
+        className: "md:col-span-2 bg-gradient-to-br from-gray-900 to-black",
+        delay: 0.4
+    }
+];
 
 export function AboutSection() {
-    const features = [
-        {
-            icon: Users,
-            title: 'Lebenslange Freundschaft',
-            description:
-                'Eine Gemeinschaft, die weit über das Studium hinausgeht. Bundesbrüder bleiben ein Leben lang verbunden.',
-        },
-        {
-            icon: BookOpen,
-            title: 'Akademische Exzellenz',
-            description:
-                'Gegenseitige Unterstützung im Studium, Zugang zu Erfahrungen und Wissen älterer Semester.',
-        },
-        {
-            icon: Calendar,
-            title: 'Aktives Bundesleben',
-            description:
-                'Regelmäßige Veranstaltungen, Commerse, Kneipen und gemeinsame Aktivitäten prägen unser Zusammenleben.',
-        },
-    ];
-
     return (
-        <section id="about" className="py-24 bg-gray-50">
+        <section id="about" className="py-32 bg-black text-white relative">
             <div className="container mx-auto px-6">
-                {/* Section Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="text-center mb-16"
+                    className="mb-16 md:mb-24"
                 >
-                    <span className="inline-block px-4 py-1 bg-amber-100 text-amber-700 rounded-full text-sm font-medium mb-4">
-                        Über Uns
-                    </span>
-                    <h2 className="font-serif text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                        Mehr als eine Verbindung
+                    <h2 className="font-serif text-5xl md:text-6xl font-bold mb-6">
+                        Mehr als eine <span className="text-gray-600">Verbindung.</span>
                     </h2>
-                    <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                        Die Teutonia ist eine Gemeinschaft von Studenten und Akademikern,
-                        die sich den Werten von Freundschaft, Bildung und Tradition verpflichtet fühlen.
+                    <p className="text-xl text-gray-400 max-w-2xl">
+                        Wir verbinden Studenten und Akademiker. Liberal, tolerant und leistungsorientiert.
                     </p>
                 </motion.div>
 
-                {/* Feature Cards */}
-                <div className="grid md:grid-cols-3 gap-8">
-                    {features.map((feature, index) => (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 auto-rows-[300px]">
+                    {bentoItems.map((item, i) => (
                         <motion.div
-                            key={feature.title}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
+                            key={i}
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: index * 0.1 }}
-                            className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-shadow"
+                            transition={{ duration: 0.5, delay: item.delay }}
+                            className={cn(
+                                "group relative p-8 rounded-3xl border border-white/10 overflow-hidden hover:border-white/20 transition-colors",
+                                item.className
+                            )}
                         >
-                            <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-amber-400 rounded-xl flex items-center justify-center mb-6">
-                                <feature.icon className="w-6 h-6 text-white" />
+                            <div className="absolute inset-0 bg-noise opacity-20 pointer-events-none" />
+                            <div className="relative z-10 h-full flex flex-col justify-between">
+                                <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors">
+                                    <item.icon className="w-6 h-6 text-white" />
+                                </div>
+                                <div>
+                                    <h3 className="text-2xl font-semibold mb-3">{item.title}</h3>
+                                    <p className="text-gray-400 leading-relaxed font-light">{item.description}</p>
+                                </div>
                             </div>
-                            <h3 className="font-serif text-xl font-semibold text-gray-900 mb-3">
-                                {feature.title}
-                            </h3>
-                            <p className="text-gray-600">{feature.description}</p>
                         </motion.div>
                     ))}
                 </div>
