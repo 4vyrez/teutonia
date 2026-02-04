@@ -31,7 +31,7 @@ export function ContactSection() {
                                 </div>
                                 <div>
                                     <h3 className="text-sm font-mono text-gray-500 uppercase tracking-wider mb-1">Anschrift</h3>
-                                    <p className="text-lg">Karlsruher Burschenschaft Teutonia<br />Schützenstraße 30, 76137 Karlsruhe</p>
+                                    <p className="text-lg">Karlsruher Burschenschaft Teutonia<br />Parkstraße 1, 76131 Karlsruhe</p>
                                 </div>
                             </div>
 
@@ -41,7 +41,10 @@ export function ContactSection() {
                                 </div>
                                 <div>
                                     <h3 className="text-sm font-mono text-gray-500 uppercase tracking-wider mb-1">Email</h3>
-                                    <a href="mailto:kontakt@kbteutonia.de" className="text-lg hover:text-amber-500 transition-colors">kontakt@kbteutonia.de</a>
+                                    <div className="flex flex-col gap-1">
+                                        <a href="mailto:chargen@kbteutonia.de" className="text-lg hover:text-amber-500 transition-colors">chargen@kbteutonia.de</a>
+                                        <a href="mailto:zimmer@kbteutonia.de" className="text-sm text-gray-400 hover:text-amber-500 transition-colors">zimmer@kbteutonia.de (Zimmer)</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

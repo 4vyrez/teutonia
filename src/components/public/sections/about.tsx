@@ -49,7 +49,7 @@ export function AboutSection() {
                         Mehr als eine <span className="text-gray-600">Verbindung.</span>
                     </h2>
                     <p className="text-xl text-gray-400 max-w-2xl">
-                        Wir verbinden Studenten und Akademiker. Liberal, tolerant und leistungsorientiert.
+                        In unserer Gemeinschaft findet man immer den richtigen Ansprechpartner – egal, ob es ums Feiern, Arbeiten, Studieren oder die Verwirklichung neuer Ideen geht.
                     </p>
                 </motion.div>
 

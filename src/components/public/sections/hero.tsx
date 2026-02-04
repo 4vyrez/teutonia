@@ -38,13 +38,11 @@ export function HeroSection() {
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-                    className="font-serif text-6xl md:text-8xl lg:text-9xl font-bold text-white mb-8 tracking-tight leading-none"
+                    className="text-5xl md:text-8xl font-serif font-bold tracking-tight mb-8"
                 >
-                    <span className="block text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60">
-                        Teutonia
-                    </span>
-                    <span className="block text-4xl md:text-5xl lg:text-6xl font-sans font-light text-white/40 mt-2 tracking-widest uppercase">
-                        Karlsruhe
+                    <span className="block text-white mb-2">Gemeinsam.</span>
+                    <span className="block text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-red-500 to-amber-600">
+                        Keiner allein.
                     </span>
                 </motion.h1>
 

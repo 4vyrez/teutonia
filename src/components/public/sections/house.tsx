@@ -17,14 +17,14 @@ export function HouseSection() {
             <div className="container mx-auto px-6">
                 <div className="grid lg:grid-cols-2 gap-16 items-center">
                     <div>
-                        <span className="text-amber-500 font-mono text-sm tracking-widest uppercase mb-4 block">Unser Haus</span>
-                        <h2 className="font-serif text-5xl font-bold mb-8">
-                            Dein Zuhause <br />
-                            <span className="text-gray-600">am Campus.</span>
-                        </h2>
-                        <p className="text-xl text-gray-400 mb-12 max-w-md font-light">
-                            Keine 5 Minuten zum Audimax. Unsere Villa in der Oststadt bietet mehr als nur ein Dach über dem Kopf.
-                        </p>
+                        <div className="mb-8">
+                            <h2 className="font-serif text-3xl font-bold mb-4">
+                                Dein Zuhause <span className="text-gray-500">am Campus.</span>
+                            </h2>
+                            <p className="text-gray-400 leading-relaxed">
+                                Keine 5 Minuten zum Audimax. Unsere Villa in der Oststadt bietet mehr als nur ein Dach über dem Kopf.
+                            </p>
+                        </div>
 
                         <div className="grid grid-cols-2 gap-4">
                             {features.map((item, i) => (
