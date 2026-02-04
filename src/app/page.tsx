@@ -2,8 +2,12 @@ import { Header, Footer } from '@/components/layout';
 import {
   HeroSection,
   AboutSection,
+  HistorySection,
+  CommunitySection,
+  UniversitySection,
+  HouseSection,
   ColorsSection,
-  CTASection,
+  ContactSection,
 } from '@/components/public/sections';
 
 export default function HomePage() {
@@ -13,8 +17,12 @@ export default function HomePage() {
       <main>
         <HeroSection />
         <AboutSection />
+        <HistorySection />
+        <CommunitySection />
+        <UniversitySection />
+        <HouseSection />
         <ColorsSection />
-        <CTASection />
+        <ContactSection />
       </main>
       <Footer />
     </>
