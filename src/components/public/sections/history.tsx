@@ -38,9 +38,9 @@ const timelineEvents = [
 
 export function HistorySection() {
     return (
-        <section id="history" className="py-32 bg-[#120808] text-white relative overflow-hidden">
+        <section id="history" className="py-32 relative overflow-hidden">
             {/* Background Texture */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_left,_var(--tw-gradient-stops))] from-red-950/10 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-red-950/5 to-transparent pointer-events-none" />
 
             <div className="container mx-auto px-6 relative z-10">
                 <div className="text-center mb-24">
@@ -68,7 +68,7 @@ export function HistorySection() {
 
                                 {/* Content Side */}
                                 <div className="w-full md:w-1/2 md:px-12 pl-12 pr-4">
-                                    <div className="group relative p-6 rounded-2xl bg-white/5 border border-white/5 hover:border-amber-500/20 hover:bg-white/10 transition-all duration-500">
+                                    <div className="group relative p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-amber-500/30 hover:bg-white/10 hover:shadow-[0_0_30px_rgba(217,119,6,0.1)] transition-all duration-500 backdrop-blur-sm">
                                         <div className="text-amber-500 font-mono text-lg font-bold mb-2 tracking-wider">{event.year}</div>
                                         <h3 className="text-xl font-bold mb-3 text-white group-hover:text-amber-500 transition-colors">{event.title}</h3>
                                         <p className="text-gray-400 text-sm leading-relaxed">

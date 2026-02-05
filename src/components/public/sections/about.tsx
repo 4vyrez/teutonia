@@ -9,35 +9,35 @@ const bentoItems = [
         title: "Lebenslange Freundschaft",
         description: "Ein Bund fürs Leben. Von den ersten Tagen im Studium bis weit in den Ruhestand.",
         icon: Users,
-        className: "md:col-span-2 bg-gradient-to-br from-red-950/50 to-black",
+        className: "md:col-span-2 bg-gradient-to-br from-red-900/40 to-black/60 backdrop-blur-md border-white/10",
         delay: 0.1
     },
     {
         title: "Exzellenz",
         description: "Bestleistung in Studium und Beruf.",
         icon: Trophy,
-        className: "md:col-span-1 bg-black",
+        className: "md:col-span-1 bg-white/5 backdrop-blur-md border-white/10",
         delay: 0.2
     },
     {
         title: "Tradition & Zukunft",
         description: "Werte aus 1843, gelebt im Heute.",
         icon: Sparkles,
-        className: "md:col-span-1 bg-black",
+        className: "md:col-span-1 bg-white/5 backdrop-blur-md border-white/10",
         delay: 0.3
     },
     {
         title: "Akademische Bildung",
         description: "Über den Tellerrand hinaus. Seminare, Vorträge und Training.",
         icon: GraduationCap,
-        className: "md:col-span-2 bg-gradient-to-br from-gray-900 to-black",
+        className: "md:col-span-2 bg-gradient-to-br from-zinc-900/80 to-black/60 backdrop-blur-md border-white/10",
         delay: 0.4
     }
 ];
 
 export function AboutSection() {
     return (
-        <section id="about" className="py-32 bg-black text-white relative">
+        <section id="about" className="py-32 relative text-white">
             <div className="container mx-auto px-6">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
