@@ -8,17 +8,14 @@ import { ArrowRight, ChevronDown } from 'lucide-react';
 export function HeroSection() {
     return (
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black selection:bg-amber-500/30">
-            {/* Background Effects */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-red-950/20 via-black to-black" />
+            {/* V5 Background: Aurora & Smoke Effect */}
+            <div className="absolute inset-0 z-0">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(180,0,0,0.15),transparent_70%)] animate-pulse-slow" />
+                <div className="absolute top-0 right-0 w-full h-[800px] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-amber-500/10 via-transparent to-transparent opacity-60 mix-blend-screen" />
+                <div className="absolute -bottom-32 left-0 w-full h-[600px] bg-red-900/10 blur-[120px]" />
+            </div>
 
-            {/* Grid Pattern */}
-            <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:50px_50px]" />
-
-            {/* Spotlight */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-red-600/20 blur-[100px] rounded-full opacity-50 animate-pulse" />
-
-            {/* Content */}
-            <div className="relative z-10 container mx-auto px-6 py-32 text-center">
+            <div className="container relative z-10 mx-auto px-6 h-full flex flex-col justify-center items-center text-center">
                 {/* Badge */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}

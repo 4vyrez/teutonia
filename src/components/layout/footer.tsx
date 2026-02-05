@@ -25,7 +25,7 @@ export function Footer() {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="bg-[#050505] text-white border-t border-white/5">
+        <footer className="relative bg-gradient-to-b from-[#1a0505] to-[#0a0202] text-white border-t border-white/10">
             <div className="container mx-auto px-6 py-16">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
                     {/* Brand */}
@@ -98,19 +98,19 @@ export function Footer() {
                             </div>
                             <div>
                                 <strong className="text-white block mb-1">Telefon</strong>
-                                <a href="tel:+4972166777348" className="hover:text-amber-500 transition-colors">
+                                <a href="tel:+4972166777348" className="hover:text-red-400 transition-colors">
                                     0721 - 66 777 348
                                 </a>
                             </div>
                             <div>
                                 <strong className="text-white block mb-1">Chargen / Verschiedenes</strong>
-                                <a href="mailto:chargen@kbteutonia.de" className="hover:text-amber-500 transition-colors">
+                                <a href="mailto:chargen@kbteutonia.de" className="hover:text-red-400 transition-colors">
                                     chargen@kbteutonia.de
                                 </a>
                             </div>
                             <div>
                                 <strong className="text-white block mb-1">Zimmervermietung</strong>
-                                <a href="mailto:zimmer@kbteutonia.de" className="hover:text-amber-500 transition-colors">
+                                <a href="mailto:zimmer@kbteutonia.de" className="hover:text-red-400 transition-colors">
                                     zimmer@kbteutonia.de
                                 </a>
                             </div>

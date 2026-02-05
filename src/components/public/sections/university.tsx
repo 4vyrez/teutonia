@@ -6,12 +6,12 @@ import Link from 'next/link';
 
 export function UniversitySection() {
     return (
-        <section id="university" className="py-32 bg-[#0d0d0d] text-white relative overflow-hidden">
-            {/* Tech Background Grid */}
-            <div className="absolute inset-0 bg-grid-white/[0.03] bg-[size:60px_60px]" />
+        <section id="university" className="py-32 relative overflow-hidden bg-transparent">
+            {/* Tech Background Grid - Subtle */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:60px_60px]" />
 
             {/* Green Glow (KIT Color Reference) */}
-            <div className="absolute right-0 top-1/4 w-[600px] h-[600px] bg-emerald-900/10 blur-[150px] rounded-full pointer-events-none" />
+            <div className="absolute right-0 top-1/4 w-[600px] h-[600px] bg-emerald-900/10 blur-[150px] rounded-full pointer-events-none mix-blend-screen" />
 
             <div className="container mx-auto px-6 relative z-10">
                 <div className="grid lg:grid-cols-12 gap-12 items-center">
