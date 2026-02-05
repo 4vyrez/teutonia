@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, Playfair_Display } from 'next/font/google';
 import { Toaster } from '@/components/ui/sonner';
-import { HudOverlay } from '@/components/layout/hud-overlay';
+
 import { CommandMenu } from '@/components/layout/command-menu';
 import { ScrollToTop } from '@/components/ui/scroll-to-top';
 import './globals.css';
@@ -44,7 +44,7 @@ export default function RootLayout({
   return (
     <html lang="de" className={`${inter.variable} ${playfair.variable}`}>
       <body className="antialiased font-sans bg-white text-gray-900">
-        <HudOverlay />
+
         <CommandMenu />
         <ScrollToTop />
         {children}
