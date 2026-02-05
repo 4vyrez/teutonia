@@ -21,13 +21,13 @@ export function HeroSection() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="inline-flex items-center gap-2 px-4 py-1.5 mb-8 rounded-full bg-white/5 border border-white/10 text-amber-500/80 text-sm font-medium tracking-wide backdrop-blur-xl"
+                    className="inline-flex items-center gap-2 px-4 py-1.5 mb-8 rounded-full bg-white/5 border border-white/10 text-amber-200/90 text-sm font-medium tracking-widest backdrop-blur-xl"
                 >
                     <span className="relative flex h-2 w-2">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
                         <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
                     </span>
-                    EST. 1843
+                    SEIT 1843. FÜHREND.
                 </motion.div>
 
                 {/* Main Heading */}
@@ -37,9 +37,9 @@ export function HeroSection() {
                     transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
                     className="text-5xl md:text-8xl font-serif font-bold tracking-tight mb-8"
                 >
-                    <span className="block text-white mb-2">Gemeinsam.</span>
-                    <span className="block text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-red-500 to-amber-600">
-                        Keiner allein.
+                    <span className="block text-white mb-2">Zukunft gestalten.</span>
+                    <span className="block text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-200 to-amber-500 pb-2">
+                        Geschichte schreiben.
                     </span>
                 </motion.h1>
 
@@ -50,8 +50,8 @@ export function HeroSection() {
                     transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
                     className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto mb-12 font-light leading-relaxed"
                 >
-                    Tradition trifft Zukunft. Die älteste Burschenschaft am KIT. <br className="hidden md:block" />
-                    <span className="text-white/80">Gemeinschaft. Exzellenz. Charakter.</span>
+                    Das stärkste akademische Netzwerk am KIT. <br className="hidden md:block" />
+                    <span className="text-white/90 font-medium">Gemeinschaft. Exzellenz. Charakter.</span>
                 </motion.p>
 
                 {/* CTA Buttons */}

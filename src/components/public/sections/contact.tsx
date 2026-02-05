@@ -8,7 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 
 export function ContactSection() {
     return (
-        <section id="contact" className="py-32 bg-black text-white relative overflow-hidden">
+        <section id="contact" className="py-32 relative text-white overflow-hidden">
             <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:30px_30px] pointer-events-none" />
             <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-red-900/10 blur-[120px] rounded-full pointer-events-none" />
 
@@ -17,8 +17,8 @@ export function ContactSection() {
                     {/* Info Side */}
                     <div className="flex flex-col justify-center">
                         <h2 className="font-serif text-5xl font-bold mb-8">
-                            Bereit für den <br />
-                            <span className="text-amber-500">nächsten Schritt?</span>
+                            Werde Teil <br />
+                            <span className="text-amber-200">der Elite.</span>
                         </h2>
                         <p className="text-xl text-gray-400 mb-12 font-light">
                             Ob Student, Alumnus oder Interessierter – wir freuen uns auf den Austausch. Komm vorbei oder schreib uns.
@@ -26,7 +26,7 @@ export function ContactSection() {
 
                         <div className="space-y-8">
                             <div className="flex items-center gap-6 group">
-                                <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center border border-white/5 group-hover:border-amber-500/30 transition-colors">
+                                <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center border border-white/5 group-hover:border-amber-400/30 transition-colors">
                                     <MapPin className="w-6 h-6 text-white" />
                                 </div>
                                 <div>
@@ -36,14 +36,14 @@ export function ContactSection() {
                             </div>
 
                             <div className="flex items-center gap-6 group">
-                                <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center border border-white/5 group-hover:border-amber-500/30 transition-colors">
+                                <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center border border-white/5 group-hover:border-amber-400/30 transition-colors">
                                     <Mail className="w-6 h-6 text-white" />
                                 </div>
                                 <div>
                                     <h3 className="text-sm font-mono text-gray-500 uppercase tracking-wider mb-1">Email</h3>
                                     <div className="flex flex-col gap-1">
-                                        <a href="mailto:chargen@kbteutonia.de" className="text-lg hover:text-amber-500 transition-colors">chargen@kbteutonia.de</a>
-                                        <a href="mailto:zimmer@kbteutonia.de" className="text-sm text-gray-400 hover:text-amber-500 transition-colors">zimmer@kbteutonia.de (Zimmer)</a>
+                                        <a href="mailto:chargen@kbteutonia.de" className="text-lg hover:text-amber-400 transition-colors">chargen@kbteutonia.de</a>
+                                        <a href="mailto:zimmer@kbteutonia.de" className="text-sm text-gray-400 hover:text-amber-400 transition-colors">zimmer@kbteutonia.de (Zimmer)</a>
                                     </div>
                                 </div>
                             </div>
@@ -66,7 +66,7 @@ export function ContactSection() {
                                         id="name"
                                         name="name"
                                         placeholder="Max Mustermann"
-                                        className="bg-white/5 border-white/5 hover:border-white/10 text-white placeholder:text-gray-600 focus:border-amber-500/50 focus:ring-amber-500/20 rounded-xl h-12"
+                                        className="bg-white/5 border-white/5 hover:border-white/10 text-white placeholder:text-gray-600 focus:border-amber-400/50 focus:ring-amber-400/20 rounded-xl h-12"
                                         required
                                     />
                                 </div>
@@ -77,7 +77,7 @@ export function ContactSection() {
                                         name="email"
                                         type="email"
                                         placeholder="max@kit.edu"
-                                        className="bg-white/5 border-white/5 hover:border-white/10 text-white placeholder:text-gray-600 focus:border-amber-500/50 focus:ring-amber-500/20 rounded-xl h-12"
+                                        className="bg-white/5 border-white/5 hover:border-white/10 text-white placeholder:text-gray-600 focus:border-amber-400/50 focus:ring-amber-400/20 rounded-xl h-12"
                                         required
                                     />
                                 </div>
@@ -89,7 +89,7 @@ export function ContactSection() {
                                     id="subject"
                                     name="subject"
                                     placeholder="Interesse an einem Zimmer..."
-                                    className="bg-white/5 border-white/5 hover:border-white/10 text-white placeholder:text-gray-600 focus:border-amber-500/50 focus:ring-amber-500/20 rounded-xl h-12"
+                                    className="bg-white/5 border-white/5 hover:border-white/10 text-white placeholder:text-gray-600 focus:border-amber-400/50 focus:ring-amber-400/20 rounded-xl h-12"
                                 />
                             </div>
 
@@ -99,7 +99,7 @@ export function ContactSection() {
                                     id="message"
                                     name="message"
                                     placeholder="Deine Nachricht..."
-                                    className="min-h-[150px] bg-white/5 border-white/5 hover:border-white/10 text-white placeholder:text-gray-600 focus:border-amber-500/50 focus:ring-amber-500/20 rounded-xl resize-none p-4"
+                                    className="min-h-[150px] bg-white/5 border-white/5 hover:border-white/10 text-white placeholder:text-gray-600 focus:border-amber-400/50 focus:ring-amber-400/20 rounded-xl resize-none p-4"
                                     required
                                 />
                             </div>

@@ -5,6 +5,8 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import { TechButton } from '@/components/ui/tech-button';
+import { MagneticLink } from '@/components/ui/magnetic-link';
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -60,7 +62,7 @@ export function Header() {
                 className={cn(
                     'container mx-auto px-6 py-4 rounded-2xl transition-all duration-300 flex items-center justify-between',
                     isScrolled
-                        ? 'bg-[#150a0a]/80 backdrop-blur-xl shadow-lg border border-white/5'
+                        ? 'bg-black/20 backdrop-blur-2xl shadow-lg border border-white/10'
                         : 'bg-transparent'
                 )}
             >
@@ -82,7 +84,7 @@ export function Header() {
                         )}>
                             Teutonia
                         </span>
-                        <span className="text-[10px] uppercase tracking-[0.2em] text-amber-500/80">
+                        <span className="text-[10px] uppercase tracking-[0.2em] text-gray-400 group-hover:text-amber-200 transition-colors">
                             Karlsruhe
                         </span>
                     </div>
@@ -95,14 +97,14 @@ export function Header() {
                             <li key={link.href}>
                                 <DropdownMenu>
                                     <DropdownMenuTrigger
-                                        className="flex items-center gap-1 text-sm font-medium text-white/80 hover:text-white transition-colors focus:outline-none group"
+                                        className="flex items-center gap-1 text-sm font-medium text-white/80 hover:text-white transition-colors focus:outline-none group px-2 py-1"
                                     >
                                         {link.label}
                                         <ChevronDown className="h-3 w-3 transition-transform group-data-[state=open]:rotate-180" />
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent
                                         align="center"
-                                        className="w-48 bg-[#150a0a]/95 backdrop-blur-xl border-white/10 text-white"
+                                        className="w-48 bg-[#0a0505]/95 backdrop-blur-xl border-white/10 text-white"
                                     >
                                         {link.children.map((child) => (
                                             <DropdownMenuItem key={child.label} asChild>
@@ -116,12 +118,14 @@ export function Header() {
                             </li>
                         ) : (
                             <li key={link.href}>
-                                <Link
-                                    href={link.href}
-                                    className="text-sm font-medium text-white/80 hover:text-amber-500 transition-colors"
-                                >
-                                    {link.label}
-                                </Link>
+                                <MagneticLink>
+                                    <Link
+                                        href={link.href}
+                                        className="block text-sm font-medium text-white/80 hover:text-amber-200 transition-colors px-2 py-1"
+                                    >
+                                        {link.label}
+                                    </Link>
+                                </MagneticLink>
                             </li>
                         )
                     )}
@@ -130,12 +134,9 @@ export function Header() {
                 {/* CTA & Mobile Toggle */}
                 <div className="flex items-center gap-4">
                     <Link href="/#contact" className="hidden lg:block">
-                        <Button
-                            size="sm"
-                            className="bg-amber-600 hover:bg-amber-500 text-white font-medium rounded-lg px-6 shadow-[0_0_20px_rgba(217,119,6,0.3)] hover:shadow-[0_0_30px_rgba(217,119,6,0.5)] transition-all"
-                        >
+                        <TechButton variant="gold" size="sm" className="hidden lg:flex font-serif tracking-wide border-t border-white/20">
                             Kontakt
-                        </Button>
+                        </TechButton>
                     </Link>
 
                     <button
@@ -147,37 +148,44 @@ export function Header() {
                 </div>
             </nav>
 
-            {/* Mobile Menu Overlay */}
+            {/* Mobile Menu Overlay - Full Screen Professional */}
             {isMobileMenuOpen && (
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    className="absolute top-full left-4 right-4 mt-2 p-6 bg-[#1a0f0f] border border-white/10 rounded-2xl shadow-2xl lg:hidden z-50"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="fixed inset-0 z-40 bg-black/95 backdrop-blur-3xl flex flex-col items-center justify-center lg:hidden"
                 >
-                    <ul className="space-y-4">
+                    <div className="absolute top-6 right-6">
+                        <button
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className="p-2 text-white/50 hover:text-white transition-colors"
+                        >
+                            <X className="w-8 h-8" />
+                        </button>
+                    </div>
+
+                    <ul className="space-y-8 text-center">
                         {navLinks.map((link) => (
-                            <li key={link.href}>
+                            <li key={link.href} className="overflow-hidden">
                                 {link.children ? (
-                                    <div className="space-y-3">
-                                        <div className="font-semibold text-amber-500 uppercase text-xs tracking-wider">{link.label}</div>
-                                        <div className="pl-4 space-y-3 border-l border-white/10">
-                                            {link.children.map(child => (
-                                                <Link
-                                                    key={child.label}
-                                                    href={child.href}
-                                                    className="block text-white/90 hover:text-white"
-                                                    onClick={() => setIsMobileMenuOpen(false)}
-                                                >
-                                                    {child.label}
-                                                </Link>
-                                            ))}
-                                        </div>
+                                    <div className="space-y-4">
+                                        <div className="text-amber-500/50 uppercase text-sm tracking-[0.3em] font-mono mb-2">{link.label}</div>
+                                        {link.children.map(child => (
+                                            <Link
+                                                key={child.label}
+                                                href={child.href}
+                                                className="block text-3xl font-serif font-bold text-white hover:text-amber-400 transition-colors"
+                                                onClick={() => setIsMobileMenuOpen(false)}
+                                            >
+                                                {child.label}
+                                            </Link>
+                                        ))}
                                     </div>
                                 ) : (
                                     <Link
                                         href={link.href}
-                                        className="block text-lg font-medium text-white"
+                                        className="block text-4xl font-serif font-bold text-white hover:text-amber-400 transition-colors"
                                         onClick={() => setIsMobileMenuOpen(false)}
                                     >
                                         {link.label}
@@ -185,6 +193,13 @@ export function Header() {
                                 )}
                             </li>
                         ))}
+                        <li className="pt-8">
+                            <Link href="/#contact" onClick={() => setIsMobileMenuOpen(false)}>
+                                <TechButton variant="gold" size="tech">
+                                    Mitglied werden
+                                </TechButton>
+                            </Link>
+                        </li>
                     </ul>
                 </motion.div>
             )}

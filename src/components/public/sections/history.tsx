@@ -12,27 +12,27 @@ const timelineEvents = [
     {
         year: '1848',
         title: 'Freiheitskampf',
-        description: 'Teutonen kämpfen in der Badischen Revolution für Freiheit und Einheit. Nach dem Scheitern wird die Burschenschaft verboten.'
-    },
-    {
-        year: '1857',
-        title: 'Wiedergründung',
-        description: 'Nach Jahren im Verborgenen tritt die Teutonia wieder öffentlich auf. Das Bekenntnis zu Schwarz-Rot-Gold wird wieder erlaubt.'
+        description: 'Teutonen kämpfen in der Badischen Revolution für Freiheit, Demokratie und Einheit. Ein Erbe, das uns bis heute verpflichtet.'
     },
     {
         year: '1906',
-        title: 'Teutonenhaus',
-        description: 'Das heutige Haus in der Schützenstraße wird eingeweiht. Es steht an der Stelle des im Krieg zerstörten Hauses der Burschenschaft Germania.'
+        title: 'Das Teutonenhaus',
+        description: 'Weihe unseres Hauses. Ein architektonisches Denkmal und Mittelpunkt unseres Bundeslebens in der Karlsruher Oststadt.'
     },
     {
         year: '1950',
         title: 'Neustart',
-        description: 'Aus dem "Studentenclub Universitas" geht die wiedergegründete Teutonia hervor. Die alten Farben und Werte werden wieder aufgenommen.'
+        description: 'Wiederbegründung nach dem Krieg. Die Flamme der Freiheit und des studentischen Zusammenhalts brennt weiter.'
     },
     {
         year: '2016',
-        title: 'ADB',
-        description: 'Teutonia ist Gründungsmitglied der "Allgemeinen Deutschen Burschenschaft" (ADB) und übernimmt Verantwortung im neuen Dachverband.'
+        title: 'Verantwortung',
+        description: 'Gründungsmitglied der "Allgemeinen Deutschen Burschenschaft" (ADB). Wir gestalten die Zukunft des Korporationswesens aktiv mit.'
+    },
+    {
+        year: '2024',
+        title: 'Transformation',
+        description: 'Digitalisierung, Modernisierung und Öffnung. Wir verbinden 180 Jahre Tradition mit den Anforderungen einer vernetzten Welt.'
     },
 ];
 

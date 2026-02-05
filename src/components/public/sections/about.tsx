@@ -46,10 +46,10 @@ export function AboutSection() {
                     className="mb-16 md:mb-24"
                 >
                     <h2 className="font-serif text-5xl md:text-6xl font-bold mb-6">
-                        Mehr als eine <span className="text-gray-600">Verbindung.</span>
+                        Ein Netzwerk von <span className="text-white/30">Weltklasse.</span>
                     </h2>
                     <p className="text-xl text-gray-400 max-w-2xl">
-                        In unserer Gemeinschaft findet man immer den richtigen Ansprechpartner – egal, ob es ums Feiern, Arbeiten, Studieren oder die Verwirklichung neuer Ideen geht.
+                        Wir bilden die Führungskräfte von morgen. Durch akademische Exzellenz, lebenslange Förderung und ein starkes Fundament an Werten.
                     </p>
                 </motion.div>
 

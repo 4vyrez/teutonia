@@ -18,7 +18,7 @@ export function UniversitySection() {
 
                     {/* Left: Content */}
                     <div className="lg:col-span-7">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/30 border border-emerald-900/50 text-emerald-500 text-xs font-medium tracking-wide mb-6">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/30 border border-emerald-500/30 text-emerald-400 text-xs font-medium tracking-widest uppercase mb-6 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
                             <span className="relative flex h-2 w-2">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -70,18 +70,18 @@ export function UniversitySection() {
                         <motion.div
                             animate={{ y: [0, -10, 0] }}
                             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                            className="absolute top-10 right-10 bg-[#121212] border border-white/10 p-4 rounded-xl shadow-xl max-w-[150px]"
+                            className="absolute top-10 right-10 bg-[#121212] border border-amber-500/20 p-4 rounded-xl shadow-[0_0_30px_rgba(245,158,11,0.1)] max-w-[150px]"
                         >
-                            <div className="text-emerald-500 font-bold text-2xl mb-1">Nr. 1</div>
+                            <div className="text-amber-500 font-bold text-2xl mb-1">Nr. 1</div>
                             <div className="text-xs text-gray-500 leading-tight">Informatik in Deutschland</div>
                         </motion.div>
 
                         <motion.div
                             animate={{ y: [0, 10, 0] }}
                             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                            className="absolute bottom-20 left-0 bg-[#121212] border border-white/10 p-4 rounded-xl shadow-xl max-w-[150px]"
+                            className="absolute bottom-20 left-0 bg-[#121212] border border-emerald-500/20 p-4 rounded-xl shadow-[0_0_30px_rgba(16,185,129,0.1)] max-w-[150px]"
                         >
-                            <div className="text-teal-400 font-bold text-2xl mb-1">20.000+</div>
+                            <div className="text-emerald-500 font-bold text-2xl mb-1">20k+</div>
                             <div className="text-xs text-gray-500 leading-tight">Studierende am Campus</div>
                         </motion.div>
                     </div>
