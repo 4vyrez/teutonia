@@ -64,13 +64,16 @@ export function AboutSection() {
                             transition={{ duration: 0.5, delay: item.delay }}
                             className={item.className}
                         >
-                            <SpotlightCard className="h-full p-8 rounded-3xl bg-white/[0.02] border-white/5 hover:border-white/10 transition-colors">
+                            <SpotlightCard
+                                className="h-full p-8 rounded-3xl bg-white/[0.02] border-white/5 hover:border-white/10 transition-colors"
+                                spotlightColor="rgba(251, 191, 36, 0.15)"
+                            >
                                 <div className="h-full flex flex-col justify-between">
                                     <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors">
-                                        <item.icon className="w-6 h-6 text-white" />
+                                        <item.icon className="w-6 h-6 text-amber-100/80" />
                                     </div>
                                     <div>
-                                        <h3 className="text-2xl font-semibold mb-3 text-white">{item.title}</h3>
+                                        <h3 className="text-2xl font-semibold mb-3 text-amber-50">{item.title}</h3>
                                         <p className="text-gray-400 leading-relaxed font-light">{item.description}</p>
                                     </div>
                                 </div>
