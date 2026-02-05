@@ -1,8 +1,9 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Book, Briefcase, Calendar, Heart, ArrowUpRight } from 'lucide-react';
+import { Book, Briefcase, Calendar, Heart } from 'lucide-react';
 import Link from 'next/link';
+import { SpotlightCard } from '@/components/ui/spotlight-card';
 
 const pillars = [
     {
@@ -44,24 +45,24 @@ export function CommunitySection() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {pillars.map((pillar, i) => (
-                        <Link href={pillar.href} key={i} className="group">
+                        <Link href={pillar.href} key={i} className="group block h-full">
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.1 }}
-                                className="h-full p-8 rounded-3xl bg-white/5 border border-white/5 group-hover:border-amber-400/30 transition-colors relative overflow-hidden"
+                                className="h-full"
                             >
-                                <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <ArrowUpRight className="w-5 h-5 text-white/50" />
-                                </div>
+                                <SpotlightCard className="h-full p-8 rounded-3xl bg-white/[0.02] border-white/5 hover:border-white/10 transition-colors">
+                                    <div className="flex flex-col h-full">
+                                        <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300">
+                                            <pillar.icon className="w-5 h-5 text-gray-200" />
+                                        </div>
 
-                                <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-12 group-hover:scale-110 transition-transform">
-                                    <pillar.icon className="w-5 h-5 text-white" />
-                                </div>
-
-                                <h3 className="text-xl font-bold mb-3">{pillar.title}</h3>
-                                <p className="text-gray-500 text-sm leading-relaxed">{pillar.desc}</p>
+                                        <h3 className="text-xl font-bold mb-3 text-white">{pillar.title}</h3>
+                                        <p className="text-gray-400 text-sm leading-relaxed">{pillar.desc}</p>
+                                    </div>
+                                </SpotlightCard>
                             </motion.div>
                         </Link>
                     ))}
