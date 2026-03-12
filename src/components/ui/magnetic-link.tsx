@@ -3,7 +3,7 @@
 import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 
-export function MagneticLink({ children, className, href }: { children: React.ReactNode; className?: string; href?: string }) {
+export function MagneticLink({ children, className }: { children: React.ReactNode; className?: string }) {
     const ref = useRef<HTMLDivElement>(null);
     const [position, setPosition] = useState({ x: 0, y: 0 });
 

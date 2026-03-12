@@ -1,76 +1,58 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { Book, Briefcase, Calendar, Heart } from 'lucide-react';
 import Link from 'next/link';
-import { SpotlightCard } from '@/components/ui/spotlight-card';
-
-const pillars = [
-    {
-        title: 'Studium',
-        icon: Book,
-        desc: 'Gemeinsames Lernen, Bibliothek und Prüfungsvorbereitung.',
-        href: '/studium'
-    },
-    {
-        title: 'Karriere',
-        icon: Briefcase,
-        desc: 'Netzwerk aus über 170 Alumni in Führungspositionen.',
-        href: '/karriere'
-    },
-    {
-        title: 'Events',
-        icon: Calendar,
-        desc: 'Vorträge, Bälle und legendäre Partys auf dem Haus.',
-        href: '/veranstaltungen'
-    },
-    {
-        title: 'Freundschaft',
-        icon: Heart,
-        desc: 'Ein Bund fürs Leben. In Karlsruhe und der Welt.',
-        href: '/freundschaft'
-    }
-];
+import { motion } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
+import { homePillars } from '@/content/public-site';
 
 export function CommunitySection() {
-    return (
-        <section id="community" className="py-32 relative text-white border-t border-white/5">
-            <div className="container mx-auto px-6">
-                <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
-                    <div>
-                        <span className="text-amber-200/80 font-sans font-medium text-sm tracking-[0.2em] uppercase mb-4 block">Gemeinschaft</span>
-                        <h2 className="font-serif text-4xl md:text-5xl font-bold text-[#f2f2f0]">Vier Säulen. Ein Fundament.</h2>
-                    </div>
-                </div>
+  return (
+    <section className="mx-auto max-w-7xl px-6 pb-20 md:px-8 lg:pb-24">
+      <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
+        <div className="space-y-5">
+          <span className="text-xs font-semibold uppercase tracking-[0.28em] text-primary/75">
+            Bereiche
+          </span>
+          <h2 className="font-serif text-4xl text-slate-900 md:text-6xl">
+            Vier Perspektiven auf denselben Kern.
+          </h2>
+          <p className="text-lg leading-8 text-slate-700">
+            Studium, Karriere, Veranstaltungen und Freundschaft sind keine getrennten Themen. Sie
+            zeigen nur unterschiedliche Seiten derselben Gemeinschaft.
+          </p>
+        </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {pillars.map((pillar, i) => (
-                        <Link href={pillar.href} key={i} className="group block h-full">
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.1 }}
-                                className="h-full"
-                            >
-                                <SpotlightCard
-                                    className="h-full p-8 rounded-3xl bg-white/[0.02] border-white/5 hover:border-white/10 transition-colors"
-                                    spotlightColor="rgba(251, 191, 36, 0.15)"
-                                >
-                                    <div className="flex flex-col h-full">
-                                        <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300">
-                                            <pillar.icon className="w-5 h-5 text-amber-100/80" />
-                                        </div>
+        <div className="rounded-[1.8rem] border border-[#e6dbc9] bg-[linear-gradient(120deg,rgba(115,45,40,0.07),rgba(199,168,117,0.2),rgba(255,255,255,0.9))] p-6 text-sm leading-7 text-slate-700 shadow-[0_28px_70px_rgba(109,78,47,0.08)]">
+          Die öffentlichen Unterseiten werden nicht als lose Landingpages angelegt, sondern als
+          präzisere Vertiefungen der Themen, die auf der Startseite beginnen.
+        </div>
+      </div>
 
-                                        <h3 className="text-xl font-bold mb-3 text-amber-50">{pillar.title}</h3>
-                                        <p className="text-gray-400 text-sm leading-relaxed">{pillar.desc}</p>
-                                    </div>
-                                </SpotlightCard>
-                            </motion.div>
-                        </Link>
-                    ))}
+      <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+        {homePillars.map((pillar, index) => (
+          <motion.div
+            key={pillar.title}
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ delay: index * 0.08 }}
+          >
+            <Link
+              href={pillar.href}
+              className="group flex h-full flex-col rounded-[1.8rem] border border-white/70 bg-white/80 p-7 shadow-[0_28px_80px_rgba(103,75,49,0.08)] backdrop-blur transition-transform duration-300 hover:-translate-y-1"
+            >
+              <div className="flex items-center justify-between gap-3">
+                <div className="text-xs font-semibold uppercase tracking-[0.22em] text-primary/70">
+                  {pillar.eyebrow}
                 </div>
-            </div>
-        </section>
-    );
+                <ArrowUpRight className="h-4 w-4 text-primary transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </div>
+              <h3 className="mt-5 font-serif text-3xl text-slate-900">{pillar.title}</h3>
+              <p className="mt-4 leading-7 text-slate-700">{pillar.description}</p>
+            </Link>
+          </motion.div>
+        ))}
+      </div>
+    </section>
+  );
 }

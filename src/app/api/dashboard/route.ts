@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import { getUpcomingEvents } from '@/lib/services/events';
-import { getCurrentWeekMeals } from '@/lib/services/meals';
 import { db } from '@/lib/db';
 import { announcements } from '@/lib/db/schema';
 import { eq, and, or, gte, isNull } from 'drizzle-orm';

@@ -1,10 +1,14 @@
-import ConstructionPage from '@/components/layout/construction-page';
+import type { Metadata } from 'next';
+import { publicPages } from '@/content/public-site';
+import { PublicPageTemplate } from '@/components/public/public-page-template';
 
-export default function Page() {
-    return (
-        <ConstructionPage
-            title="Netzwerk & Karriere"
-            description="Über 170 Alte Herren in Führungspositionen weltweit. Das Netzwerk der Teutonia öffnet Türen."
-        />
-    );
+const content = publicPages.karriere;
+
+export const metadata: Metadata = {
+  title: 'Netzwerk & Karriere',
+  description: content.description,
+};
+
+export default function KarrierePage() {
+  return <PublicPageTemplate content={content} />;
 }

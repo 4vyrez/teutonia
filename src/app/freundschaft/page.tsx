@@ -1,10 +1,14 @@
-import ConstructionPage from '@/components/layout/construction-page';
+import type { Metadata } from 'next';
+import { publicPages } from '@/content/public-site';
+import { PublicPageTemplate } from '@/components/public/public-page-template';
 
-export default function Page() {
-    return (
-        <ConstructionPage
-            title="Lebensbund & Freundschaft"
-            description="Mehr als nur eine Zweck-WG. Eine Gemeinschaft, die über das Studium hinausgeht."
-        />
-    );
+const content = publicPages.freundschaft;
+
+export const metadata: Metadata = {
+  title: 'Lebensbund & Freundschaft',
+  description: content.description,
+};
+
+export default function FreundschaftPage() {
+  return <PublicPageTemplate content={content} />;
 }

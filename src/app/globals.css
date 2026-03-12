@@ -6,37 +6,38 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --font-sans: var(--font-manrope);
+  --font-serif: var(--font-cormorant);
+  --font-mono: "SFMono-Regular", ui-monospace, monospace;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -46,63 +47,39 @@
   --radius-4xl: calc(var(--radius) + 16px);
 }
 
-/* V5 Forced Dark Mode: Rich Charcoal / Deep Crimson / True Gold */
 :root {
-  --radius: 0.625rem;
-
-  /* Background: A deep, rich charcoal, avoiding pure black for a more "expensive" feel */
-  --background: oklch(0.14 0.01 260);
-  --foreground: oklch(0.92 0.01 85);
-
-  --card: oklch(0.18 0.02 260);
-  --card-foreground: oklch(0.92 0.01 85);
-
-  --popover: oklch(0.16 0.02 260);
-  --popover-foreground: oklch(0.92 0.01 85);
-
-  /* Primary: Deep, noble Crimson (Blood Red), not bright neon red */
-  --primary: oklch(0.42 0.18 25);
-  --primary-foreground: oklch(0.98 0 0);
-
-  --muted: oklch(0.25 0.02 260);
-  --muted-foreground: oklch(0.7 0.02 260);
-
-  --accent: oklch(0.25 0.05 25);
-  /* Subtle Red tint for hover states */
-  --accent-foreground: oklch(0.98 0 0);
-  /* Gold/White text on accent */
-
-  --destructive: oklch(0.5 0.2 25);
-
-  --border: oklch(0.25 0.02 260);
-  --input: oklch(0.25 0.02 260);
-  --ring: oklch(0.75 0.15 85);
-  /* Focus ring is GOLD */
-
-  /* True Metallic Gold (No more Orange) */
-  --gold: oklch(0.78 0.14 85);
-  --gold-foreground: oklch(0.14 0.01 260);
-
-  /* Charts adjusted to match new palette */
-  --chart-1: oklch(0.42 0.18 25);
-  /* Crimson */
-  --chart-2: oklch(0.78 0.14 85);
-  /* Gold */
-  --chart-3: oklch(0.25 0.02 260);
-  /* Charcoal */
-  --chart-4: oklch(0.6 0.15 25);
-  /* Lighter Red */
-  --chart-5: oklch(0.85 0.1 85);
-  /* Lighter Gold */
-
-  --sidebar: oklch(0.16 0.02 260);
-  --sidebar-foreground: oklch(0.92 0.01 85);
-  --sidebar-primary: oklch(0.78 0.14 85);
-  --sidebar-primary-foreground: oklch(0.14 0.01 260);
-  --sidebar-accent: oklch(0.2 0.02 260);
-  --sidebar-accent-foreground: oklch(0.92 0.01 85);
-  --sidebar-border: oklch(0.25 0.02 260);
-  --sidebar-ring: oklch(0.78 0.14 85);
+  --radius: 0.95rem;
+  --background: oklch(0.975 0.012 86);
+  --foreground: oklch(0.31 0.025 45);
+  --card: oklch(0.992 0.008 84);
+  --card-foreground: oklch(0.31 0.025 45);
+  --popover: oklch(0.99 0.008 84);
+  --popover-foreground: oklch(0.31 0.025 45);
+  --primary: oklch(0.47 0.105 28);
+  --primary-foreground: oklch(0.985 0.005 84);
+  --secondary: oklch(0.94 0.018 85);
+  --secondary-foreground: oklch(0.32 0.025 44);
+  --muted: oklch(0.948 0.01 82);
+  --muted-foreground: oklch(0.56 0.03 45);
+  --accent: oklch(0.94 0.028 79);
+  --accent-foreground: oklch(0.34 0.025 44);
+  --destructive: oklch(0.58 0.18 28);
+  --border: oklch(0.89 0.014 80);
+  --input: oklch(0.9 0.014 81);
+  --ring: oklch(0.73 0.09 72);
+  --chart-1: oklch(0.47 0.105 28);
+  --chart-2: oklch(0.78 0.08 78);
+  --chart-3: oklch(0.63 0.05 70);
+  --chart-4: oklch(0.58 0.07 48);
+  --chart-5: oklch(0.68 0.12 58);
+  --sidebar: oklch(0.985 0.006 84);
+  --sidebar-foreground: oklch(0.31 0.025 45);
+  --sidebar-primary: oklch(0.47 0.105 28);
+  --sidebar-primary-foreground: oklch(0.985 0.005 84);
+  --sidebar-accent: oklch(0.95 0.018 85);
+  --sidebar-accent-foreground: oklch(0.31 0.025 45);
+  --sidebar-border: oklch(0.89 0.014 80);
+  --sidebar-ring: oklch(0.73 0.09 72);
 }
 
 @layer base {
@@ -110,52 +87,73 @@
     @apply border-border outline-ring/50;
   }
 
-  body {
-    @apply bg-background text-foreground;
+  html {
+    scroll-behavior: smooth;
   }
 
-  /* V5 Background: Rich Charcoal to Deep Red Tint - Default */
   body {
-    background-image: radial-gradient(circle at 50% 0%, oklch(0.18 0.05 25 / 0.4), transparent 70%),
-      linear-gradient(to bottom, oklch(0.14 0.01 260), oklch(0.10 0.01 260));
+    @apply bg-background text-foreground font-sans;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(circle at top left, rgba(122, 47, 43, 0.08), transparent 28%),
+      radial-gradient(circle at top right, rgba(198, 168, 117, 0.18), transparent 24%),
+      linear-gradient(180deg, rgba(248, 243, 235, 1), rgba(244, 238, 228, 1) 38%, rgba(251, 247, 240, 1));
     background-attachment: fixed;
+    text-rendering: optimizeLegibility;
   }
 
-  /* V6 Polish: Custom Scrollbar & Selection */
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: oklch(0.25 0.02 260);
-    /* Charcoal Border */
-    border-radius: 99px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: oklch(0.42 0.18 25);
-    /* Crimson Hover */
+  a {
+    @apply outline-none;
   }
 
   ::selection {
-    background: oklch(0.42 0.18 25);
-    /* Crimson */
-    color: white;
+    background: rgba(122, 47, 43, 0.18);
+    color: #231814;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(122, 47, 43, 0.36);
+    border-radius: 999px;
+    border: 2px solid rgba(248, 243, 235, 1);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(122, 47, 43, 0.5);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
 @layer utilities {
   .bg-grid-white {
     background-size: 50px 50px;
-    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-image:
+      linear-gradient(to right, rgba(78, 59, 46, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(78, 59, 46, 0.06) 1px, transparent 1px);
   }
 
   .glass-card {
-    @apply bg-[#1a1515]/60 backdrop-blur-xl border border-white/5 shadow-2xl;
+    @apply border border-white/70 bg-white/78 shadow-[0_28px_90px_rgba(103,75,49,0.08)] backdrop-blur;
   }
 }

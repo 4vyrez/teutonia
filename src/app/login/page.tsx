@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
@@ -98,12 +99,12 @@ export default function LoginPage() {
                         </form>
 
                         <div className="mt-6 text-center">
-                            <a
+                            <Link
                                 href="/"
                                 className="text-sm text-gray-500 hover:text-amber-600 transition-colors"
                             >
                                 ← Zurück zur Startseite
-                            </a>
+                            </Link>
                         </div>
                     </CardContent>
                 </Card>

@@ -1,4 +1,4 @@
-import { Header, Footer } from '@/components/layout';
+import { PublicShell } from '@/components/public/public-shell';
 import {
   HeroSection,
   AboutSection,
@@ -11,18 +11,16 @@ import {
 
 export default function HomePage() {
   return (
-    <>
-      <Header />
-      <main>
+    <PublicShell>
+      <>
         <HeroSection />
         <AboutSection />
-        <HistorySection />
         <CommunitySection />
         <UniversitySection />
+        <HistorySection />
         <HouseSection />
         <ContactSection />
-      </main>
-      <Footer />
-    </>
+      </>
+    </PublicShell>
   );
 }

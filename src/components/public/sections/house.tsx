@@ -1,53 +1,79 @@
 'use client';
 
+import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Home, Coffee, Monitor, Check } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { TechLightbox } from '@/components/ui/tech-lightbox';
-
-const features = [
-    { title: "20 Zimmer", desc: "Saniert & Vollmöbliert" },
-    { title: "Grand Hall", desc: "Festsaal für Events" },
-    { title: "Bar & Lounge", desc: "Private Members Club" },
-    { title: "Bibliothek", desc: "Exzellente Lernatmosphäre" },
-];
+import { ArrowRight, Boxes, ScanSearch } from 'lucide-react';
+import { houseHotspots, houseRooms, houseSceneAsset } from '@/content/public-site';
+import { HouseExplorer } from '@/components/public/house/house-explorer';
 
 export function HouseSection() {
-    return (
-        <section id="house" className="py-32 relative text-white">
-            <div className="container mx-auto px-6">
-                <div className="grid lg:grid-cols-2 gap-16 items-center">
-                    <div>
-                        <div className="mb-8">
-                            <h2 className="font-serif text-3xl font-bold mb-4">
-                                Ein Anwesen <span className="text-gray-500">mit Geschichte.</span>
-                            </h2>
-                            <p className="text-gray-400 leading-relaxed">
-                                Leben in einer Villa in der Oststadt. Keine 5 Minuten zum Campus.
-                                Ein Ort, der Studium, Gemeinschaft und Lebensart verbindet.
-                            </p>
-                        </div>
+  return (
+    <section id="house" className="mx-auto max-w-7xl px-6 pb-20 md:px-8 lg:pb-24">
+      <div className="space-y-5 pb-10 md:max-w-4xl">
+        <span className="text-xs font-semibold uppercase tracking-[0.28em] text-primary/75">
+          Unser Haus
+        </span>
+        <h2 className="font-serif text-4xl text-slate-900 md:text-6xl">
+          Ein Explorer, der vom Gebäude zu den tatsächlichen Räumen führt.
+        </h2>
+        <p className="text-lg leading-8 text-slate-700">
+          Die Haus-Sektion arbeitet nicht mehr mit einer generischen Lightbox. Sie zeigt das Haus
+          als zusammenhängenden Ort und führt von diskreten Punkten zu Nutzung, Atmosphäre und
+          den dazugehörigen Innenräumen.
+        </p>
+      </div>
 
-                        <div className="grid grid-cols-2 gap-4">
-                            {features.map((item, i) => (
-                                <div key={i} className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/5">
-                                    <div className="w-5 h-5 rounded-full bg-amber-400/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                                        <Check className="w-3 h-3 text-amber-400" />
-                                    </div>
-                                    <div>
-                                        <div className="font-bold text-sm">{item.title}</div>
-                                        <div className="text-xs text-gray-500">{item.desc}</div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+      <HouseExplorer sceneAsset={houseSceneAsset} rooms={houseRooms} hotspots={houseHotspots} />
 
-                    <div className="h-full">
-                        <TechLightbox />
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
+      <div className="mt-6 grid gap-5 lg:grid-cols-[1fr_0.9fr]">
+        <motion.article
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          className="rounded-[1.9rem] border border-white/70 bg-white/78 p-6 shadow-[0_28px_90px_rgba(106,76,44,0.08)] backdrop-blur"
+        >
+          <div className="flex items-center gap-3 text-primary">
+            <Boxes className="h-5 w-5" />
+            <span className="text-xs font-semibold uppercase tracking-[0.24em]">Model-ready</span>
+          </div>
+          <h3 className="mt-4 font-serif text-3xl text-slate-900">
+            Die Struktur ist auf ein späteres 3D-Modell vorbereitet.
+          </h3>
+          <p className="mt-4 leading-7 text-slate-700">
+            Hotspots, Raumdaten und das Szenen-Asset sind bewusst getrennt. Sobald ein bereinigtes
+            `glb`-Modell vorliegt, kann der Explorer vom Foto-Stage auf eine echte 3D-Szene
+            umgestellt werden, ohne die UX neu zu bauen.
+          </p>
+        </motion.article>
+
+        <motion.article
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ delay: 0.06 }}
+          className="rounded-[1.9rem] border border-[#e7dccb] bg-[linear-gradient(120deg,rgba(116,44,40,0.08),rgba(198,168,117,0.18),rgba(255,255,255,0.9))] p-6 shadow-[0_28px_90px_rgba(106,76,44,0.08)]"
+        >
+          <div className="flex items-center gap-3 text-primary">
+            <ScanSearch className="h-5 w-5" />
+            <span className="text-xs font-semibold uppercase tracking-[0.24em]">AI- & Blender-Pfad</span>
+          </div>
+          <h3 className="mt-4 font-serif text-3xl text-slate-900">
+            Der nächste Ausbauschritt ist definiert, nicht dem Zufall überlassen.
+          </h3>
+          <p className="mt-4 leading-7 text-slate-700">
+            Welche Fotos, Perspektiven und Exportformate für ein echtes 3D-Modell benötigt werden,
+            ist im Repo dokumentiert. Damit kannst du gezielt Material sammeln oder an einen
+            externen Modellierungs-Workflow übergeben.
+          </p>
+          <Link
+            href="/#contact"
+            className="mt-6 inline-flex items-center gap-2 rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition-transform duration-300 hover:-translate-y-0.5"
+          >
+            Weiteres Material abstimmen
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </motion.article>
+      </div>
+    </section>
+  );
 }

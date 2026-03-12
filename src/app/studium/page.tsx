@@ -1,10 +1,14 @@
-import ConstructionPage from '@/components/layout/construction-page';
+import type { Metadata } from 'next';
+import { publicPages } from '@/content/public-site';
+import { PublicPageTemplate } from '@/components/public/public-page-template';
 
-export default function Page() {
-    return (
-        <ConstructionPage
-            title="Studium & Bildung"
-            description="Wir unterstützen uns gegenseitig im Studium. Von der Klausurenphase bis zur Abschlussarbeit. Inhalte folgen in Kürze."
-        />
-    );
+const content = publicPages.studium;
+
+export const metadata: Metadata = {
+  title: 'Studium & Bildung',
+  description: content.description,
+};
+
+export default function StudiumPage() {
+  return <PublicPageTemplate content={content} />;
 }

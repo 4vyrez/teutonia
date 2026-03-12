@@ -1,32 +1,33 @@
 import type { Metadata } from 'next';
-import { Inter, Playfair_Display } from 'next/font/google';
+import { Cormorant_Garamond, Manrope } from 'next/font/google';
 import { Toaster } from '@/components/ui/sonner';
 
 import { CommandMenu } from '@/components/layout/command-menu';
 import { ScrollToTop } from '@/components/ui/scroll-to-top';
+import { siteMeta } from '@/content/public-site';
 import './globals.css';
 
-const inter = Inter({
+const manrope = Manrope({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-manrope',
 });
 
-const playfair = Playfair_Display({
+const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
-  variable: '--font-playfair',
+  variable: '--font-cormorant',
+  weight: ['400', '500', '600', '700'],
 });
 
 export const metadata: Metadata = {
   title: {
-    default: 'KB! Teutonia | Karlsruher Burschenschaft seit 1843',
+    default: `${siteMeta.title} | Karlsruher Burschenschaft seit 1843`,
     template: '%s | KB! Teutonia',
   },
-  description:
-    'Karlsruher Burschenschaft Teutonia - Gegründet 1843. Die älteste Burschenschaft an einer technischen Universität. Ca. 20 Studenten und 170 Alumni am KIT.',
+  description: siteMeta.description,
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
   openGraph: {
-    title: 'KB! Teutonia',
-    description: 'Karlsruher Burschenschaft seit 1843',
+    title: siteMeta.title,
+    description: siteMeta.description,
     type: 'website',
     locale: 'de_DE',
   },
@@ -42,9 +43,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="de" className={`${inter.variable} ${playfair.variable}`}>
-      <body className="antialiased font-sans bg-white text-gray-900">
-
+    <html lang="de" className={`${manrope.variable} ${cormorant.variable}`}>
+      <body className="antialiased font-sans bg-background text-foreground">
         <CommandMenu />
         <ScrollToTop />
         {children}

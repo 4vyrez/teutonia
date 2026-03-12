@@ -1,10 +1,14 @@
-import ConstructionPage from '@/components/layout/construction-page';
+import type { Metadata } from 'next';
+import { publicPages } from '@/content/public-site';
+import { PublicPageTemplate } from '@/components/public/public-page-template';
 
-export default function Page() {
-    return (
-        <ConstructionPage
-            title="Events & Programm"
-            description="Vortragsabende, Stiftungsfeste und gesellschaftliche Highlights. Hier entsteht unser Semesterprogramm."
-        />
-    );
+const content = publicPages.veranstaltungen;
+
+export const metadata: Metadata = {
+  title: 'Veranstaltungen & Programm',
+  description: content.description,
+};
+
+export default function VeranstaltungenPage() {
+  return <PublicPageTemplate content={content} />;
 }

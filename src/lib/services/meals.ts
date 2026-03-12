@@ -1,6 +1,6 @@
 import { db } from '@/lib/db';
 import { meals, mealSignups, members } from '@/lib/db/schema';
-import { eq, and, desc } from 'drizzle-orm';
+import { eq, and } from 'drizzle-orm';
 import type { Meal, NewMeal, MealSignup, NewMealSignup } from '@/lib/db/schema';
 
 // ============================================
