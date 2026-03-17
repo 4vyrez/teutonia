@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { mainNavigation, siteMeta } from '@/content/public-site';
 
 const footerLinks = [
@@ -23,7 +24,13 @@ export function Footer() {
     <footer className="border-t border-white/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.5),rgba(243,235,224,0.92))]">
       <div className="mx-auto max-w-7xl px-6 py-14 md:px-8">
         <div className="grid gap-10 lg:grid-cols-[1.05fr_0.65fr_0.65fr_0.85fr]">
-          <div className="space-y-5">
+          <motion.div
+            className="space-y-5"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5 }}
+          >
             <Link href="/" className="flex items-center gap-3">
               <div className="relative h-12 w-10 overflow-hidden rounded-[0.9rem] border border-[#e2d6c4] bg-white shadow-[0_10px_24px_rgba(98,76,49,0.08)]">
                 <Image
@@ -52,9 +59,14 @@ export function Footer() {
                 <div key={line}>{line}</div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
             <h2 className="text-xs font-semibold uppercase tracking-[0.24em] text-primary/75">
               Navigation
             </h2>
@@ -67,9 +79,14 @@ export function Footer() {
                   </Link>
                 ))}
             </div>
-          </div>
+          </motion.div>
 
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.18 }}
+          >
             <h2 className="text-xs font-semibold uppercase tracking-[0.24em] text-primary/75">
               Bereiche
             </h2>
@@ -80,9 +97,14 @@ export function Footer() {
                 </Link>
               ))}
             </div>
-          </div>
+          </motion.div>
 
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.26 }}
+          >
             <h2 className="text-xs font-semibold uppercase tracking-[0.24em] text-primary/75">
               Direkter Kontakt
             </h2>
@@ -106,7 +128,7 @@ export function Footer() {
                 </a>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         <div className="mt-12 flex flex-col gap-4 border-t border-white/80 pt-6 text-sm text-slate-600 md:flex-row md:items-center md:justify-between">

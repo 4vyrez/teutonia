@@ -2,10 +2,10 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowRight, Mail, MapPin, Phone } from 'lucide-react';
+import { ArrowRight, Home, Mail, MapPin, Phone } from 'lucide-react';
 import { contactCards, siteMeta } from '@/content/public-site';
 
-const icons = [Mail, Mail, Phone];
+const icons = [Mail, Home, Phone];
 
 export function ContactSection() {
   return (
@@ -97,7 +97,7 @@ export function ContactSection() {
             </p>
             <Link
               href={`mailto:${siteMeta.emails.rooms}?subject=Zimmeranfrage%20Teutonia`}
-              className="mt-5 inline-flex items-center gap-2 rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition-transform duration-300 hover:-translate-y-0.5"
+              className="btn-shimmer mt-5 inline-flex items-center gap-2 rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition-transform duration-300 hover:-translate-y-0.5"
             >
               Zimmeranfrage starten
               <ArrowRight className="h-4 w-4" />

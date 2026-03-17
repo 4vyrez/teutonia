@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { homePillars } from '@/content/public-site';
+import { SpotlightCard } from '@/components/ui/spotlight-card';
 
 export function CommunitySection() {
   return (
@@ -23,8 +24,8 @@ export function CommunitySection() {
         </div>
 
         <div className="rounded-[1.8rem] border border-[#e6dbc9] bg-[linear-gradient(120deg,rgba(115,45,40,0.07),rgba(199,168,117,0.2),rgba(255,255,255,0.9))] p-6 text-sm leading-7 text-slate-700 shadow-[0_28px_70px_rgba(109,78,47,0.08)]">
-          Die öffentlichen Unterseiten werden nicht als lose Landingpages angelegt, sondern als
-          präzisere Vertiefungen der Themen, die auf der Startseite beginnen.
+          Jedes Thema hat seinen eigenen Raum — mit konkreten Einblicken, Erfahrungsberichten und
+          klaren Antworten auf das, was Studienanfänger und Interessierte wirklich beschäftigt.
         </div>
       </div>
 
@@ -37,19 +38,24 @@ export function CommunitySection() {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ delay: index * 0.08 }}
           >
-            <Link
-              href={pillar.href}
-              className="group flex h-full flex-col rounded-[1.8rem] border border-white/70 bg-white/80 p-7 shadow-[0_28px_80px_rgba(103,75,49,0.08)] backdrop-blur transition-transform duration-300 hover:-translate-y-1"
+            <SpotlightCard
+              spotlightColor="rgba(122,47,43,0.07)"
+              className="h-full rounded-[1.8rem] border border-white/70 bg-white/80 shadow-[0_28px_80px_rgba(103,75,49,0.08)] backdrop-blur transition-transform duration-300 hover:-translate-y-1"
             >
-              <div className="flex items-center justify-between gap-3">
-                <div className="text-xs font-semibold uppercase tracking-[0.22em] text-primary/70">
-                  {pillar.eyebrow}
+              <Link
+                href={pillar.href}
+                className="group flex h-full flex-col p-7"
+              >
+                <div className="flex items-center justify-between gap-3">
+                  <div className="text-xs font-semibold uppercase tracking-[0.22em] text-primary/70">
+                    {pillar.eyebrow}
+                  </div>
+                  <ArrowUpRight className="h-4 w-4 text-primary transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </div>
-                <ArrowUpRight className="h-4 w-4 text-primary transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-              </div>
-              <h3 className="mt-5 font-serif text-3xl text-slate-900">{pillar.title}</h3>
-              <p className="mt-4 leading-7 text-slate-700">{pillar.description}</p>
-            </Link>
+                <h3 className="mt-5 font-serif text-3xl text-slate-900">{pillar.title}</h3>
+                <p className="mt-4 leading-7 text-slate-700">{pillar.description}</p>
+              </Link>
+            </SpotlightCard>
           </motion.div>
         ))}
       </div>

@@ -145,6 +145,15 @@
   }
 }
 
+@keyframes shimmer-slide {
+  from {
+    transform: translateX(-150%) skewX(-12deg);
+  }
+  to {
+    transform: translateX(250%) skewX(-12deg);
+  }
+}
+
 @layer utilities {
   .bg-grid-white {
     background-size: 50px 50px;
@@ -155,5 +164,34 @@
 
   .glass-card {
     @apply border border-white/70 bg-white/78 shadow-[0_28px_90px_rgba(103,75,49,0.08)] backdrop-blur;
+  }
+
+  .btn-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-shimmer::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.18) 50%,
+      transparent 100%
+    );
+    transform: translateX(-150%) skewX(-12deg);
+    transition: none;
+  }
+
+  .btn-shimmer:hover::after {
+    animation: shimmer-slide 0.55s ease-in-out forwards;
+  }
+
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 128px 128px;
   }
 }

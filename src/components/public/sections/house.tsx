@@ -17,9 +17,8 @@ export function HouseSection() {
           Ein Explorer, der vom Gebäude zu den tatsächlichen Räumen führt.
         </h2>
         <p className="text-lg leading-8 text-slate-700">
-          Die Haus-Sektion arbeitet nicht mehr mit einer generischen Lightbox. Sie zeigt das Haus
-          als zusammenhängenden Ort und führt von diskreten Punkten zu Nutzung, Atmosphäre und
-          den dazugehörigen Innenräumen.
+          Das Haus der Teutonia in der Karlsruher Oststadt ist kein Wohnheim, sondern ein gelebter
+          Ort. Wähle einen Bereich und entdecke, wie Räume, Alltag und Gemeinschaft zusammenkommen.
         </p>
       </div>
 
@@ -34,15 +33,15 @@ export function HouseSection() {
         >
           <div className="flex items-center gap-3 text-primary">
             <Boxes className="h-5 w-5" />
-            <span className="text-xs font-semibold uppercase tracking-[0.24em]">Model-ready</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.24em]">20 Zimmer</span>
           </div>
           <h3 className="mt-4 font-serif text-3xl text-slate-900">
-            Die Struktur ist auf ein späteres 3D-Modell vorbereitet.
+            Wohnen direkt im Haus der Gemeinschaft.
           </h3>
           <p className="mt-4 leading-7 text-slate-700">
-            Hotspots, Raumdaten und das Szenen-Asset sind bewusst getrennt. Sobald ein bereinigtes
-            `glb`-Modell vorliegt, kann der Explorer vom Foto-Stage auf eine echte 3D-Szene
-            umgestellt werden, ohne die UX neu zu bauen.
+            Zwanzig möblierte Zimmer, ein gemeinsamer Mittagstisch und kurze Wege zum KIT.
+            Das Haus ist kein Internat, sondern ein Ort, an dem man sich bewusst entscheidet,
+            Teil von etwas Größerem zu sein.
           </p>
         </motion.article>
 
@@ -55,21 +54,20 @@ export function HouseSection() {
         >
           <div className="flex items-center gap-3 text-primary">
             <ScanSearch className="h-5 w-5" />
-            <span className="text-xs font-semibold uppercase tracking-[0.24em]">AI- & Blender-Pfad</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.24em]">Zimmer anfragen</span>
           </div>
           <h3 className="mt-4 font-serif text-3xl text-slate-900">
-            Der nächste Ausbauschritt ist definiert, nicht dem Zufall überlassen.
+            Interesse an einem Zimmer oder am Kennenlernen?
           </h3>
           <p className="mt-4 leading-7 text-slate-700">
-            Welche Fotos, Perspektiven und Exportformate für ein echtes 3D-Modell benötigt werden,
-            ist im Repo dokumentiert. Damit kannst du gezielt Material sammeln oder an einen
-            externen Modellierungs-Workflow übergeben.
+            Wer bei uns einziehen oder die Teutonia unverbindlich kennenlernen möchte, kann jederzeit
+            Kontakt aufnehmen. Einfach Studienfach und gewünschten Zeitraum mitschicken.
           </p>
           <Link
             href="/#contact"
-            className="mt-6 inline-flex items-center gap-2 rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition-transform duration-300 hover:-translate-y-0.5"
+            className="btn-shimmer mt-6 inline-flex items-center gap-2 rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition-transform duration-300 hover:-translate-y-0.5"
           >
-            Weiteres Material abstimmen
+            Jetzt Kontakt aufnehmen
             <ArrowRight className="h-4 w-4" />
           </Link>
         </motion.article>

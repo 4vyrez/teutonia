@@ -12,7 +12,7 @@ import {
   ArrowRight,
   type LucideIcon,
 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 export function CommandMenu() {
     const [open, setOpen] = React.useState(false);
@@ -24,6 +24,9 @@ export function CommandMenu() {
                 e.preventDefault();
                 setOpen((open) => !open);
             }
+            if (e.key === 'Escape') {
+                setOpen(false);
+            }
         };
         document.addEventListener('keydown', down);
         return () => document.removeEventListener('keydown', down);
@@ -34,16 +37,23 @@ export function CommandMenu() {
         command();
     }, []);
 
-    if (!open) return null;
-
     return (
+        <AnimatePresence>
+            {open ? (
         <div className="fixed inset-0 z-[100] flex items-start justify-center pt-[20vh] px-4">
-            <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setOpen(false)} />
+            <motion.div
+                className="fixed inset-0 bg-black/60 backdrop-blur-sm"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setOpen(false)}
+            />
 
             <motion.div
                 initial={{ opacity: 0, scale: 0.95, y: -20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95 }}
+                exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                transition={{ duration: 0.18, ease: 'easeOut' }}
                 className="relative w-full max-w-lg overflow-hidden rounded-[1.5rem] border border-white/80 bg-white/94 shadow-[0_32px_90px_rgba(105,76,45,0.16)] backdrop-blur"
             >
                 <Command className="w-full bg-transparent p-2">
@@ -84,6 +94,8 @@ export function CommandMenu() {
                 </Command>
             </motion.div>
         </div>
+            ) : null}
+        </AnimatePresence>
     );
 }
 

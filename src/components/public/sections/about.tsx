@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { ShieldCheck, BookOpenText, Landmark, Users } from 'lucide-react';
 import { homeValues } from '@/content/public-site';
+import { SpotlightCard } from '@/components/ui/spotlight-card';
 
 const icons = [ShieldCheck, BookOpenText, Landmark, Users];
 
@@ -28,25 +29,29 @@ export function AboutSection() {
           const Icon = icons[index];
 
           return (
-            <motion.article
+            <motion.div
               key={value.title}
               initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
               transition={{ delay: index * 0.08 }}
-              className="rounded-[1.8rem] border border-white/70 bg-white/78 p-7 shadow-[0_28px_85px_rgba(105,74,44,0.08)] backdrop-blur"
             >
-              <div className="inline-flex rounded-full border border-primary/12 bg-primary/6 p-3 text-primary">
-                <Icon className="h-5 w-5" />
-              </div>
-              <h3 className="mt-5 text-2xl font-semibold text-slate-900">{value.title}</h3>
-              <p className="mt-4 leading-7 text-slate-700">{value.description}</p>
-              {value.detail ? (
-                <p className="mt-5 border-t border-stone-200/80 pt-5 text-sm leading-6 text-slate-600">
-                  {value.detail}
-                </p>
-              ) : null}
-            </motion.article>
+              <SpotlightCard
+                spotlightColor="rgba(122,47,43,0.07)"
+                className="h-full rounded-[1.8rem] border border-white/70 bg-white/78 p-7 shadow-[0_28px_85px_rgba(105,74,44,0.08)] backdrop-blur"
+              >
+                <div className="inline-flex rounded-full border border-primary/12 bg-primary/6 p-3 text-primary transition-transform duration-300 group-hover:scale-110">
+                  <Icon className="h-5 w-5" />
+                </div>
+                <h3 className="mt-5 text-2xl font-semibold text-slate-900">{value.title}</h3>
+                <p className="mt-4 leading-7 text-slate-700">{value.description}</p>
+                {value.detail ? (
+                  <p className="mt-5 border-t border-stone-200/80 pt-5 text-sm leading-6 text-slate-600">
+                    {value.detail}
+                  </p>
+                ) : null}
+              </SpotlightCard>
+            </motion.div>
           );
         })}
       </div>

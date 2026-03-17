@@ -43,7 +43,7 @@ export function PublicPageTemplate({ content }: { content: PublicPageContent }) 
             >
               <Link
                 href={content.cta.primary.href}
-                className="inline-flex items-center gap-2 rounded-full bg-slate-950 px-6 py-3 text-sm font-semibold text-white transition-transform duration-300 hover:-translate-y-0.5"
+                className="btn-shimmer inline-flex items-center gap-2 rounded-full bg-slate-950 px-6 py-3 text-sm font-semibold text-white transition-transform duration-300 hover:-translate-y-0.5"
               >
                 {content.cta.primary.label}
                 <ArrowRight className="h-4 w-4" />
@@ -90,7 +90,9 @@ export function PublicPageTemplate({ content }: { content: PublicPageContent }) 
             transition={{ delay: index * 0.08 }}
             className="rounded-[1.7rem] border border-white/65 bg-white/78 p-7 shadow-[0_28px_65px_rgba(103,72,43,0.08)] backdrop-blur"
           >
-            <div className="mb-5 h-10 w-10 rounded-full border border-primary/15 bg-primary/7" />
+            <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-full border border-primary/20 bg-primary/8 font-serif text-base font-semibold text-primary/70">
+              {String(index + 1).padStart(2, '0')}
+            </div>
             <h2 className="text-2xl font-semibold text-slate-900">{item.title}</h2>
             <p className="mt-4 leading-7 text-slate-700">{item.description}</p>
           </motion.article>
@@ -166,7 +168,7 @@ export function PublicPageTemplate({ content }: { content: PublicPageContent }) 
           <div className="flex flex-wrap gap-3">
             <Link
               href={content.cta.primary.href}
-              className="inline-flex items-center gap-2 rounded-full bg-slate-950 px-6 py-3 text-sm font-semibold text-white transition-transform duration-300 hover:-translate-y-0.5"
+              className="btn-shimmer inline-flex items-center gap-2 rounded-full bg-slate-950 px-6 py-3 text-sm font-semibold text-white transition-transform duration-300 hover:-translate-y-0.5"
             >
               {content.cta.primary.label}
               <ArrowRight className="h-4 w-4" />
