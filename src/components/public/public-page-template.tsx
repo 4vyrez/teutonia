@@ -178,6 +178,7 @@ export function PublicPageTemplate({ content }: { content: PublicPageContent }) 
               className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white/80 px-6 py-3 text-sm font-semibold text-slate-800 transition-colors hover:border-primary/30 hover:text-primary"
             >
               {content.cta.secondary.label}
+              <MoveRight className="h-4 w-4" />
             </Link>
           </div>
         </motion.div>

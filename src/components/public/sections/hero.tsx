@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { ArrowRight, MapPin, Sparkles } from 'lucide-react';
 import { homeHero, homeHeroActions, homeMetrics } from '@/content/public-site';
 
@@ -18,7 +18,7 @@ function parseNumeric(value: string): { prefix: string; num: number; suffix: str
 function AnimatedMetricValue({ value }: { value: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.5 });
-  const parsed = parseNumeric(value);
+  const parsed = useMemo(() => parseNumeric(value), [value]);
   const [display, setDisplay] = useState(parsed ? '0' : value);
 
   useEffect(() => {

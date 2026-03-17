@@ -137,13 +137,13 @@ export function HouseExplorer({
 
               <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full border border-white/70 bg-white/72 px-3 py-2 text-[11px] uppercase tracking-[0.22em] text-slate-700 backdrop-blur">
                 <Building2 className="h-3.5 w-3.5 text-primary" />
-                Echtes Hausfoto als Stage
+                Parkstraße 1 · Karlsruhe
               </div>
             </div>
           )}
         </div>
 
-        <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:hidden">
+        <div className="mt-5 grid gap-3 sm:grid-cols-2 md:hidden">
           {orderedHotspots.map((hotspot) => {
             const active = selectedHotspot?.id === hotspot.id;
 

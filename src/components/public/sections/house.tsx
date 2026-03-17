@@ -14,7 +14,7 @@ export function HouseSection() {
           Unser Haus
         </span>
         <h2 className="font-serif text-4xl text-slate-900 md:text-6xl">
-          Ein Explorer, der vom Gebäude zu den tatsächlichen Räumen führt.
+          Ein Haus, das man besser versteht, wenn man es von innen sieht.
         </h2>
         <p className="text-lg leading-8 text-slate-700">
           Das Haus der Teutonia in der Karlsruher Oststadt ist kein Wohnheim, sondern ein gelebter

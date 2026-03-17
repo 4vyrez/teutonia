@@ -19,9 +19,8 @@ export function ContactSection() {
             Kennenlernen, besuchen, nachfragen.
           </h2>
           <p className="leading-7 text-slate-700">
-            Wer mehr über das Haus, ein Zimmer oder die Gemeinschaft wissen möchte, soll schnell
-            zum richtigen Ansprechpartner kommen. Deshalb setzt die Seite auf direkte Kontaktwege
-            statt auf ein ungesichertes Formular.
+            Wer mehr über das Haus, ein Zimmer oder die Gemeinschaft wissen möchte, findet hier
+            direkte Kontaktwege zum richtigen Ansprechpartner — unkompliziert und ohne Umwege.
           </p>
 
           <div className="rounded-[1.6rem] border border-white/70 bg-white/68 p-5">

@@ -37,7 +37,7 @@ export default function DatenschutzPage() {
                 href="https://www.kbteutonia.de/datenschutzerklaerung.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-5 inline-flex items-center gap-2 rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition-transform duration-300 hover:-translate-y-0.5"
+                className="btn-shimmer mt-5 inline-flex items-center gap-2 rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition-transform duration-300 hover:-translate-y-0.5"
               >
                 PDF öffnen
               </a>
