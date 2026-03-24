@@ -48,11 +48,11 @@ export function HouseSectionComponent() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 font-sans text-sm text-foreground/70">
+          <div className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-2 font-sans text-sm text-foreground/70">
             <MapPin className="h-4 w-4 text-primary" />
             {siteMeta.address[1]}, {siteMeta.address[2]}
           </div>
-          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 font-sans text-sm text-foreground/70">
+          <div className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-2 font-sans text-sm text-foreground/70">
             <Route className="h-4 w-4 text-primary" />
             5 Minuten zum KIT
           </div>

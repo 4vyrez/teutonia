@@ -4,6 +4,8 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { historyTimeline } from '@/content/public-site';
 
+const EASE = [0.16, 1, 0.3, 1] as const;
+
 export function HistorySection() {
   const timelineRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(timelineRef, { once: true, margin: '-80px' });
@@ -13,25 +15,41 @@ export function HistorySection() {
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-16 md:grid-cols-2 md:gap-20">
           {/* Left: Intro */}
-          <motion.div
-            className="flex flex-col justify-center"
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <p className="mb-4 font-sans text-xs font-semibold uppercase tracking-[0.18em] text-primary/70">
-              Geschichte
-            </p>
-            <h2 className="font-serif text-4xl font-light italic leading-tight text-foreground md:text-5xl">
-              Seit 1843 — und kein bisschen ruhiger.
-            </h2>
-            <p className="mt-6 font-sans text-base leading-relaxed text-muted-foreground">
+          <div className="flex flex-col justify-center">
+            <div className="mb-4 overflow-hidden">
+              <motion.p
+                className="font-sans text-xs font-semibold uppercase tracking-[0.18em] text-primary/70"
+                initial={{ y: '100%' }}
+                whileInView={{ y: '0%' }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, ease: EASE }}
+              >
+                Geschichte
+              </motion.p>
+            </div>
+            <div className="overflow-hidden">
+              <motion.h2
+                className="font-serif text-4xl font-light italic leading-tight text-foreground md:text-5xl"
+                initial={{ y: '100%' }}
+                whileInView={{ y: '0%' }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.55, ease: EASE, delay: 0.05 }}
+              >
+                Seit 1843 — und kein bisschen ruhiger.
+              </motion.h2>
+            </div>
+            <motion.p
+              className="mt-6 font-sans text-base leading-relaxed text-muted-foreground"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.25 }}
+            >
               Über 180 Jahre studentischer Geschichte, geprägt von Haltung, Verantwortung und dem
               Willen, mehr aus dem Studium zu machen als nur Lehrveranstaltungen zu besuchen. Die
               Teutonia ist nicht Nostalgie — sie ist Kontinuität.
-            </p>
-          </motion.div>
+            </motion.p>
+          </div>
 
           {/* Right: Timeline */}
           <div ref={timelineRef} className="relative">

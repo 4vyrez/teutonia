@@ -3,14 +3,7 @@
 import { motion } from 'framer-motion';
 import { testimonials } from '@/content/public-site';
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, delay: i * 0.12, ease: 'easeOut' as const },
-  }),
-};
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 export function BelongingSection() {
   const [featured, ...rest] = testimonials;
@@ -21,26 +14,41 @@ export function BelongingSection() {
         {/* Featured pull quote */}
         <motion.div
           className="relative mx-auto mb-16 max-w-3xl text-center"
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.5 }}
         >
-          {/* Decorative quote mark */}
+          {/* Decorative marks */}
           <span
-            className="pointer-events-none absolute -top-4 left-0 font-serif text-[8rem] leading-none text-accent/20 select-none md:text-[10rem]"
+            className="pointer-events-none absolute -top-6 left-0 select-none font-serif leading-none text-accent/30 md:-top-8"
+            style={{ fontSize: 'clamp(6rem, 12vw, 11rem)' }}
             aria-hidden
           >
             &ldquo;
           </span>
 
           <blockquote className="relative z-10 px-4">
-            <p className="font-serif text-2xl font-light italic leading-snug text-foreground md:text-3xl lg:text-4xl">
-              {featured.quote}
-            </p>
-            <footer className="mt-6 font-sans text-sm text-muted-foreground">
+            <div className="overflow-hidden">
+              <motion.p
+                className="font-serif text-2xl font-light italic leading-snug text-foreground md:text-3xl lg:text-[2.1rem]"
+                initial={{ y: '100%' }}
+                whileInView={{ y: '0%' }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: EASE, delay: 0.1 }}
+              >
+                {featured.quote}
+              </motion.p>
+            </div>
+            <motion.footer
+              className="mt-5 font-sans text-sm text-muted-foreground"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.4 }}
+            >
               — {featured.name}, {featured.field}
-            </footer>
+            </motion.footer>
           </blockquote>
         </motion.div>
 
@@ -49,19 +57,18 @@ export function BelongingSection() {
           {rest.map((t, i) => (
             <motion.div
               key={t.name}
-              custom={i}
-              variants={cardVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-60px' }}
-              className="relative rounded-2xl border border-border bg-card p-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.5, ease: EASE, delay: i * 0.1 }}
+              className="rounded-xl border border-border p-6"
             >
-              {/* Photo-ready avatar slot — uncomment and replace when real photos are available */}
+              {/* Photo-ready slot — uncomment when real photos exist */}
               {/* <div className="mb-4 h-10 w-10 overflow-hidden rounded-full bg-muted">
                 <Image src={t.avatar} alt={t.name} width={40} height={40} className="object-cover" />
               </div> */}
 
-              <p className="font-serif text-base italic leading-relaxed text-foreground/90">
+              <p className="font-serif text-base italic leading-relaxed text-foreground/85">
                 &ldquo;{t.quote}&rdquo;
               </p>
               <div className="mt-4 border-t border-border pt-4">
