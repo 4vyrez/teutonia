@@ -1,0 +1,15 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/studium/layout,_N_T_/studium/page,_N_T_/studium"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/studium/__PAGE__",
+    "/studium",
+    "/_index",
+    "/_head"
+  ]
+}

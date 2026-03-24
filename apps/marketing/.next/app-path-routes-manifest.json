@@ -1,0 +1,13 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/api/health/route": "/api/health",
+  "/datenschutz/page": "/datenschutz",
+  "/favicon.ico/route": "/favicon.ico",
+  "/freundschaft/page": "/freundschaft",
+  "/impressum/page": "/impressum",
+  "/karriere/page": "/karriere",
+  "/page": "/",
+  "/studium/page": "/studium",
+  "/veranstaltungen/page": "/veranstaltungen"
+}
