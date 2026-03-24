@@ -1,7 +1,7 @@
 export { HeroSection } from './hero';
-export { PromiseSection } from './promise';
-export { BelongingSection } from './belonging';
+export { NumbersSection } from './numbers';
+export { AreasSection } from './areas';
 export { HouseSectionComponent } from './house-section';
-export { CommunitySection } from './community';
+export { QuoteSection } from './quote';
 export { HistorySection } from './history';
 export { ContactSection } from './contact';

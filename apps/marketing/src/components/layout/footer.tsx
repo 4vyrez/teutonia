@@ -21,7 +21,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-white/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.5),rgba(243,235,224,0.92))]">
+    <footer className="border-t border-border bg-background">
       <div className="mx-auto max-w-7xl px-6 py-14 md:px-8">
         <div className="grid gap-10 lg:grid-cols-[1.05fr_0.65fr_0.65fr_0.85fr]">
           <motion.div
@@ -32,7 +32,7 @@ export function Footer() {
             transition={{ duration: 0.5 }}
           >
             <Link href="/" className="flex items-center gap-3">
-              <div className="relative h-12 w-10 overflow-hidden rounded-[0.9rem] border border-[#e2d6c4] bg-white shadow-[0_10px_24px_rgba(98,76,49,0.08)]">
+              <div className="relative h-12 w-10 overflow-hidden rounded-lg border border-border bg-card shadow-sm">
                 <Image
                   src="/images/Teutonia-wappen.jpg"
                   alt="Wappen der Teutonia"
@@ -42,19 +42,19 @@ export function Footer() {
                 />
               </div>
               <div>
-                <div className="font-serif text-2xl text-slate-900">Teutonia</div>
+                <div className="font-serif text-2xl text-foreground">Teutonia</div>
                 <div className="text-[10px] uppercase tracking-[0.28em] text-primary/75">
                   Karlsruhe seit 1843
                 </div>
               </div>
             </Link>
 
-            <p className="max-w-md leading-7 text-slate-700">
+            <p className="max-w-md leading-7 text-muted-foreground">
               Akademischer Anspruch, Hausgemeinschaft und ein konservativer, zugleich zeitgemäßer
               Auftritt gehören für die Teutonia zusammen.
             </p>
 
-            <div className="space-y-1 text-sm leading-6 text-slate-600">
+            <div className="space-y-1 text-sm leading-6 text-muted-foreground">
               {siteMeta.address.map((line) => (
                 <div key={line}>{line}</div>
               ))}
@@ -70,11 +70,11 @@ export function Footer() {
             <h2 className="text-xs font-semibold uppercase tracking-[0.24em] text-primary/75">
               Navigation
             </h2>
-            <div className="mt-4 grid gap-3 text-sm text-slate-700">
+            <div className="mt-4 grid gap-3 text-sm text-muted-foreground">
               {mainNavigation
                 .filter((item) => !item.children)
                 .map((item) => (
-                  <Link key={item.label} href={item.href} className="transition-colors hover:text-primary">
+                  <Link key={item.label} href={item.href} className="transition-colors hover:text-foreground">
                     {item.label}
                   </Link>
                 ))}
@@ -90,9 +90,9 @@ export function Footer() {
             <h2 className="text-xs font-semibold uppercase tracking-[0.24em] text-primary/75">
               Bereiche
             </h2>
-            <div className="mt-4 grid gap-3 text-sm text-slate-700">
+            <div className="mt-4 grid gap-3 text-sm text-muted-foreground">
               {footerLinks.map((item) => (
-                <Link key={item.label} href={item.href} className="transition-colors hover:text-primary">
+                <Link key={item.label} href={item.href} className="transition-colors hover:text-foreground">
                   {item.label}
                 </Link>
               ))}
@@ -108,21 +108,21 @@ export function Footer() {
             <h2 className="text-xs font-semibold uppercase tracking-[0.24em] text-primary/75">
               Direkter Kontakt
             </h2>
-            <div className="mt-4 space-y-4 text-sm leading-6 text-slate-700">
+            <div className="mt-4 space-y-4 text-sm leading-6 text-muted-foreground">
               <div>
-                <div className="font-medium text-slate-900">Allgemein</div>
+                <div className="font-medium text-foreground">Allgemein</div>
                 <a href={`mailto:${siteMeta.emails.general}`} className="transition-colors hover:text-primary">
                   {siteMeta.emails.general}
                 </a>
               </div>
               <div>
-                <div className="font-medium text-slate-900">Zimmer</div>
+                <div className="font-medium text-foreground">Zimmer</div>
                 <a href={`mailto:${siteMeta.emails.rooms}`} className="transition-colors hover:text-primary">
                   {siteMeta.emails.rooms}
                 </a>
               </div>
               <div>
-                <div className="font-medium text-slate-900">Telefon</div>
+                <div className="font-medium text-foreground">Telefon</div>
                 <a href="tel:+4972166777348" className="transition-colors hover:text-primary">
                   {siteMeta.phone}
                 </a>
@@ -131,7 +131,7 @@ export function Footer() {
           </motion.div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-4 border-t border-white/80 pt-6 text-sm text-slate-600 md:flex-row md:items-center md:justify-between">
+        <div className="mt-12 flex flex-col gap-4 border-t border-border pt-6 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">
           <div>© {currentYear} Karlsruher Burschenschaft Teutonia.</div>
           <div className="flex flex-wrap items-center gap-5">
             {siteMeta.socials.map((social) => (
@@ -140,13 +140,13 @@ export function Footer() {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="transition-colors hover:text-primary"
+                className="transition-colors hover:text-foreground"
               >
                 {social.label}
               </a>
             ))}
             {legalLinks.map((item) => (
-              <Link key={item.label} href={item.href} className="transition-colors hover:text-primary">
+              <Link key={item.label} href={item.href} className="transition-colors hover:text-foreground">
                 {item.label}
               </Link>
             ))}

@@ -68,24 +68,31 @@ export const mainNavigation: NavigationItem[] = [
 ];
 
 export const homeHero = {
-  eyebrow: 'Karlsruhe · Gegründet 1843',
-  title: 'Keiner bleibt allein.',
+  eyebrow: 'Karlsruher Burschenschaft · Gegründet 1843',
+  title: 'Manche Bindungen dauern länger als das Studium.',
   description:
-    'Eine Bruderschaft, die seit 180 Jahren aus Kommilitonen Freunde fürs Leben macht.',
+    'Teutonia ist kein Wohnheim. Es ist eine Gemeinschaft — für die Zeit des Studiums und weit darüber hinaus.',
 };
 
 export const heroStats: { label: string }[] = [
-  { label: 'Seit 1843' },
-  { label: '170+ Mitglieder' },
-  { label: '5 Min. zum KIT' },
+  { label: '180 Jahre Geschichte' },
+  { label: '170+ Alte Herren' },
+  { label: '20 Zimmer in Karlsruhe' },
+];
+
+export const homeKennzahlen: Metric[] = [
+  { value: '180', label: 'Jahre Geschichte' },
+  { value: '170+', label: 'Alte Herren' },
+  { value: '20', label: 'Zimmer' },
+  { value: '1843', label: 'Gegründet' },
 ];
 
 export const testimonials: { quote: string; name: string; field: string }[] = [
   {
     quote:
-      'Ich hatte nach zwei Wochen mehr Freunde als nach zwei Jahren alleine im Studentenwohnheim.',
-    name: 'Max M.',
-    field: 'Informatik, 3. Semester',
+      'Ich bin nicht hierhergekommen, um zu wohnen. Ich bin geblieben, weil es sich wie Zuhause anfühlt.',
+    name: 'Maximilian B.',
+    field: 'Maschinenbau, 5. Semester',
   },
   {
     quote:
@@ -160,30 +167,30 @@ export const homePillars: PillarCard[] = [
   {
     href: '/studium',
     title: 'Studium',
-    eyebrow: 'Lernen mit Rückenwind',
+    eyebrow: 'Nicht allein durch die härteste Phase',
     description:
-      'Vom Mittagstisch bis zur Klausurenphase entstehen kurze Wege für Hilfe, Austausch und konzentriertes Arbeiten.',
+      'Mittagstisch, gemeinsame Lernräume und fachübergreifende Unterstützung — wer hier wohnt, kämpft nicht allein.',
   },
   {
     href: '/karriere',
     title: 'Karriere',
-    eyebrow: 'Netzwerk mit Substanz',
+    eyebrow: 'Ein Netzwerk, das wirklich funktioniert',
     description:
-      'Berufliche Orientierung entsteht aus persönlichen Beziehungen, nicht aus losen Kontaktlisten.',
+      'Über 170 Alte Herren in allen Branchen. Echtes Mentoring statt leerer LinkedIn-Verbindungen.',
   },
   {
     href: '/veranstaltungen',
     title: 'Veranstaltungen',
-    eyebrow: 'Formate mit Charakter',
+    eyebrow: 'Momente, die man nicht kaufen kann',
     description:
-      'Vorträge, Feste und studentische Abende geben dem Haus Rhythmus und halten den Austausch lebendig.',
+      'Vorträge, Feste, Ausflüge, Abende auf dem Haus — ein Kalender, der das Studium lebendig macht.',
   },
   {
     href: '/freundschaft',
     title: 'Freundschaft',
-    eyebrow: 'Lebensbund im Alltag',
+    eyebrow: 'Bindungen für das ganze Leben',
     description:
-      'Gemeinschaft zeigt sich in täglichen Routinen ebenso wie in Übergängen zwischen Studium, Beruf und späteren Lebensphasen.',
+      'Was hier beginnt, hört nicht mit dem Abschluss auf. Der Lebensbund ist kein Marketingversprechen.',
   },
 ];
 

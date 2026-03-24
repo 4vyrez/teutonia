@@ -18,11 +18,10 @@ export function HouseSectionComponent() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="font-serif text-4xl font-light italic text-foreground md:text-5xl">
-            Dein Zuhause auf Zeit. Und mehr.
+            Das Haus.
           </h2>
-          <p className="mt-4 max-w-xl font-sans text-base leading-relaxed text-muted-foreground">
-            Das Haus liegt in der Karlsruher Oststadt — fünf Minuten vom KIT, mitten im
-            Studentenleben. 20 Zimmer, gemeinsame Räume, ein Rhythmus, der trägt.
+          <p className="mt-4 max-w-xl font-sans text-base leading-7 text-muted-foreground">
+            Parkstraße 1, Karlsruhe-Oststadt. 20 Zimmer. Fünf Minuten zum KIT.
           </p>
         </motion.div>
 

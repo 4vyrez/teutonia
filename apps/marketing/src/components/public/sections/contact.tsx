@@ -10,7 +10,7 @@ import { siteMeta } from '@/content/public-site';
 import { contactSchema, type ContactInput } from '@/lib/validations/schemas';
 import { cn } from '@teutonia/shared';
 
-const EASE = [0.16, 1, 0.3, 1] as const;
+const EASE = [0.25, 0.1, 0.25, 1] as const;
 
 const socialIcons: Record<string, React.ReactNode> = {
   Instagram: <Instagram className="h-4 w-4" />,
@@ -42,13 +42,13 @@ export function ContactSection() {
         <div className="grid gap-16 md:grid-cols-2 md:gap-20">
           {/* Left: Copy + contact details */}
           <div>
-            <div className="mb-4 overflow-hidden">
+            <div className="mb-3 overflow-hidden">
               <motion.p
-                className="font-sans text-xs font-semibold uppercase tracking-[0.18em] text-primary/70"
+                className="font-sans text-[0.65rem] uppercase tracking-[0.3em] text-primary"
                 initial={{ y: '100%' }}
                 whileInView={{ y: '0%' }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.45, ease: EASE }}
+                transition={{ duration: 0.8, ease: EASE }}
               >
                 Kontakt
               </motion.p>
@@ -59,20 +59,20 @@ export function ContactSection() {
                 initial={{ y: '100%' }}
                 whileInView={{ y: '0%' }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.55, ease: EASE, delay: 0.05 }}
+                transition={{ duration: 0.9, ease: EASE, delay: 0.08 }}
               >
-                Schreib uns.
+                Komm auf einen Kaffee.
               </motion.h2>
             </div>
             <motion.p
-              className="mt-5 font-sans text-base leading-relaxed text-muted-foreground"
+              className="mt-5 font-sans text-base leading-7 text-muted-foreground"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.25 }}
             >
-              Du hast Fragen zum Haus, zur Gemeinschaft oder möchtest einfach vorbeikommen?
-              Schreib uns — oder komm direkt vorbei. Wir freuen uns.
+              Fragen zum Haus, zur Bewerbung oder zum Kennenlernen — meld dich einfach. Wir
+              antworten persönlich.
             </motion.p>
 
             {/* Address */}
@@ -81,7 +81,7 @@ export function ContactSection() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
+              transition={{ duration: 0.8, delay: 0.35 }}
             >
               <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
               <div className="font-sans text-sm text-muted-foreground">
@@ -92,30 +92,42 @@ export function ContactSection() {
             </motion.div>
 
             {/* Email */}
-            <div className="mt-4">
+            <motion.div
+              className="mt-4"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
               <a
                 href={`mailto:${siteMeta.emails.general}`}
                 className="font-sans text-sm text-primary underline underline-offset-4 hover:opacity-70"
               >
                 {siteMeta.emails.general}
               </a>
-            </div>
+            </motion.div>
 
             {/* Socials */}
-            <div className="mt-6 flex gap-3">
+            <motion.div
+              className="mt-6 flex gap-3"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.45 }}
+            >
               {siteMeta.socials.map((social) => (
                 <Link
                   key={social.label}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 font-sans text-sm text-foreground/70 transition-colors hover:border-primary/30 hover:text-foreground"
+                  className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 font-sans text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
                 >
                   {socialIcons[social.label] ?? null}
                   {social.label}
                 </Link>
               ))}
-            </div>
+            </motion.div>
           </div>
 
           {/* Right: Form */}
@@ -123,7 +135,7 @@ export function ContactSection() {
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.15 }}
+            transition={{ duration: 0.8, ease: EASE, delay: 0.15 }}
           >
             <AnimatePresence mode="wait">
               {submitted ? (
@@ -157,7 +169,7 @@ export function ContactSection() {
                       type="text"
                       placeholder="Dein Name"
                       className={cn(
-                        'w-full rounded-lg border bg-background px-4 py-3 font-sans text-sm text-foreground placeholder:text-muted-foreground/50 outline-none transition-colors focus:border-primary/40 focus:ring-2 focus:ring-primary/10',
+                        'w-full rounded-lg border bg-background px-4 py-3 font-sans text-sm text-foreground placeholder:text-muted-foreground/40 outline-none transition-colors focus:border-primary/50 focus:ring-2 focus:ring-primary/20',
                         errors.name ? 'border-destructive' : 'border-border'
                       )}
                     />
@@ -176,7 +188,7 @@ export function ContactSection() {
                       type="email"
                       placeholder="deine@email.de"
                       className={cn(
-                        'w-full rounded-lg border bg-background px-4 py-3 font-sans text-sm text-foreground placeholder:text-muted-foreground/50 outline-none transition-colors focus:border-primary/40 focus:ring-2 focus:ring-primary/10',
+                        'w-full rounded-lg border bg-background px-4 py-3 font-sans text-sm text-foreground placeholder:text-muted-foreground/40 outline-none transition-colors focus:border-primary/50 focus:ring-2 focus:ring-primary/20',
                         errors.email ? 'border-destructive' : 'border-border'
                       )}
                     />
@@ -195,7 +207,7 @@ export function ContactSection() {
                       rows={5}
                       placeholder="Deine Nachricht an uns…"
                       className={cn(
-                        'w-full resize-none rounded-lg border bg-background px-4 py-3 font-sans text-sm text-foreground placeholder:text-muted-foreground/50 outline-none transition-colors focus:border-primary/40 focus:ring-2 focus:ring-primary/10',
+                        'w-full resize-none rounded-lg border bg-background px-4 py-3 font-sans text-sm text-foreground placeholder:text-muted-foreground/40 outline-none transition-colors focus:border-primary/50 focus:ring-2 focus:ring-primary/20',
                         errors.message ? 'border-destructive' : 'border-border'
                       )}
                     />
