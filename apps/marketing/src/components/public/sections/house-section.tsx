@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { MapPin, Route } from 'lucide-react';
 import { HouseExplorer } from '@/components/public/house/house-explorer';
-import { houseSceneAsset, houseRooms, houseHotspots, siteMeta } from '@/content/public-site';
+import { houseRooms, houseHotspots, siteMeta } from '@/content/public-site';
 
 export function HouseSectionComponent() {
   return (
@@ -32,11 +32,7 @@ export function HouseSectionComponent() {
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.7, delay: 0.1 }}
         >
-          <HouseExplorer
-            sceneAsset={houseSceneAsset}
-            rooms={houseRooms}
-            hotspots={houseHotspots}
-          />
+          <HouseExplorer rooms={houseRooms} hotspots={houseHotspots} />
         </motion.div>
 
         {/* Info pills */}

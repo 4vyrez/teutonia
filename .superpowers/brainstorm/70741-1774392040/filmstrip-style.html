@@ -1,0 +1,78 @@
+<h2>Wie sieht der Filmstrip aus?</h2>
+<p class="subtitle">Der Filmstrip ist die Navigation zwischen den 6 Räumen — was klickt sich besser an?</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#1a1410;padding:20px 16px;min-height:180px;display:flex;flex-direction:column;justify-content:flex-end;gap:12px;">
+      <!-- Dark hero area suggestion -->
+      <div style="background:linear-gradient(170deg,rgba(200,180,154,0.3),rgba(106,69,48,0.6));border-radius:14px;height:80px;display:flex;align-items:flex-end;padding:10px;">
+        <div style="color:rgba(255,255,255,0.9);font-size:13px;font-weight:600;">Loggia & Eingang</div>
+      </div>
+      <!-- Photo filmstrip -->
+      <div style="display:flex;gap:7px;">
+        <div style="flex-shrink:0;width:64px;height:52px;background:linear-gradient(135deg,#c8b49a,#7a5030);border-radius:11px;border:2px solid white;position:relative;display:flex;align-items:flex-end;padding:5px;">
+          <span style="font-size:8px;color:white;font-weight:500;line-height:1.2;">Loggia</span>
+        </div>
+        <div style="flex-shrink:0;width:64px;height:52px;background:linear-gradient(135deg,#9b7a5a,#5a3520);border-radius:11px;opacity:0.5;"></div>
+        <div style="flex-shrink:0;width:64px;height:52px;background:linear-gradient(135deg,#b8a080,#6a4535);border-radius:11px;opacity:0.5;"></div>
+        <div style="flex-shrink:0;width:64px;height:52px;background:linear-gradient(135deg,#c0a070,#704535);border-radius:11px;opacity:0.5;"></div>
+        <div style="flex-shrink:0;width:64px;height:52px;background:linear-gradient(135deg,#a89070,#5a3525);border-radius:11px;opacity:0.5;"></div>
+        <div style="flex-shrink:0;width:64px;height:52px;background:linear-gradient(135deg,#b8a070,#6a4030);border-radius:11px;opacity:0.5;"></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Foto-Thumbnails (Empfohlen)</h3>
+      <p>Kleine quadratische/rechteckige Raumfotos als Filmstrip. Das aktive ist heller/umrahmt. Sehr visuell, zeigt wirklich "das Haus". Label optional als Mini-Text im Foto.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#f7f2ec;padding:20px 16px;min-height:180px;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;">
+      <!-- Light hero suggestion -->
+      <div style="background:linear-gradient(160deg,#c8b49a,#7a5030);border-radius:14px;height:80px;display:flex;align-items:flex-end;padding:10px;">
+        <div style="color:white;font-size:13px;font-weight:600;">Loggia & Eingang</div>
+      </div>
+      <!-- Text-label filmstrip -->
+      <div style="display:flex;gap:5px;flex-wrap:wrap;">
+        <div style="background:#7a2f2b;color:white;border-radius:10px;padding:7px 13px;font-size:10px;font-weight:600;">Loggia</div>
+        <div style="background:white;border:1px solid #e0d8cc;color:#666;border-radius:10px;padding:7px 13px;font-size:10px;">Bar</div>
+        <div style="background:white;border:1px solid #e0d8cc;color:#666;border-radius:10px;padding:7px 13px;font-size:10px;">Festsaal</div>
+        <div style="background:white;border:1px solid #e0d8cc;color:#666;border-radius:10px;padding:7px 13px;font-size:10px;">Lounge</div>
+        <div style="background:white;border:1px solid #e0d8cc;color:#666;border-radius:10px;padding:7px 13px;font-size:10px;">Lernzimmer</div>
+        <div style="background:white;border:1px solid #e0d8cc;color:#666;border-radius:10px;padding:7px 13px;font-size:10px;">Zimmer</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Text-Label Chips</h3>
+      <p>Schlanke Pill-Buttons mit Rauhnamen. Aktiver ist gefüllt. Sehr clean, eher tab-artig. Kein Foto-Overhead, aber auch weniger visuell.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0f0d0b;padding:20px 16px;min-height:180px;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;">
+      <!-- Dark with gradient fade -->
+      <div style="background:linear-gradient(160deg,#c8b49a,#7a5030);border-radius:14px;height:70px;display:flex;align-items:flex-end;padding:10px;">
+        <div style="color:white;font-size:13px;font-weight:600;">Loggia & Eingang</div>
+      </div>
+      <!-- Mixed: photo + name label -->
+      <div style="display:flex;gap:7px;align-items:center;">
+        <div style="flex-shrink:0;width:72px;height:58px;background:linear-gradient(135deg,#c8b49a,#7a5030);border-radius:12px;border:1.5px solid rgba(255,255,255,0.6);display:flex;flex-direction:column;justify-content:flex-end;padding:6px;">
+          <span style="font-size:8px;color:white;font-weight:600;line-height:1;">Loggia</span>
+        </div>
+        <div style="flex-shrink:0;width:72px;height:58px;background:linear-gradient(135deg,#9b7a5a,#5a3520);border-radius:12px;opacity:0.45;display:flex;flex-direction:column;justify-content:flex-end;padding:6px;">
+          <span style="font-size:8px;color:rgba(255,255,255,0.7);font-weight:600;line-height:1;">Bar</span>
+        </div>
+        <div style="flex-shrink:0;width:72px;height:58px;background:linear-gradient(135deg,#b8a080,#6a4535);border-radius:12px;opacity:0.45;display:flex;flex-direction:column;justify-content:flex-end;padding:6px;">
+          <span style="font-size:8px;color:rgba(255,255,255,0.7);font-weight:600;line-height:1;">Festsaal</span>
+        </div>
+        <div style="color:rgba(255,255,255,0.3);font-size:11px;margin-left:4px;">…</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Foto-Thumbnails mit Label + dunkler Hintergrund</h3>
+      <p>Wie A, aber der gesamte Explorer hat einen dunklen/tiefen Hintergrund (dunkelbraun, fast schwarz). Wirkt sehr premium und cinematic — wie ein Kino-Erlebnis.</p>
+    </div>
+  </div>
+
+</div>

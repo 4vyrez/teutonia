@@ -1,0 +1,84 @@
+<h2>Welches Grundkonzept für den neuen House Explorer?</h2>
+<p class="subtitle">Das aktuelle Design zeigt alles gleichzeitig — Bild, Text, Facts, Nav. Welcher Ansatz soll es ersetzen?</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#f5f0ea;padding:20px;display:flex;flex-direction:column;gap:10px;min-height:220px;">
+      <!-- Tab nav -->
+      <div style="display:flex;gap:6px;flex-wrap:wrap;">
+        <span style="background:#7a2f2b;color:white;border-radius:20px;padding:5px 14px;font-size:11px;font-weight:600;">Loggia</span>
+        <span style="background:white;border:1px solid #ddd;border-radius:20px;padding:5px 14px;font-size:11px;color:#666;">Bar</span>
+        <span style="background:white;border:1px solid #ddd;border-radius:20px;padding:5px 14px;font-size:11px;color:#666;">Festsaal</span>
+        <span style="background:white;border:1px solid #ddd;border-radius:20px;padding:5px 14px;font-size:11px;color:#666;">Lounge</span>
+        <span style="background:white;border:1px solid #ddd;border-radius:20px;padding:5px 14px;font-size:11px;color:#666;">+2</span>
+      </div>
+      <!-- Full-bleed image area -->
+      <div style="flex:1;background:linear-gradient(160deg,#c8b49a,#8a6a50);border-radius:18px;display:flex;align-items:flex-end;padding:16px;min-height:130px;">
+        <div style="color:white;">
+          <div style="font-size:10px;letter-spacing:0.18em;opacity:0.8;text-transform:uppercase;">Eingang & Loggia</div>
+          <div style="font-size:16px;font-weight:600;margin-top:4px;">Ankommen an der Parkstraße</div>
+        </div>
+      </div>
+      <!-- Slim detail below -->
+      <div style="background:white;border-radius:14px;padding:12px 14px;font-size:11px;color:#555;line-height:1.6;">
+        Der Zugang zur Parkstraße führt direkt in einen Alltag, in dem Wege kurz sind.
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Tab-Navigation + Großes Bild</h3>
+      <p>Schlanke Pill-Tabs oben wählen den Raum. Das Bild füllt fast die ganze Fläche. Text erscheint als cleaner Overlay oder slim darunter. Sehr clean, alles im Fokus auf einen Raum.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#f5f0ea;padding:16px;display:flex;gap:12px;min-height:220px;">
+      <!-- Slim sidebar -->
+      <div style="width:110px;flex-shrink:0;display:flex;flex-direction:column;gap:6px;">
+        <div style="background:#7a2f2b;color:white;border-radius:12px;padding:8px 10px;font-size:10px;font-weight:600;">Loggia</div>
+        <div style="background:white;border-radius:12px;padding:8px 10px;font-size:10px;color:#666;border:1px solid #e8e0d5;">Bar & Tresen</div>
+        <div style="background:white;border-radius:12px;padding:8px 10px;font-size:10px;color:#666;border:1px solid #e8e0d5;">Festsaal</div>
+        <div style="background:white;border-radius:12px;padding:8px 10px;font-size:10px;color:#666;border:1px solid #e8e0d5;">Lounge</div>
+        <div style="background:white;border-radius:12px;padding:8px 10px;font-size:10px;color:#666;border:1px solid #e8e0d5;">Lernzimmer</div>
+        <div style="background:white;border-radius:12px;padding:8px 10px;font-size:10px;color:#666;border:1px solid #e8e0d5;">Zimmer</div>
+      </div>
+      <!-- Large right area -->
+      <div style="flex:1;background:linear-gradient(150deg,#c8b49a,#7a5540);border-radius:16px;display:flex;flex-direction:column;justify-content:flex-end;padding:14px;">
+        <div style="color:white;font-size:11px;opacity:0.75;letter-spacing:0.15em;text-transform:uppercase;">Eingang</div>
+        <div style="color:white;font-size:15px;font-weight:600;margin-top:3px;">Loggia & Eingangsbereich</div>
+        <div style="background:rgba(255,255,255,0.15);border-radius:10px;padding:8px 10px;margin-top:10px;">
+          <div style="color:rgba(255,255,255,0.8);font-size:10px;line-height:1.5;">Ankommen zwischen Straße, Haus und Gemeinschaft.</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Vertikale Sidebar + Großbild</h3>
+      <p>Alle 6 Räume als schlanke Liste links. Rechts daneben dominiert ein großes Bild mit Overlay-Info. Wirkt wie ein edler Immobilien-Konfigurator. Navigation ist immer sichtbar.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#f5f0ea;padding:16px;display:flex;flex-direction:column;gap:10px;min-height:220px;">
+      <!-- Expanded hero card -->
+      <div style="background:linear-gradient(150deg,#c8b49a,#7a5540);border-radius:18px;padding:18px;flex:1;display:flex;flex-direction:column;justify-content:flex-end;">
+        <div style="color:rgba(255,255,255,0.7);font-size:9px;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:4px;">Aktuell ausgewählt</div>
+        <div style="color:white;font-size:17px;font-weight:700;">Loggia & Eingang</div>
+        <div style="color:rgba(255,255,255,0.8);font-size:10px;margin-top:5px;line-height:1.5;">Ankommen zwischen Straße, Haus und Gemeinschaft.</div>
+      </div>
+      <!-- Filmstrip -->
+      <div style="display:flex;gap:7px;overflow:hidden;">
+        <div style="width:56px;height:52px;background:#7a2f2b;border-radius:12px;flex-shrink:0;border:2px solid #7a2f2b;"></div>
+        <div style="width:56px;height:52px;background:#c8b49a;border-radius:12px;flex-shrink:0;opacity:0.6;"></div>
+        <div style="width:56px;height:52px;background:#b09070;border-radius:12px;flex-shrink:0;opacity:0.6;"></div>
+        <div style="width:56px;height:52px;background:#c8b49a;border-radius:12px;flex-shrink:0;opacity:0.6;"></div>
+        <div style="width:56px;height:52px;background:#a07050;border-radius:12px;flex-shrink:0;opacity:0.6;"></div>
+        <div style="width:56px;height:52px;background:#c8b49a;border-radius:12px;flex-shrink:0;opacity:0.6;"></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Filmstrip unten + Hero oben</h3>
+      <p>Kleine Raumkacheln als horizontale Leiste unten. Oben nimmt das ausgewählte Bild fast die ganze Fläche ein. Ähnlich wie eine Fotoshow — very cinematic, sehr dynamisch.</p>
+    </div>
+  </div>
+
+</div>

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight, Boxes, ScanSearch } from 'lucide-react';
-import { houseHotspots, houseRooms, houseSceneAsset } from '@/content/public-site';
+import { houseHotspots, houseRooms } from '@/content/public-site';
 import { HouseExplorer } from '@/components/public/house/house-explorer';
 
 export function HouseSection() {
@@ -22,7 +22,7 @@ export function HouseSection() {
         </p>
       </div>
 
-      <HouseExplorer sceneAsset={houseSceneAsset} rooms={houseRooms} hotspots={houseHotspots} />
+      <HouseExplorer rooms={houseRooms} hotspots={houseHotspots} />
 
       <div className="mt-6 grid gap-5 lg:grid-cols-[1fr_0.9fr]">
         <motion.article
