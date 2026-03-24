@@ -1,0 +1,13 @@
+{
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/health/route": "app/api/health/route.js",
+  "/datenschutz/page": "app/datenschutz/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/freundschaft/page": "app/freundschaft/page.js",
+  "/impressum/page": "app/impressum/page.js",
+  "/karriere/page": "app/karriere/page.js",
+  "/page": "app/page.js",
+  "/studium/page": "app/studium/page.js",
+  "/veranstaltungen/page": "app/veranstaltungen/page.js"
+}
