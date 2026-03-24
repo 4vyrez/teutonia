@@ -4,60 +4,90 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { homePillars } from '@/content/public-site';
-import { SpotlightCard } from '@teutonia/shared/components/ui/spotlight-card';
+
+const benefits: Record<string, string[]> = {
+  Studium: [
+    'Mittagstisch & gemeinsame Lernräume',
+    'Fachübergreifender Austausch',
+    'Unterstützung in der Klausurenphase',
+  ],
+  Karriere: [
+    'Netzwerk aus 170+ Alten Herren',
+    'Mentoring & Berufsorientierung',
+    'Kontakte in viele Branchen',
+  ],
+  Veranstaltungen: [
+    'Vorträge, Feste & Abende auf dem Haus',
+    'Kulturelle und studentische Formate',
+    'Gemeinsame Aktivitäten das ganze Jahr',
+  ],
+  Freundschaft: [
+    'Echte Bindungen jenseits des Studiums',
+    'Lebensbund mit gemeinsamen Werten',
+    'Unterstützung in allen Lebensphasen',
+  ],
+};
 
 export function CommunitySection() {
   return (
-    <section className="mx-auto max-w-7xl px-6 pb-20 md:px-8 lg:pb-24">
-      <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
-        <div className="space-y-5">
-          <span className="text-xs font-semibold uppercase tracking-[0.28em] text-primary/75">
-            Bereiche
-          </span>
-          <h2 className="font-serif text-4xl text-slate-900 md:text-6xl">
-            Vier Perspektiven auf denselben Kern.
-          </h2>
-          <p className="text-lg leading-8 text-slate-700">
-            Studium, Karriere, Veranstaltungen und Freundschaft sind keine getrennten Themen. Sie
-            zeigen nur unterschiedliche Seiten derselben Gemeinschaft.
-          </p>
-        </div>
-
-        <div className="rounded-[1.8rem] border border-[#e6dbc9] bg-[linear-gradient(120deg,rgba(115,45,40,0.07),rgba(199,168,117,0.2),rgba(255,255,255,0.9))] p-6 text-sm leading-7 text-slate-700 shadow-[0_28px_70px_rgba(109,78,47,0.08)]">
-          Jedes Thema hat seinen eigenen Raum — mit konkreten Einblicken, Erfahrungsberichten und
-          klaren Antworten auf das, was Studienanfänger und Interessierte wirklich beschäftigt.
-        </div>
+    <section id="about" className="py-24 md:py-32">
+      <div className="mx-auto max-w-7xl px-4">
+        {/* Section heading */}
+        <motion.h2
+          className="mb-12 font-serif text-4xl font-light italic text-foreground md:text-5xl"
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          Mehr als Wohnen
+        </motion.h2>
       </div>
 
-      <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-        {homePillars.map((pillar, index) => (
-          <motion.div
-            key={pillar.title}
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ delay: index * 0.08 }}
-          >
-            <SpotlightCard
-              spotlightColor="rgba(122,47,43,0.07)"
-              className="h-full rounded-[1.8rem] border border-white/70 bg-white/80 shadow-[0_28px_80px_rgba(103,75,49,0.08)] backdrop-blur transition-transform duration-300 hover:-translate-y-1"
+      {/* Horizontal scroll strip */}
+      <div className="relative">
+        {/* Fade mask on right edge */}
+        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-24 [mask-image:linear-gradient(to_left,white,transparent)] bg-background" />
+
+        <motion.div
+          className="flex gap-5 overflow-x-auto scroll-smooth px-4 pb-4 [scroll-snap-type:x_mandatory] cursor-grab active:cursor-grabbing md:px-[calc((100vw-80rem)/2+1rem)]"
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6 }}
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
+          {homePillars.map((pillar) => (
+            <div
+              key={pillar.title}
+              className="min-w-[300px] max-w-[340px] flex-shrink-0 [scroll-snap-align:start] rounded-2xl border border-border bg-card p-6 md:min-w-[340px]"
             >
+              <p className="mb-1 font-sans text-xs font-semibold uppercase tracking-[0.16em] text-primary/70">
+                {pillar.eyebrow}
+              </p>
+              <h3 className="mb-4 font-serif text-2xl italic text-foreground">
+                {pillar.title}
+              </h3>
+
+              <ul className="mb-6 space-y-2">
+                {(benefits[pillar.title] ?? []).map((b) => (
+                  <li key={b} className="flex items-start gap-2.5 font-sans text-sm text-muted-foreground">
+                    <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary/50" />
+                    {b}
+                  </li>
+                ))}
+              </ul>
+
               <Link
                 href={pillar.href}
-                className="group flex h-full flex-col p-7"
+                className="inline-flex items-center gap-1.5 font-sans text-sm font-medium text-primary transition-opacity hover:opacity-70"
               >
-                <div className="flex items-center justify-between gap-3">
-                  <div className="text-xs font-semibold uppercase tracking-[0.22em] text-primary/70">
-                    {pillar.eyebrow}
-                  </div>
-                  <ArrowUpRight className="h-4 w-4 text-primary transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                </div>
-                <h3 className="mt-5 font-serif text-3xl text-slate-900">{pillar.title}</h3>
-                <p className="mt-4 leading-7 text-slate-700">{pillar.description}</p>
+                Mehr erfahren
+                <ArrowUpRight className="h-3.5 w-3.5" />
               </Link>
-            </SpotlightCard>
-          </motion.div>
-        ))}
+            </div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

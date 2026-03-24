@@ -1,11 +1,11 @@
 import { PublicShell } from '@/components/public/public-shell';
 import {
   HeroSection,
-  AboutSection,
-  HistorySection,
+  PromiseSection,
+  BelongingSection,
+  HouseSectionComponent,
   CommunitySection,
-  UniversitySection,
-  HouseSection,
+  HistorySection,
   ContactSection,
 } from '@/components/public/sections';
 
@@ -14,11 +14,11 @@ export default function HomePage() {
     <PublicShell>
       <>
         <HeroSection />
-        <AboutSection />
+        <PromiseSection />
+        <BelongingSection />
+        <HouseSectionComponent />
         <CommunitySection />
-        <UniversitySection />
         <HistorySection />
-        <HouseSection />
         <ContactSection />
       </>
     </PublicShell>

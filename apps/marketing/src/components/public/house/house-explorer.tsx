@@ -42,7 +42,7 @@ export function HouseExplorer({
 
   return (
     <div className="grid gap-6 xl:grid-cols-[1.18fr_0.82fr]">
-      <div className="rounded-[2rem] border border-white/70 bg-white/80 p-4 shadow-[0_36px_120px_rgba(111,78,46,0.1)] backdrop-blur md:p-6">
+      <div className="rounded-2xl border border-border bg-card p-4 shadow-sm md:p-6">
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-stone-200/80 pb-4">
           <div>
             <div className="text-xs font-semibold uppercase tracking-[0.24em] text-primary/75">
@@ -121,8 +121,8 @@ export function HouseExplorer({
                         className={cn(
                           'hidden max-w-[14rem] rounded-full border px-3 py-2 text-xs font-medium leading-5 shadow-[0_24px_70px_rgba(79,56,40,0.14)] backdrop-blur md:block',
                           isActive
-                            ? 'border-primary/20 bg-[#fff8f2]/92 text-slate-900'
-                            : 'border-white/75 bg-white/72 text-slate-700 opacity-0 transition-all duration-300 group-hover:opacity-100 group-focus-visible:opacity-100'
+                            ? 'border-primary/20 bg-card text-foreground'
+                            : 'border-border bg-card text-foreground/70 opacity-0 transition-all duration-300 group-hover:opacity-100 group-focus-visible:opacity-100'
                         )}
                       >
                         <span className="block text-[10px] uppercase tracking-[0.18em] text-primary/75">
@@ -135,7 +135,7 @@ export function HouseExplorer({
                 );
               })}
 
-              <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full border border-white/70 bg-white/72 px-3 py-2 text-[11px] uppercase tracking-[0.22em] text-slate-700 backdrop-blur">
+              <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full border border-border bg-card px-3 py-2 text-[11px] uppercase tracking-[0.22em] text-foreground/70">
                 <Building2 className="h-3.5 w-3.5 text-primary" />
                 Parkstraße 1 · Karlsruhe
               </div>
@@ -167,7 +167,7 @@ export function HouseExplorer({
         </div>
       </div>
 
-      <div className="rounded-[2rem] border border-white/75 bg-white/82 p-5 shadow-[0_32px_110px_rgba(105,73,42,0.1)] backdrop-blur md:p-6">
+      <div className="rounded-2xl border border-border bg-card p-5 shadow-sm md:p-6">
         <AnimatePresence mode="wait">
           <motion.div
             key={selectedRoom.id}
@@ -182,7 +182,7 @@ export function HouseExplorer({
                 <div className="text-xs font-semibold uppercase tracking-[0.24em] text-primary/75">
                   {selectedHotspot.label}
                 </div>
-                <h3 className="mt-2 font-serif text-3xl text-slate-900 md:text-4xl">
+                <h3 className="mt-2 font-serif text-3xl text-accent font-semibold md:text-4xl">
                   {selectedRoom.title}
                 </h3>
                 <p className="mt-3 max-w-xl text-sm leading-6 text-slate-600">

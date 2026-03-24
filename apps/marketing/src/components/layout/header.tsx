@@ -112,7 +112,7 @@ export function Header({ compact = false }: { compact?: boolean }) {
         <div className="hidden items-center gap-3 lg:flex">
           <Link
             href="/#house"
-            className="btn-shimmer inline-flex items-center gap-2 rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition-transform duration-300 hover:-translate-y-0.5"
+            className="btn-shimmer inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-white transition-transform duration-300 hover:-translate-y-0.5"
           >
             House Explorer
             <ArrowRight className="h-4 w-4" />
@@ -173,7 +173,7 @@ export function Header({ compact = false }: { compact?: boolean }) {
             <Link
               href="/#house"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="btn-shimmer mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white"
+              className="btn-shimmer mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-white"
             >
               House Explorer
               <ArrowRight className="h-4 w-4" />

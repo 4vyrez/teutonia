@@ -140,6 +140,16 @@ export const loginSchema = z.object({
 });
 
 // ============================================
+// Contact Schema (marketing site)
+// ============================================
+
+export const contactSchema = z.object({
+    name: z.string().min(2, 'Name muss mindestens 2 Zeichen lang sein'),
+    email: z.string().email('Bitte eine gültige E-Mail-Adresse eingeben'),
+    message: z.string().min(10, 'Nachricht muss mindestens 10 Zeichen lang sein'),
+});
+
+// ============================================
 // Type Exports
 // ============================================
 
@@ -152,6 +162,7 @@ export type MealSignupType = z.infer<typeof mealSignupTypeSchema>;
 export type AnnouncementCategory = z.infer<typeof announcementCategorySchema>;
 export type ExpenseCategory = z.infer<typeof expenseCategorySchema>;
 
+export type ContactInput = z.infer<typeof contactSchema>;
 export type MemberInput = z.infer<typeof createMemberSchema>;
 export type EventInput = z.infer<typeof createEventSchema>;
 export type EventRegistrationInput = z.infer<typeof eventRegistrationSchema>;

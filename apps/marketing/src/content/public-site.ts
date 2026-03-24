@@ -68,13 +68,38 @@ export const mainNavigation: NavigationItem[] = [
 ];
 
 export const homeHero = {
-  eyebrow: 'Karlsruher Burschenschaft seit 1843',
-  title: 'Raum für Haltung, Studium und Gemeinschaft.',
+  eyebrow: 'Karlsruhe · Gegründet 1843',
+  title: 'Keiner bleibt allein.',
   description:
-    'Teutonia verbindet akademischen Anspruch mit gelebtem Alltag. In der Karlsruher Oststadt entsteht ein Umfeld, in dem man konzentriert arbeitet, belastbare Beziehungen aufbaut und Verantwortung übernimmt.',
-  supportingText:
-    'Kein beliebiger Studentenort, sondern ein Haus mit Profil: campusnah, gemeinschaftlich und offen für Persönlichkeiten, die mehr suchen als nur ein Zimmer.',
+    'Eine Bruderschaft, die seit 180 Jahren aus Kommilitonen Freunde fürs Leben macht.',
 };
+
+export const heroStats: { label: string }[] = [
+  { label: 'Seit 1843' },
+  { label: '170+ Mitglieder' },
+  { label: '5 Min. zum KIT' },
+];
+
+export const testimonials: { quote: string; name: string; field: string }[] = [
+  {
+    quote:
+      'Ich hatte nach zwei Wochen mehr Freunde als nach zwei Jahren alleine im Studentenwohnheim.',
+    name: 'Max M.',
+    field: 'Informatik, 3. Semester',
+  },
+  {
+    quote:
+      'Das Haus hat meinen Studienstart komplett verändert. Ich bin nicht mehr allein mit Fragen — weder fachlich noch menschlich.',
+    name: 'Jonas K.',
+    field: 'Maschinenbau, 4. Semester',
+  },
+  {
+    quote:
+      'Hier lernt man nicht nur für Klausuren. Man lernt, wie man Verantwortung übernimmt und mit Menschen umgeht, auf die man zählen kann.',
+    name: 'Lukas B.',
+    field: 'Wirtschaftsingenieurwesen, 5. Semester',
+  },
+];
 
 export const homeHeroActions: HeroAction[] = [
   { href: '/#house', label: 'Haus erleben', variant: 'primary' },
