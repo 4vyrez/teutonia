@@ -12,7 +12,7 @@ const milestones = [
 
 export function GeschichtePreview() {
   return (
-    <Section id="geschichte" className="bg-background">
+    <Section id="geschichte" theme="light">
       <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-4">
           <Eyebrow>08 — Tradition</Eyebrow>
@@ -40,7 +40,7 @@ export function GeschichtePreview() {
         </div>
 
         <div className="lg:col-span-8">
-          <ol className="space-y-px overflow-hidden border border-border-strong">
+          <ol className="space-y-px overflow-hidden rounded-lg border border-border-strong shadow-sm">
             {milestones.map((m, i) => (
               <li
                 key={m.year}

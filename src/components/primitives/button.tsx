@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 
 const buttonStyles = cva(
   [
-    'group inline-flex items-center justify-center gap-2',
+    'group inline-flex items-center justify-center gap-2 rounded-md',
     'font-sans text-sm font-medium leading-none tracking-wide',
     'transition-[background-color,color,border-color,box-shadow,transform] duration-200',
     'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring',
@@ -23,7 +23,7 @@ const buttonStyles = cva(
           'hover:border-couleur-gold-dim hover:text-foreground',
           'hover:bg-foreground/5',
         ],
-        link: ['text-foreground underline-gold hover:text-couleur-gold p-0'],
+        link: ['p-0 text-foreground underline-gold hover:text-couleur-gold'],
       },
       size: {
         sm: 'h-9 px-4',

@@ -7,7 +7,8 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative isolate min-h-[100svh] overflow-hidden bg-background"
+      data-theme="dark"
+      className="relative isolate min-h-[100svh] overflow-hidden bg-background text-foreground"
     >
       {/* Layered atmospheric backdrop — no glass, no AI-blob */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
@@ -48,7 +49,7 @@ export function Hero() {
           <div className="mt-10 flex flex-wrap items-center gap-3">
             <a
               href="#kontakt"
-              className="group inline-flex h-12 items-center gap-2 bg-couleur-burgund px-7 text-sm font-medium text-primary-foreground shadow-[0_1px_0_oklch(1_0_0/8%)_inset,0_8px_24px_-12px_oklch(0.42_0.16_22/65%)] transition-colors hover:bg-couleur-burgund-hi focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+              className="group inline-flex h-12 items-center gap-2 rounded-md bg-couleur-burgund px-7 text-sm font-medium text-primary-foreground shadow-[0_1px_0_oklch(1_0_0/8%)_inset,0_8px_24px_-12px_oklch(0.42_0.16_22/65%)] transition-colors hover:bg-couleur-burgund-hi focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
             >
               Schnupperabend besuchen
               <ArrowUpRight
@@ -58,7 +59,7 @@ export function Hero() {
             </a>
             <a
               href="#haus"
-              className="group inline-flex h-12 items-center gap-2 border border-border-strong px-7 text-sm font-medium text-foreground transition-colors hover:border-couleur-gold-dim hover:text-couleur-gold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+              className="group inline-flex h-12 items-center gap-2 rounded-md border border-border-strong px-7 text-sm font-medium text-foreground transition-colors hover:border-couleur-gold-dim hover:text-couleur-gold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
             >
               Zimmer ansehen
               <ArrowDownRight aria-hidden className="h-4 w-4" />

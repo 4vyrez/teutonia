@@ -18,7 +18,10 @@ export default function ImpressumPage() {
   return (
     <>
       <SiteHeader />
-      <main className="relative bg-background pt-32 sm:pt-40">
+      <main
+        data-theme="light"
+        className="relative bg-background pt-32 text-foreground sm:pt-40"
+      >
         <div className="mx-auto w-full max-w-3xl px-6 sm:px-8 lg:px-12">
           <Link
             href="/"

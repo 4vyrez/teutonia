@@ -1,0 +1,22 @@
+{
+  "center_lat": 49.0145,
+  "center_lon": 8.4227,
+  "zoom": 16,
+  "width": 1792,
+  "height": 1792,
+  "center_pixel": [
+    846.3,
+    892.8
+  ],
+  "center_percent": [
+    47.22,
+    49.82
+  ],
+  "bounds": {
+    "nw_lat": 49.02706347482933,
+    "nw_lon": 8.404541015625,
+    "se_lat": 49.00184391797852,
+    "se_lon": 8.4429931640625
+  },
+  "attribution": "\u00a9 OpenStreetMap contributors"
+}

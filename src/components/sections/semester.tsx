@@ -55,7 +55,11 @@ const iconFor: Record<EventKind, React.ComponentType<{ className?: string }>> = 
 
 export function Semester() {
   return (
-    <Section id="semester" className="bg-background-veil border-y border-border">
+    <Section
+      id="semester"
+      theme="light"
+      className="border-y border-border bg-background-veil"
+    >
       <div className="grid gap-12 lg:grid-cols-[auto_1fr] lg:items-end lg:gap-16">
         <div className="max-w-2xl">
           <Eyebrow>06 — Semesterprogramm</Eyebrow>
@@ -83,7 +87,7 @@ export function Semester() {
       </div>
 
       <div className="mt-16 grid gap-12 lg:grid-cols-[3fr_2fr] lg:items-start">
-        <div className="grid gap-px overflow-hidden border border-border-strong bg-border md:grid-cols-2">
+        <div className="grid gap-px overflow-hidden rounded-lg border border-border-strong bg-border shadow-sm md:grid-cols-2">
           {events.map((e, i) => {
             const Icon = iconFor[e.kind];
             return (
@@ -92,7 +96,7 @@ export function Semester() {
                 className="group relative flex flex-col gap-6 bg-background p-8 sm:p-10"
               >
                 <div className="flex items-start justify-between">
-                  <div className="flex h-10 w-10 items-center justify-center border border-couleur-gold-dim text-couleur-gold">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-md border border-couleur-gold-dim text-couleur-gold">
                     <Icon className="h-5 w-5" aria-hidden />
                   </div>
                   <div className="text-right">
@@ -121,7 +125,7 @@ export function Semester() {
           })}
         </div>
 
-        <figure className="relative isolate overflow-hidden border border-border-strong">
+        <figure className="relative isolate overflow-hidden rounded-lg border border-border-strong shadow-sm">
           <div className="relative aspect-[4/5]">
             <Image
               src="/haus/leben.jpeg"

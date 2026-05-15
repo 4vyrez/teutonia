@@ -74,7 +74,10 @@ const columns = [
 
 export function SiteFooter() {
   return (
-    <footer className="relative border-t border-border bg-background-veil">
+    <footer
+      data-theme="light"
+      className="relative border-t border-border bg-background-veil text-foreground"
+    >
       <div className="mx-auto w-full max-w-7xl px-6 py-20 sm:px-8 lg:px-12">
         <div className="grid gap-16 lg:grid-cols-[1.4fr_3fr]">
           <div className="space-y-6">

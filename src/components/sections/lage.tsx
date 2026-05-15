@@ -1,13 +1,67 @@
+import Image from 'next/image';
 import { Section, Eyebrow } from '@/components/primitives/section';
 import { Caption } from '@/components/primitives/caption';
+import { cn } from '@/lib/utils';
 
-const points = [
-  { x: 64, y: 58, label: 'Parkstraße 1', sub: 'Hier wohnst du', primary: true },
-  { x: 38, y: 78, label: 'KIT Campus Süd', sub: '5 min zu Fuß' },
-  { x: 27, y: 64, label: 'Info-Bibliothek', sub: '2 min zu Fuß' },
-  { x: 46, y: 86, label: 'Uni-Bibliothek', sub: '7 min · 24 / 7' },
-  { x: 78, y: 70, label: 'Tram 4 / 5', sub: '5 min · Marktplatz in 9 min' },
-  { x: 56, y: 18, label: 'Hardtwald', sub: 'Hinter dem Haus' },
+/**
+ * Pin positions are projected from real WGS84 coordinates onto the
+ * static map asset bounds (see public/lage/karlsruhe-light.json).
+ *   bounds: NW (49.02706, 8.40454) — SE (49.00184, 8.44299)
+ *   image:  1792×1792 px, zoom 16 OSM tiles, duotone-recolored.
+ */
+type MapPoint = {
+  label: string;
+  sub: string;
+  x: number; // % from left
+  y: number; // % from top
+  primary?: boolean;
+  side?: 'left' | 'right' | 'above' | 'below';
+};
+
+const points: MapPoint[] = [
+  {
+    label: 'Parkstraße 1',
+    sub: 'Hier wohnst du',
+    x: 47.23,
+    y: 49.84,
+    primary: true,
+    side: 'right',
+  },
+  {
+    label: 'KIT Hauptbau',
+    sub: '5 min · zu Fuß',
+    x: 18.36,
+    y: 69.75,
+    side: 'left',
+  },
+  {
+    label: 'KIT-Bibliothek',
+    sub: '7 min · 24 / 7',
+    x: 30.79,
+    y: 63.08,
+    side: 'below',
+  },
+  {
+    label: 'Informatik-Bib',
+    sub: '2 min · zu Fuß',
+    x: 38.78,
+    y: 51.32,
+    side: 'right',
+  },
+  {
+    label: 'Tram 4 / 5',
+    sub: '5 min · Durlacher Tor',
+    x: 31.49,
+    y: 72.16,
+    side: 'below',
+  },
+  {
+    label: 'Hardtwald',
+    sub: 'Direkt hinterm Haus',
+    x: 42.0,
+    y: 24.0,
+    side: 'above',
+  },
 ];
 
 const distances = [
@@ -19,9 +73,27 @@ const distances = [
   { place: 'Hardtwald', time: '0 min', mode: 'direkt hinten' },
 ];
 
+function pinTransform(side: MapPoint['side']) {
+  switch (side) {
+    case 'left':
+      return 'right-full mr-3 -translate-y-1/2 top-1/2 flex-row-reverse';
+    case 'right':
+      return 'left-full ml-3 -translate-y-1/2 top-1/2';
+    case 'above':
+      return 'left-1/2 -translate-x-1/2 bottom-full mb-2 flex-col';
+    case 'below':
+    default:
+      return 'left-1/2 -translate-x-1/2 top-full mt-2 flex-col';
+  }
+}
+
 export function Lage() {
   return (
-    <Section id="lage" className="bg-background-veil border-y border-border">
+    <Section
+      id="lage"
+      theme="light"
+      className="border-y border-border bg-background-veil"
+    >
       <div className="grid gap-16 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-5">
           <Eyebrow>04 — Lage</Eyebrow>
@@ -31,8 +103,8 @@ export function Lage() {
           </h2>
           <p className="mt-8 max-w-prose text-pretty text-base leading-relaxed text-foreground-muted">
             Parkstraße 1 ist die kürzeste Verbindung zwischen Hörsaal,
-            Bibliothek und Wald. Du erreichst alles, was im Studium zählt, zu
-            Fuß. Was du mit der Tram erreichst, kommt obendrauf.
+            Bibliothek und Wald. Was im Studium zählt, erreichst du zu Fuß.
+            Was die Tram dazu bringt, kommt obendrauf.
           </p>
 
           <dl className="mt-10 divide-y divide-border">
@@ -42,7 +114,7 @@ export function Lage() {
                 className="flex items-baseline justify-between gap-4 py-3.5"
               >
                 <dt className="text-sm text-foreground-muted">{d.place}</dt>
-                <dd className="flex items-baseline gap-2 font-display text-couleur-gold-dim tabular-nums">
+                <dd className="flex items-baseline gap-2 font-display tabular-nums text-couleur-burgund">
                   <span className="text-lg">{d.time}</span>
                   <span className="text-xs uppercase tracking-[0.18em] text-foreground-dim">
                     {d.mode}
@@ -54,177 +126,76 @@ export function Lage() {
         </div>
 
         <div className="lg:col-span-7">
-          <figure className="relative">
-            <div className="relative aspect-[5/4] w-full overflow-hidden border border-border-strong bg-background">
-              {/* Stylized SVG map — DSGVO-frei, kein Google Maps */}
-              <svg
-                viewBox="0 0 100 100"
-                preserveAspectRatio="none"
-                className="absolute inset-0 h-full w-full"
-                aria-label="Schematische Karte: Parkstraße 1 mit Umfeld"
-                role="img"
-              >
-                <title>Lage Parkstraße 1 — KB! Teutonia</title>
-                {/* Forest texture */}
-                <defs>
-                  <pattern
-                    id="trees"
-                    x="0"
-                    y="0"
-                    width="6"
-                    height="6"
-                    patternUnits="userSpaceOnUse"
-                  >
-                    <circle
-                      cx="3"
-                      cy="3"
-                      r="0.6"
-                      fill="oklch(0.32 0.06 130)"
-                      opacity="0.5"
-                    />
-                  </pattern>
-                  <linearGradient id="campus" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="oklch(0.20 0.02 50)" />
-                    <stop offset="100%" stopColor="oklch(0.14 0.013 45)" />
-                  </linearGradient>
-                </defs>
+          <figure className="relative overflow-hidden rounded-lg border border-border-strong bg-background-elev shadow-sm">
+            <div className="relative aspect-[5/5]">
+              <Image
+                src="/lage/karlsruhe-light.webp"
+                alt="Karte: Parkstraße 1 zwischen KIT-Campus, Hardtwald und Innenstadt"
+                fill
+                sizes="(min-width: 1024px) 58vw, 100vw"
+                className="object-cover"
+              />
+              {/* Subtle paper tint to align with light section */}
+              <div
+                aria-hidden
+                className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background-veil/35"
+              />
 
-                {/* Hardtwald (forest) — top band */}
-                <rect x="0" y="0" width="100" height="30" fill="url(#trees)" />
-                <text
-                  x="50"
-                  y="14"
-                  textAnchor="middle"
-                  fontSize="2.5"
-                  fill="oklch(0.55 0.04 130)"
-                  fontStyle="italic"
-                  letterSpacing="0.4"
-                >
-                  HARDTWALD
-                </text>
-
-                {/* Campus block — south */}
-                <rect
-                  x="20"
-                  y="74"
-                  width="32"
-                  height="20"
-                  fill="url(#campus)"
-                  stroke="oklch(0.35 0.02 50)"
-                  strokeWidth="0.2"
-                />
-                <text
-                  x="36"
-                  y="86"
-                  textAnchor="middle"
-                  fontSize="2.2"
-                  fill="oklch(0.65 0.04 70)"
-                  letterSpacing="0.3"
-                >
-                  KIT CAMPUS SÜD
-                </text>
-
-                {/* Streets — abstracted */}
-                <g
-                  stroke="oklch(0.32 0.02 50)"
-                  strokeWidth="0.5"
-                  fill="none"
-                  opacity="0.85"
-                >
-                  {/* Parkstraße (E-W through the middle) */}
-                  <line x1="0" y1="58" x2="100" y2="58" />
-                  {/* Engesserstraße / Adenauerring (vertical) */}
-                  <line x1="40" y1="30" x2="40" y2="74" />
-                  <line x1="72" y1="30" x2="72" y2="78" />
-                  {/* Tram-Linie horizontal lower */}
-                  <line
-                    x1="0"
-                    y1="70"
-                    x2="100"
-                    y2="70"
-                    strokeDasharray="1 1"
-                    stroke="oklch(0.78 0.14 78)"
-                    strokeWidth="0.4"
-                  />
-                </g>
-
-                {/* Connecting walk-paths (Burgund) */}
-                <g
-                  stroke="oklch(0.55 0.19 22)"
-                  strokeWidth="0.6"
-                  fill="none"
-                  strokeDasharray="2 1.5"
-                  strokeLinecap="round"
-                  opacity="0.85"
-                >
-                  <path d="M64 58 Q 50 64 38 78" />
-                  <path d="M64 58 Q 45 62 27 64" />
-                  <path d="M64 58 Q 56 70 46 86" />
-                  <path d="M64 58 L 78 70" />
-                </g>
-
-                {/* Points */}
-                {points.map((p) => (
-                  <g key={p.label}>
-                    {p.primary ? (
-                      <>
-                        <circle
-                          cx={p.x}
-                          cy={p.y}
-                          r="2.4"
-                          fill="oklch(0.55 0.19 22)"
-                          stroke="oklch(0.78 0.14 78)"
-                          strokeWidth="0.5"
-                        />
-                        <circle
-                          cx={p.x}
-                          cy={p.y}
-                          r="4.5"
-                          fill="none"
-                          stroke="oklch(0.78 0.14 78)"
-                          strokeWidth="0.3"
-                          opacity="0.6"
-                        />
-                      </>
-                    ) : (
-                      <circle
-                        cx={p.x}
-                        cy={p.y}
-                        r="1.4"
-                        fill="oklch(0.78 0.14 78)"
-                      />
-                    )}
-                  </g>
-                ))}
-              </svg>
-
-              {/* HTML labels on top — better typography than SVG text */}
-              <div className="absolute inset-0">
+              {/* Pin layer */}
+              <div className="absolute inset-0 pointer-events-none">
                 {points.map((p) => (
                   <div
                     key={p.label}
-                    className="absolute -translate-x-1/2 -translate-y-full pb-2 text-center"
+                    className="absolute"
                     style={{ left: `${p.x}%`, top: `${p.y}%` }}
                   >
-                    <div
-                      className={`whitespace-nowrap font-display text-[11px] leading-tight tracking-wide sm:text-xs ${
+                    {/* Pin marker — center on coordinate */}
+                    <span
+                      aria-hidden
+                      className={cn(
+                        'block -translate-x-1/2 -translate-y-1/2',
                         p.primary
-                          ? 'text-foreground'
-                          : 'text-foreground-muted'
-                      }`}
+                          ? 'h-3 w-3 rounded-full bg-couleur-burgund ring-[3px] ring-couleur-gold/65 shadow-[0_2px_6px_oklch(0.22_0.014_45/30%)]'
+                          : 'h-2 w-2 rounded-full bg-couleur-burgund/85 ring-2 ring-background-elev',
+                      )}
+                    />
+
+                    {/* Label card */}
+                    <div
+                      className={cn(
+                        'absolute flex items-center gap-2',
+                        pinTransform(p.side),
+                      )}
                     >
-                      {p.label}
-                    </div>
-                    <div className="whitespace-nowrap text-[9px] uppercase tracking-[0.18em] text-couleur-gold-dim sm:text-[10px]">
-                      {p.sub}
+                      <div
+                        className={cn(
+                          'rounded-md border bg-background-elev/95 px-2.5 py-1.5 shadow-sm backdrop-blur-sm',
+                          p.primary
+                            ? 'border-couleur-gold/70'
+                            : 'border-border-strong',
+                        )}
+                      >
+                        <div className="font-display whitespace-nowrap text-xs leading-tight text-foreground sm:text-sm">
+                          {p.label}
+                        </div>
+                        <div className="whitespace-nowrap text-[10px] uppercase tracking-[0.16em] text-couleur-burgund/80">
+                          {p.sub}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 ))}
               </div>
+
+              {/* Attribution */}
+              <div className="absolute bottom-2 right-2 rounded-sm bg-background-elev/85 px-1.5 py-0.5 text-[10px] tracking-wide text-foreground-dim backdrop-blur-sm">
+                © OpenStreetMap
+              </div>
             </div>
           </figure>
           <Caption number="Tafel 02.">
-            Schematische Lage. Maßstab nicht real — die Wege schon.
+            Echter Kartenausschnitt um die Parkstraße 1. Maßstab: ~1,7 km
+            Bildbreite. Gehzeiten sind real gemessen, nicht geschätzt.
           </Caption>
         </div>
       </div>

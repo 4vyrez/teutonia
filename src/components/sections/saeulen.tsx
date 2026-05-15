@@ -30,7 +30,11 @@ const pillars = [
 
 export function Saeulen() {
   return (
-    <Section id="saeulen" className="bg-background-veil border-y border-border">
+    <Section
+      id="saeulen"
+      theme="light"
+      className="border-y border-border bg-background-veil"
+    >
       <div>
         <div className="max-w-3xl">
           <Eyebrow>03 — Was du bekommst</Eyebrow>
@@ -48,7 +52,7 @@ export function Saeulen() {
 
         <div className="mt-12 lg:mt-16">
           {/* Hero photo of community */}
-          <figure className="relative isolate mb-10 overflow-hidden border border-border-strong">
+          <figure className="relative isolate mb-10 overflow-hidden rounded-lg border border-border-strong shadow-sm">
             <div className="relative aspect-[16/7] sm:aspect-[21/8]">
               <Image
                 src="/haus/gemeinsam.jpg"
@@ -86,7 +90,7 @@ export function Saeulen() {
             {pillars.map((p, i) => (
               <article
                 key={p.eyebrow}
-                className="group relative flex flex-col overflow-hidden border border-border-strong bg-background-elev p-8 transition-colors hover:border-couleur-gold-dim sm:p-10"
+                className="group relative flex flex-col overflow-hidden rounded-lg border border-border-strong bg-background-elev p-8 shadow-sm transition-colors hover:border-couleur-gold-dim sm:p-10"
               >
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] uppercase tracking-[0.28em] text-couleur-gold-dim">

@@ -9,6 +9,7 @@ type SectionProps = {
   as?: 'section' | 'div' | 'article' | 'aside';
   eyebrow?: string;
   fullBleed?: boolean;
+  theme?: 'light' | 'dark';
 };
 
 export function Section({
@@ -18,11 +19,16 @@ export function Section({
   containerClassName,
   as: Tag = 'section',
   fullBleed = false,
+  theme,
 }: SectionProps) {
   return (
     <Tag
       id={id}
-      className={cn('relative py-24 sm:py-28 lg:py-32', className)}
+      data-theme={theme}
+      className={cn(
+        'relative bg-background py-24 text-foreground sm:py-28 lg:py-32',
+        className,
+      )}
     >
       {fullBleed ? (
         children

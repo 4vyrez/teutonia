@@ -27,7 +27,7 @@ const principles = [
 
 export function Identitaet() {
   return (
-    <Section id="identitaet" className="bg-background">
+    <Section id="identitaet" theme="dark">
       <div className="grid gap-16 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-4 lg:sticky lg:top-24 lg:self-start">
           <Eyebrow>02 — Identität</Eyebrow>

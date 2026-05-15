@@ -70,7 +70,7 @@ export function ContactForm() {
                 defaultChecked={t.value === 'zimmer'}
                 className="peer sr-only"
               />
-              <span className="inline-flex h-10 items-center border border-border-strong px-4 text-xs uppercase tracking-[0.18em] text-foreground-muted transition-colors hover:border-couleur-gold-dim hover:text-foreground peer-checked:border-couleur-gold peer-checked:bg-couleur-burgund/15 peer-checked:text-foreground peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-ring">
+              <span className="inline-flex h-10 items-center rounded-md border border-border-strong px-4 text-xs uppercase tracking-[0.18em] text-foreground-muted transition-colors hover:border-couleur-gold-dim hover:text-foreground peer-checked:border-couleur-gold peer-checked:bg-couleur-burgund/15 peer-checked:text-foreground peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-ring">
                 {t.label}
               </span>
             </label>
@@ -137,7 +137,7 @@ export function ContactForm() {
         <button
           type="submit"
           disabled={isPending}
-          className="group inline-flex h-12 items-center justify-center gap-2 self-end bg-couleur-burgund px-8 text-sm font-medium text-primary-foreground transition-colors hover:bg-couleur-burgund-hi disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+          className="group inline-flex h-12 items-center justify-center gap-2 self-end rounded-md bg-couleur-burgund px-8 text-sm font-medium text-primary-foreground shadow-[0_1px_0_oklch(1_0_0/8%)_inset,0_8px_24px_-12px_oklch(0.42_0.16_22/55%)] transition-colors hover:bg-couleur-burgund-hi focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring disabled:opacity-60"
         >
           {isPending ? (
             <>

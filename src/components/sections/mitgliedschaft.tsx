@@ -29,7 +29,7 @@ const stages = [
 
 export function Mitgliedschaft() {
   return (
-    <Section id="mitgliedschaft" className="bg-background">
+    <Section id="mitgliedschaft" theme="light">
       <div className="grid gap-16 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-4">
           <Eyebrow>05 — Mitgliedschaft</Eyebrow>
@@ -62,10 +62,10 @@ export function Mitgliedschaft() {
                 key={s.title}
                 className="relative grid grid-cols-[auto_1fr] gap-6 sm:gap-8"
               >
-                <div className="relative z-10 flex h-9 w-9 shrink-0 items-center justify-center border border-couleur-gold-dim bg-background font-display tabular-nums text-xs text-couleur-gold sm:h-12 sm:w-12 sm:text-sm">
+                <div className="relative z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-couleur-gold-dim bg-background font-display tabular-nums text-xs text-couleur-gold sm:h-12 sm:w-12 sm:text-sm">
                   {String(i + 1).padStart(2, '0')}
                 </div>
-                <div className="border border-border bg-background-elev px-6 py-5 sm:px-8 sm:py-6">
+                <div className="rounded-md border border-border bg-background-elev px-6 py-5 shadow-sm sm:px-8 sm:py-6">
                   <div className="flex flex-wrap items-baseline justify-between gap-3">
                     <h3 className="font-display text-2xl leading-tight text-foreground sm:text-[1.6rem]">
                       {s.title}

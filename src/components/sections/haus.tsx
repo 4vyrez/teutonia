@@ -15,7 +15,7 @@ const amenities = [
 
 export function Haus() {
   return (
-    <Section id="haus" className="bg-background">
+    <Section id="haus" theme="light">
       <div className="grid gap-16 lg:grid-cols-12 lg:gap-12">
         {/* Left col — Editorial intro */}
         <div className="lg:col-span-5">
@@ -48,7 +48,7 @@ export function Haus() {
 
         {/* Right col — visual + amenities */}
         <div className="lg:col-span-7">
-          <figure className="relative isolate overflow-hidden border border-border-strong bg-background-elev">
+          <figure className="relative isolate overflow-hidden rounded-lg border border-border-strong bg-background-elev shadow-sm">
             <div className="relative aspect-[4/5] sm:aspect-[5/6]">
               <Image
                 src="/haus/lernen.jpg"

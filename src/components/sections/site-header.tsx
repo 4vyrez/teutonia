@@ -1,12 +1,39 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { Wappen } from '@/components/primitives/wappen';
+import { cn } from '@/lib/utils';
 import { siteConfig } from '@/lib/site-config';
 
 export function SiteHeader() {
+  const [solid, setSolid] = useState(false);
+
+  useEffect(() => {
+    const update = () => {
+      // Switch when scrolled past 85% of the first viewport (~ end of Hero)
+      setSolid(window.scrollY > window.innerHeight * 0.85);
+    };
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', update);
+    };
+  }, []);
+
   return (
-    <header className="absolute inset-x-0 top-0 z-30">
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-6 sm:px-8 lg:px-12">
+    <header
+      data-theme={solid ? 'light' : 'dark'}
+      className={cn(
+        'fixed inset-x-0 top-0 z-30',
+        'transition-[background-color,border-color,backdrop-filter,box-shadow] duration-300',
+        solid
+          ? 'bg-background/85 backdrop-blur-md border-b border-border shadow-[0_1px_0_oklch(0.22_0.014_45/8%)]'
+          : 'bg-transparent',
+      )}
+    >
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-5 sm:px-8 lg:px-12">
         <Link
           href="/"
           aria-label="KB! Teutonia — Startseite"

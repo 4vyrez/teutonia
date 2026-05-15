@@ -1,15 +1,14 @@
 @import 'tailwindcss';
 
 /* ---------------------------------------------------------------
- * KB! Teutonia — Private Library / Editorial Dark
+ * KB! Teutonia — Editorial Hybrid (Dark + Papier-Light)
  *
- *   --background        warm-shifted Anthrazit (kein Reinschwarz)
- *   --foreground        papierhaftes Off-White
- *   --couleur-burgund   Couleur-Rot als Burgunder (primary)
- *   --couleur-gold      Couleur-Gold (Vorstoß, Hairlines, Akzente)
+ *   Sections deklarieren via [data-theme="dark|light"] ihre Palette.
+ *   Default (:root) ist Dark — Hero + Identität bleiben dunkel.
+ *   Andere Sections setzen explizit data-theme="light".
  *
- * Die Site läuft bewusst nur in Dark — die redaktionelle Tiefe
- * trägt das Wertversprechen. Kein .dark-Toggle.
+ *   Tokens hängen am Selector-Scope; @theme inline referenziert
+ *   nur var(--*) — Components bleiben unverändert.
  * --------------------------------------------------------------- */
 
 @theme inline {
@@ -51,30 +50,27 @@
   --radius-xl: 1rem;
 }
 
-:root {
-  /* Warm-shifted dark background — nie Reinschwarz */
+/* Dark — Default + explicit [data-theme="dark"] */
+:root,
+[data-theme='dark'] {
   --background: oklch(0.115 0.012 45);
   --background-elev: oklch(0.145 0.013 45);
   --background-veil: oklch(0.085 0.01 45);
 
-  /* Foreground: papierhaftes warmes Off-White */
   --foreground: oklch(0.945 0.012 82);
   --foreground-muted: oklch(0.74 0.018 70);
   --foreground-dim: oklch(0.56 0.016 60);
 
-  /* Borders + Ring */
   --border: oklch(0.945 0.012 82 / 10%);
   --border-strong: oklch(0.945 0.012 82 / 22%);
   --ring: oklch(0.58 0.18 22);
 
-  /* Couleur — Burgunder statt Signal-Rot */
   --couleur-burgund: oklch(0.42 0.16 22);
   --couleur-burgund-hi: oklch(0.55 0.19 22);
   --couleur-gold: oklch(0.78 0.14 78);
-  --couleur-gold-dim: oklch(0.62 0.10 78);
+  --couleur-gold-dim: oklch(0.62 0.1 78);
   --couleur-black: oklch(0.085 0.01 45);
 
-  /* Semantic primary + accent */
   --primary: var(--couleur-burgund);
   --primary-foreground: oklch(0.97 0.008 82);
   --primary-hover: var(--couleur-burgund-hi);
@@ -88,6 +84,39 @@
   color-scheme: dark;
 }
 
+/* Light — Warm-Papier (NICHT cream), bei ~95% Lightness */
+[data-theme='light'] {
+  --background: oklch(0.955 0.008 82);
+  --background-elev: oklch(0.985 0.005 82);
+  --background-veil: oklch(0.925 0.01 78);
+
+  --foreground: oklch(0.22 0.014 45);
+  --foreground-muted: oklch(0.38 0.014 50);
+  --foreground-dim: oklch(0.52 0.012 55);
+
+  --border: oklch(0.22 0.014 45 / 12%);
+  --border-strong: oklch(0.22 0.014 45 / 22%);
+  --ring: oklch(0.42 0.16 22);
+
+  --couleur-burgund: oklch(0.38 0.17 22);
+  --couleur-burgund-hi: oklch(0.46 0.185 22);
+  --couleur-gold: oklch(0.62 0.13 78);
+  --couleur-gold-dim: oklch(0.51 0.09 78);
+  --couleur-black: oklch(0.12 0.012 45);
+
+  --primary: var(--couleur-burgund);
+  --primary-foreground: oklch(0.97 0.008 82);
+  --primary-hover: var(--couleur-burgund-hi);
+  --accent: var(--couleur-gold);
+  --accent-foreground: oklch(0.18 0.012 45);
+  --accent-dim: var(--couleur-gold-dim);
+
+  --card: var(--background-elev);
+  --card-foreground: var(--foreground);
+
+  color-scheme: light;
+}
+
 @layer base {
   *,
   *::before,
@@ -98,6 +127,7 @@
   html {
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
   }
 
   body {
@@ -113,7 +143,11 @@
   }
 
   ::selection {
-    background-color: oklch(0.42 0.16 22 / 55%);
+    background-color: color-mix(
+      in oklch,
+      var(--couleur-burgund) 55%,
+      transparent
+    );
     color: var(--foreground);
   }
 
@@ -126,7 +160,6 @@
     letter-spacing: -0.012em;
   }
 
-  /* Pull-Quote bar */
   .pullquote-bar {
     background: linear-gradient(
       to bottom,
@@ -135,13 +168,12 @@
     );
   }
 
-  /* Subtle hairline rule with gold dim */
   .gold-rule {
     border-color: var(--couleur-gold-dim);
     opacity: 0.45;
   }
 
-  /* Grain Overlay — sehr subtil, gibt Foto-Look */
+  /* Grain Overlay */
   .grain::before {
     content: '';
     position: absolute;
@@ -153,15 +185,15 @@
     z-index: 0;
   }
 
-  /* Focus visible */
+  /* Light-Mode: grain darker for legibility */
+  [data-theme='light'] .grain::before {
+    opacity: 0.025;
+    mix-blend-mode: multiply;
+  }
+
   :focus-visible {
     outline: 2px solid var(--ring);
     outline-offset: 2px;
-  }
-
-  /* Smooth scrolling */
-  html {
-    scroll-behavior: smooth;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -188,7 +220,6 @@
     font-variant-numeric: tabular-nums;
   }
 
-  /* Editorial column width — ~65ch for ideal reading */
   .max-w-prose-tight {
     max-width: 56ch;
   }
@@ -196,7 +227,6 @@
     max-width: 72ch;
   }
 
-  /* Gold underline for inline emphasis */
   .underline-gold {
     text-decoration: underline;
     text-decoration-color: var(--couleur-gold-dim);

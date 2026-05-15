@@ -5,7 +5,7 @@ import { siteConfig } from '@/lib/site-config';
 
 export function Kontakt() {
   return (
-    <Section id="kontakt" className="bg-background">
+    <Section id="kontakt" theme="light">
       <div className="grid gap-16 lg:grid-cols-12 lg:gap-16">
         {/* Left rail */}
         <div className="lg:col-span-5">
@@ -96,7 +96,7 @@ export function Kontakt() {
 
         {/* Right rail — Form */}
         <div className="lg:col-span-7">
-          <div className="border border-border-strong bg-background-elev p-8 sm:p-12">
+          <div className="rounded-lg border border-border-strong bg-background-elev p-8 shadow-sm sm:p-12">
             <div className="mb-10 flex items-baseline justify-between gap-4 border-b border-border-strong pb-6">
               <h3 className="font-display text-xl leading-tight text-foreground">
                 Direkt schreiben

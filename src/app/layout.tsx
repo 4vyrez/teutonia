@@ -50,9 +50,9 @@ export default function RootLayout({
           toastOptions={{
             classNames: {
               toast:
-                'bg-background-elev border border-border-strong text-foreground',
+                'rounded-md border border-[oklch(0.945_0.012_82/22%)] bg-[oklch(0.145_0.013_45)] text-[oklch(0.945_0.012_82)]',
               title: 'font-display',
-              description: 'text-foreground-muted',
+              description: 'text-[oklch(0.74_0.018_70)]',
             },
           }}
         />
