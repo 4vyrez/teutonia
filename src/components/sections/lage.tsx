@@ -5,9 +5,9 @@ import { cn } from '@/lib/utils';
 
 /**
  * Pin positions projected from real WGS84 onto the static map bounds.
- *   Center: 49.0130 N, 8.4150 E (offset west of Parkstraße 1)
- *   Bounds: NW (49.02706, 8.39355) — SE (49.00184, 8.43201)
- *   Image:  1792×1792 px, OSM zoom 16, Editorial Duotone.
+ *   Center: 49.0130 N, 8.4172 E (offset west of Parkstraße 1)
+ *   Bounds: NW (49.02346, 8.40454) — SE (49.00545, 8.43201)
+ *   Image:  1280×1280 px, CartoDB light_nolabels @ z16, Editorial Duotone.
  *
  * Side-placement keeps labels off each other; primary pin sits right of
  * center so most context (KIT, Bibs, Tram) reads left-to-right toward it.
@@ -23,25 +23,25 @@ type MapPoint = {
 };
 
 const points: MapPoint[] = [
-  // Hardtwald — visible at the top of the frame
-  { label: 'Hardtwald', sub: 'Direkt hinterm Haus', x: 50.5, y: 20.0, side: 'below' },
+  // Hardtwald — top of frame; label below the pin
+  { label: 'Hardtwald', sub: 'Direkt hinterm Haus', x: 49.0, y: 19.2, side: 'below' },
   // Informatik-Bib — close to Parkstraße, label above to avoid clash
-  { label: 'Informatik-Bib', sub: '2 min · zu Fuß', x: 67.3, y: 51.3, side: 'above' },
+  { label: 'Informatik-Bib', sub: '2 min · zu Fuß', x: 54.3, y: 51.9, side: 'above' },
   // Parkstraße 1 — the anchor, label to the left so it reads "into the city"
   {
     label: 'Parkstraße 1',
     sub: 'Hier wohnst du',
-    x: 75.8,
+    x: 66.1,
     y: 49.8,
     primary: true,
     side: 'left',
   },
   // KIT-Bibliothek — center-south, label left
-  { label: 'KIT-Bibliothek', sub: '7 min · 24 / 7', x: 59.4, y: 63.1, side: 'left' },
-  // KIT Hauptbau — south-west, label above to keep south edge clean
-  { label: 'KIT Hauptbau', sub: '5 min · zu Fuß', x: 46.9, y: 69.8, side: 'above' },
-  // Durlacher Tor (Tram 4/5) — south, label below
-  { label: 'Tram 4 / 5', sub: 'Durlacher Tor · 5 min', x: 60.1, y: 72.2, side: 'below' },
+  { label: 'KIT-Bibliothek', sub: '7 min · 24 / 7', x: 43.1, y: 68.4, side: 'left' },
+  // KIT Hauptbau — south-west, label above (near south edge)
+  { label: 'KIT Hauptbau', sub: '5 min · zu Fuß', x: 25.7, y: 77.7, side: 'above' },
+  // Durlacher Tor (Tram 4/5) — bottom, label above (frame edge nearby)
+  { label: 'Tram 4 / 5', sub: 'Durlacher Tor · 5 min', x: 44.1, y: 81.1, side: 'above' },
 ];
 
 const distances = [

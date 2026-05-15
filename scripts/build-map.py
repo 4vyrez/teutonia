@@ -11,11 +11,11 @@ from pathlib import Path
 
 from PIL import Image, ImageEnhance, ImageOps
 
-CENTER_LAT = 49.0130  # Offset west of Parkstraße 1 — places the house on the
-CENTER_LON = 8.4150   # right side of the frame, where most of campus sits left
+CENTER_LAT = 49.0130  # Calibrated so Parkstraße 1 lands at ~70% x, ~50% y —
+CENTER_LON = 8.4172   # right-of-center, with KIT/Bib/Tram reading left to right
 ZOOM = 16
 TILE_SIZE = 256
-GRID_RADIUS = 3  # 7x7 grid → 1792x1792 px (~1.7 km radius at this latitude)
+GRID_RADIUS = 2  # 5x5 grid → 1280x1280 px (~1.25 km width, tighter focus)
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT_DIR = ROOT / "public" / "lage"
@@ -43,13 +43,14 @@ def num2deg(xtile: float, ytile: float, zoom: int) -> tuple[float, float]:
 
 
 def fetch_tile(zoom: int, x: int, y: int) -> Path:
-    tmp = TMP_DIR / f"tile_{zoom}_{x}_{y}.png"
+    """Fetch from CartoDB light_nolabels — same OSM data, no street labels."""
+    tmp = TMP_DIR / f"carto_{zoom}_{x}_{y}.png"
     if tmp.exists() and tmp.stat().st_size > 1000:
         return tmp
-    subdomains = ["a", "b", "c"]
+    subdomains = ["a", "b", "c", "d"]
     last_err: Exception | None = None
     for sd in subdomains:
-        url = f"https://{sd}.tile.openstreetmap.org/{zoom}/{x}/{y}.png"
+        url = f"https://{sd}.basemaps.cartocdn.com/light_nolabels/{zoom}/{x}/{y}.png"
         req = urllib.request.Request(url, headers={"User-Agent": UA})
         try:
             with urllib.request.urlopen(req, timeout=30) as resp:
@@ -117,19 +118,17 @@ def main() -> None:
     print(f"Bounds: NW=({nw_lat:.5f}, {nw_lon:.5f}) SE=({se_lat:.5f}, {se_lon:.5f})")
 
     # --- Editorial filter pipeline ---
-    # 1. Slight blur to soften jaggy tile labels (keep features readable)
-    # 2. Desaturate strongly
-    # 3. Duotone: lights → warm-papier #F1ECE3, darks → warm-anthrazit #4A4338
-    # 4. Slight contrast bump
-    desat = ImageEnhance.Color(stitched).enhance(0.0)  # full desaturation
-    # Use duotone with our editorial palette
-    LIGHT = (244, 239, 228)  # warm papier (foreground bg)
-    DARK = (74, 67, 56)  # warm anthrazit (foreground text-ish)
-    duo = duotone(desat, LIGHT, DARK)
+    # Source is CartoDB light_nolabels: pixel range is narrow (~220–255).
+    # AutoContrast spreads it across full 0–255 first, then duotone maps it.
+    desat = ImageEnhance.Color(stitched).enhance(0.0)
+    stretched = ImageOps.autocontrast(desat.convert("L"), cutoff=2)
+    stretched_rgb = stretched.convert("RGB")
+    # Slight contrast bump on top of the stretch
+    bumped = ImageEnhance.Contrast(stretched_rgb).enhance(1.15)
 
-    # Subtle contrast and warmth lift
-    duo = ImageEnhance.Contrast(duo).enhance(0.90)
-    duo = ImageEnhance.Brightness(duo).enhance(1.03)
+    LIGHT = (240, 234, 220)  # warm papier (bg-tones)
+    DARK = (58, 48, 36)  # deep warm anthrazit (feature-tones)
+    duo = duotone(bumped, LIGHT, DARK)
 
     # Save outputs
     out_webp = OUT_DIR / "karlsruhe-light.webp"

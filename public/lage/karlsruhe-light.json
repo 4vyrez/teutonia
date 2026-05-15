@@ -1,21 +1,21 @@
 {
   "center_lat": 49.013,
-  "center_lon": 8.415,
+  "center_lon": 8.4172,
   "zoom": 16,
-  "width": 1792,
-  "height": 1792,
+  "width": 1280,
+  "height": 1280,
   "center_pixel": [
-    999.4,
-    999.4
+    590.0,
+    743.4
   ],
   "center_percent": [
-    55.77,
-    55.77
+    46.09,
+    58.08
   ],
   "bounds": {
-    "nw_lat": 49.02706347482933,
-    "nw_lon": 8.3935546875,
-    "se_lat": 49.00184391797852,
+    "nw_lat": 49.02346146321411,
+    "nw_lon": 8.404541015625,
+    "se_lat": 49.005447494058096,
     "se_lon": 8.4320068359375
   },
   "attribution": "\u00a9 OpenStreetMap contributors"
