@@ -1,13 +1,13 @@
-import Image from 'next/image';
 import { Section, Eyebrow } from '@/components/primitives/section';
 import { Caption } from '@/components/primitives/caption';
 import { cn } from '@/lib/utils';
 
 /**
- * Pin positions projected from real WGS84 onto the static map bounds.
+ * Pin positions projected from real WGS84 onto the SVG map bounds.
  *   Center: 49.0130 N, 8.4172 E (offset west of Parkstraße 1)
  *   Bounds: NW (49.02346, 8.40454) — SE (49.00545, 8.43201)
- *   Image:  1280×1280 px, CartoDB light_nolabels @ z16, Editorial Duotone.
+ *   Image:  1280×1280 px SVG, rendered from OSM Overpass vector data.
+ *           Streets + parks only — no buildings (see scripts/build-map-svg.py).
  *
  * Side-placement keeps labels off each other; primary pin sits right of
  * center so most context (KIT, Bibs, Tram) reads left-to-right toward it.
@@ -15,7 +15,6 @@ import { cn } from '@/lib/utils';
 type PinSide = 'left' | 'right' | 'above' | 'below';
 type MapPoint = {
   label: string;
-  sub: string;
   x: number;
   y: number;
   primary?: boolean;
@@ -23,25 +22,18 @@ type MapPoint = {
 };
 
 const points: MapPoint[] = [
-  // Hardtwald — top of frame; label below the pin
-  { label: 'Hardtwald', sub: 'Direkt hinterm Haus', x: 49.0, y: 19.2, side: 'below' },
-  // Informatik-Bib — close to Parkstraße, label above to avoid clash
-  { label: 'Informatik-Bib', sub: '2 min · zu Fuß', x: 54.3, y: 51.9, side: 'above' },
-  // Parkstraße 1 — the anchor, label to the left so it reads "into the city"
+  { label: 'Hardtwald', x: 49.0, y: 19.2, side: 'below' },
+  { label: 'Informatik-Bib', x: 54.3, y: 51.9, side: 'right' },
   {
     label: 'Parkstraße 1',
-    sub: 'Hier wohnst du',
     x: 66.1,
     y: 49.8,
     primary: true,
     side: 'left',
   },
-  // KIT-Bibliothek — center-south, label left
-  { label: 'KIT-Bibliothek', sub: '7 min · 24 / 7', x: 43.1, y: 68.4, side: 'left' },
-  // KIT Hauptbau — south-west, label above (near south edge)
-  { label: 'KIT Hauptbau', sub: '5 min · zu Fuß', x: 25.7, y: 77.7, side: 'above' },
-  // Durlacher Tor (Tram 4/5) — bottom, label above (frame edge nearby)
-  { label: 'Tram 4 / 5', sub: 'Durlacher Tor · 5 min', x: 44.1, y: 81.1, side: 'above' },
+  { label: 'KIT-Bibliothek', x: 43.1, y: 68.4, side: 'left' },
+  { label: 'KIT Hauptbau', x: 25.7, y: 77.7, side: 'above' },
+  { label: 'Tram 4 / 5', x: 44.1, y: 81.1, side: 'above' },
 ];
 
 const distances = [
@@ -56,14 +48,14 @@ const distances = [
 function labelPosition(side: PinSide): string {
   switch (side) {
     case 'left':
-      return 'right-full top-1/2 mr-3 -translate-y-1/2';
+      return 'right-full top-1/2 mr-2.5 -translate-y-1/2';
     case 'right':
-      return 'left-full top-1/2 ml-3 -translate-y-1/2';
+      return 'left-full top-1/2 ml-2.5 -translate-y-1/2';
     case 'above':
-      return 'left-1/2 bottom-full mb-2 -translate-x-1/2';
+      return 'left-1/2 bottom-full mb-1.5 -translate-x-1/2';
     case 'below':
     default:
-      return 'left-1/2 top-full mt-2 -translate-x-1/2';
+      return 'left-1/2 top-full mt-1.5 -translate-x-1/2';
   }
 }
 
@@ -107,18 +99,15 @@ export function Lage() {
 
         <div className="lg:col-span-7">
           <figure className="relative overflow-hidden rounded-lg border border-border-strong bg-background-elev shadow-sm">
-            <div className="relative aspect-[5/5]">
-              <Image
-                src="/lage/karlsruhe-light.webp"
+            <div className="relative aspect-square">
+              {/* biome-ignore lint/performance/noImgElement: SVG vector map, no next/image optimization needed */}
+              <img
+                src="/lage/karlsruhe-light.svg"
                 alt="Karte: Parkstraße 1 — KIT, Bibliotheken, Tram und Hardtwald in Gehweite"
-                fill
-                sizes="(min-width: 1024px) 58vw, 100vw"
-                className="object-cover"
-              />
-              {/* Subtle paper tint at top + bottom for label legibility */}
-              <div
-                aria-hidden
-                className="absolute inset-0 bg-gradient-to-b from-background-veil/20 via-transparent to-background-veil/30"
+                width={1280}
+                height={1280}
+                className="absolute inset-0 h-full w-full object-cover"
+                loading="lazy"
               />
 
               {/* Pin layer */}
@@ -129,7 +118,6 @@ export function Lage() {
                     className="absolute"
                     style={{ left: `${p.x}%`, top: `${p.y}%` }}
                   >
-                    {/* Pin marker — centered on the geographic point */}
                     <span
                       aria-hidden
                       className={cn(
@@ -140,41 +128,35 @@ export function Lage() {
                       )}
                     />
 
-                    {/* Label card — positioned per side */}
                     <div
                       className={cn(
                         'absolute whitespace-nowrap',
                         labelPosition(p.side),
                       )}
                     >
-                      <div
+                      <span
                         className={cn(
-                          'rounded-md border bg-background-elev/95 px-2.5 py-1.5 shadow-[0_2px_8px_oklch(0.22_0.014_45/15%)] backdrop-blur-sm',
+                          'font-display text-[11px] tracking-tight sm:text-xs',
                           p.primary
-                            ? 'border-couleur-gold/70'
-                            : 'border-border-strong',
+                            ? 'rounded-sm bg-background-elev/95 px-1.5 py-0.5 font-medium text-couleur-burgund shadow-[0_1px_3px_oklch(0.22_0.014_45/20%)]'
+                            : 'text-foreground/85 [text-shadow:0_1px_2px_oklch(0.96_0.008_82/85%)]',
                         )}
                       >
-                        <div className="font-display text-xs leading-tight text-foreground sm:text-sm">
-                          {p.label}
-                        </div>
-                        <div className="text-[10px] uppercase tracking-[0.16em] text-couleur-burgund/80">
-                          {p.sub}
-                        </div>
-                      </div>
+                        {p.label}
+                      </span>
                     </div>
                   </div>
                 ))}
               </div>
 
               {/* Attribution */}
-              <div className="absolute bottom-2 right-2 rounded-sm bg-background-elev/85 px-1.5 py-0.5 text-[10px] tracking-wide text-foreground-dim backdrop-blur-sm">
+              <div className="absolute bottom-1.5 right-1.5 rounded-sm bg-background-elev/85 px-1.5 py-0.5 text-[10px] tracking-wide text-foreground-dim">
                 © OpenStreetMap
               </div>
             </div>
           </figure>
           <Caption number="Tafel 02.">
-            Karte um die Parkstraße 1 — etwa 1,7 km Bildbreite. Gehzeiten
+            Karte um die Parkstraße 1 — etwa 1,25 km Bildbreite. Gehzeiten
             sind real gemessen, nicht geschätzt.
           </Caption>
         </div>

@@ -9,7 +9,7 @@ import time
 import urllib.request
 from pathlib import Path
 
-from PIL import Image, ImageEnhance, ImageOps
+from PIL import Image, ImageEnhance, ImageFilter, ImageOps
 
 CENTER_LAT = 49.0130  # Calibrated so Parkstraße 1 lands at ~70% x, ~50% y —
 CENTER_LON = 8.4172   # right-of-center, with KIT/Bib/Tram reading left to right
@@ -118,17 +118,16 @@ def main() -> None:
     print(f"Bounds: NW=({nw_lat:.5f}, {nw_lon:.5f}) SE=({se_lat:.5f}, {se_lon:.5f})")
 
     # --- Editorial filter pipeline ---
-    # Source is CartoDB light_nolabels: pixel range is narrow (~220–255).
-    # AutoContrast spreads it across full 0–255 first, then duotone maps it.
-    desat = ImageEnhance.Color(stitched).enhance(0.0)
-    stretched = ImageOps.autocontrast(desat.convert("L"), cutoff=2)
-    stretched_rgb = stretched.convert("RGB")
-    # Slight contrast bump on top of the stretch
-    bumped = ImageEnhance.Contrast(stretched_rgb).enhance(1.15)
+    # Aggressive smoothing collapses small building texture into broad fields,
+    # leaving the city skeleton (main roads + parks) as the dominant signal.
+    gray = ImageOps.grayscale(stitched)
+    medianed = gray.filter(ImageFilter.MedianFilter(size=11))
+    blurred = medianed.filter(ImageFilter.GaussianBlur(radius=4.0))
+    stretched = ImageOps.autocontrast(blurred, cutoff=15)
 
-    LIGHT = (240, 234, 220)  # warm papier (bg-tones)
-    DARK = (58, 48, 36)  # deep warm anthrazit (feature-tones)
-    duo = duotone(bumped, LIGHT, DARK)
+    LIGHT = (244, 238, 224)  # warm papier
+    DARK = (148, 132, 102)  # soft warm taupe — features stay quiet
+    duo = duotone(stretched.convert("RGB"), LIGHT, DARK)
 
     # Save outputs
     out_webp = OUT_DIR / "karlsruhe-light.webp"

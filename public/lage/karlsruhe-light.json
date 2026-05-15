@@ -4,14 +4,6 @@
   "zoom": 16,
   "width": 1280,
   "height": 1280,
-  "center_pixel": [
-    590.0,
-    743.4
-  ],
-  "center_percent": [
-    46.09,
-    58.08
-  ],
   "bounds": {
     "nw_lat": 49.02346146321411,
     "nw_lon": 8.404541015625,
