@@ -5,7 +5,7 @@ const pillars = [
   {
     eyebrow: 'Gemeinschaft',
     title: 'Du wohnst nicht allein.',
-    body: 'Bei der Klausur ist um halb zwei jemand wach. Wenn der Kühlschrank leer ist, kocht der Nachbar mit. Wir teilen Lernmaterialien, Erfahrungen und das Haus.',
+    body: 'Bei der Klausur ist um halb zwei jemand wach. Wanderwochenenden im Schwarzwald, Skiausflüge in die Alpen, Segeltörns im Sommer. Stammtische unter der Woche. Reisen gemeinsam. Wir teilen das Haus, Erfahrungen und ziemlich viele Erinnerungen.',
     routine: 'Was passiert montags?',
     detail:
       'Gemeinsames Abendessen im Haus, ab 19 Uhr. Niemand muss kommen — fast alle kommen.',
@@ -16,15 +16,15 @@ const pillars = [
     body: 'Maschinenbau erklärt Informatik die Mechanik. BWL übersetzt die Klausurfrage zurück. Ältere Semester wissen, welche Übungsleiterin gnädig korrigiert. Das ist kein Zufall — das ist die Idee.',
     routine: 'Wo lernst du?',
     detail:
-      'Im Lernzimmer, in der Bibliothek der Verbindung, in der Uni-Bib (7 min). Oder mit jemandem aus deinem Studiengang am Küchentisch.',
+      'Im Lernzimmer des Hauses, in der hauseigenen Bibliothek, in der Uni-Bib (7 min zu Fuß). Oder mit jemandem aus deinem Studiengang am Küchentisch.',
   },
   {
     eyebrow: 'Netzwerk',
     title: 'Alumni, die noch da sind.',
-    body: 'Ältere Mitglieder bleiben dem Haus verbunden — als Ratgeber, als Gesprächspartner, manchmal als Türöffner. Kein zwanghaftes Networking. Eher: jemand, der schon dort war, wo du hingehst.',
+    body: 'Alte Herren bleiben der Aktivitas verbunden — als Ratgeber, als Gesprächspartner, manchmal als Türöffner. Kein zwanghaftes Networking. Eher: jemand, der schon dort war, wo du hingehst.',
     routine: 'Wann triffst du sie?',
     detail:
-      'Bei Festen, Vorträgen im Haus, oder ganz nüchtern bei einem Bier an der Bar. Mehrmals pro Semester.',
+      'Bei Festen, beim Stiftungsfest, bei Vorträgen im Haus oder einfach an der Bar. Mehrmals pro Semester, planbar.',
   },
 ];
 

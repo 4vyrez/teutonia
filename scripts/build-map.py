@@ -11,8 +11,8 @@ from pathlib import Path
 
 from PIL import Image, ImageEnhance, ImageOps
 
-CENTER_LAT = 49.0145  # Parkstraße 1 (geocoded via Nominatim)
-CENTER_LON = 8.4227
+CENTER_LAT = 49.0130  # Offset west of Parkstraße 1 — places the house on the
+CENTER_LON = 8.4150   # right side of the frame, where most of campus sits left
 ZOOM = 16
 TILE_SIZE = 256
 GRID_RADIUS = 3  # 7x7 grid → 1792x1792 px (~1.7 km radius at this latitude)

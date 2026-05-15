@@ -6,7 +6,7 @@ const principles = [
   {
     label: 'Liberal-freiheitlich',
     detail:
-      'Eine liberale Gesinnung zieht sich seit der Gründung 1843 durch unsere Geschichte. Wir verstehen Burschenschaft als Bildungs- und Lerngemeinschaft, nicht als politische Bewegung.',
+      'Eine liberal-freiheitliche Gesinnung zieht sich seit der Gründung 1843 durch unsere Geschichte — der rote Faden über mehr als 165 Jahre. Burschenschaft als Bildungs- und Lerngemeinschaft, nicht als politische Bewegung.',
   },
   {
     label: 'Parteipolitisch neutral',
@@ -14,14 +14,14 @@ const principles = [
       'Wir nehmen keine Parteilinie ein und lehnen jede Vereinnahmung ab. Im Haus wird diskutiert, nicht agitiert.',
   },
   {
-    label: 'Ohne Mensur',
+    label: 'Mensur freigestellt',
     detail:
-      'Die Bestimmungsmensur haben wir 1971 abgeschafft. Wir fechten nicht und wir verlangen es von niemandem.',
+      'Die Bestimmungsmensur — die Pflichtpartie — haben wir 1971 abgeschafft. Verabredungsmensuren mit befreundeten Korporationen werden weiterhin gefochten, aber freiwillig. Den Umgang mit dem Korbschläger lernt allerdings jedes Mitglied — als Disziplin, nicht als Probe.',
   },
   {
-    label: 'Eigenständig',
+    label: 'Eigenständig im Dachverband',
     detail:
-      '1997 sind wir aus der Deutschen Burschenschaft ausgetreten, 2011 aus der NDB. Seit 2016 sind wir Mitglied der Allgemeinen Deutschen Burschenschaft (ADB) — einem Dachverband mit klar verfassungstreuer Linie.',
+      '1997 sind wir aus der Deutschen Burschenschaft ausgetreten, 2011 aus der NDB — beides als Reaktion auf politische Drift in den Dachverbänden. Seit dem 2. Oktober 2016 sind wir Gründungsmitglied der Allgemeinen Deutschen Burschenschaft (ADB) mit klar verfassungstreuer Linie.',
   },
 ];
 

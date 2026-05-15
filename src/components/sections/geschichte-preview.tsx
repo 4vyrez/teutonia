@@ -3,11 +3,11 @@ import { ArrowUpRight } from 'lucide-react';
 import { Section, Eyebrow } from '@/components/primitives/section';
 
 const milestones = [
-  { year: '1843', detail: 'Gründung — erste Burschenschaft an einer technischen Hochschule.' },
-  { year: '1848 / 49', detail: 'Aktive Teilnahme an der Revolution. Danach Verbot.' },
-  { year: '1950', detail: 'Neugründung nach dem Krieg.' },
-  { year: '1971', detail: 'Abschaffung der Bestimmungsmensur.' },
-  { year: 'heute', detail: '165 + Jahre liberal-freiheitliche Tradition, neu gelesen.' },
+  { year: '1843', detail: 'Gründung — erste Burschenschaft an einer technischen Hochschule in Deutschland.' },
+  { year: '1848 / 49', detail: 'Aktive Teilnahme an der Revolution. Mitglieder kämpfen im badischen Volksheer.' },
+  { year: '1971', detail: 'Bestimmungsmensur abgeschafft. Verabredungsmensuren bleiben — freiwillig.' },
+  { year: '1997', detail: 'Austritt aus der Deutschen Burschenschaft. Gründung des Hambacher Kreises.' },
+  { year: '2016', detail: 'Mitgründung der Allgemeinen Deutschen Burschenschaft (ADB).' },
 ];
 
 export function GeschichtePreview() {

@@ -16,14 +16,14 @@ export const metadata: Metadata = {
 
 const events = [
   {
-    year: '1843',
-    title: 'Gründung am 10. Oktober',
-    body: 'Teutonia wird gegründet — als erste Burschenschaft an einer technischen Hochschule in Deutschland. Die Couleur orientiert sich an der Jenenser Urburschenschaft von 1815: Rot und Schwarz mit goldenem Vorstoß.',
+    year: '10. Okt. 1843',
+    title: 'Gründung',
+    body: 'Teutonia wird gegründet — als erste Burschenschaft an einer technischen Hochschule in Deutschland. Die Couleur orientiert sich an der Jenenser Urburschenschaft von 1815: Rot und Schwarz mit breitem goldenem Vorstoß.',
   },
   {
     year: '1848 / 49',
     title: 'Revolution',
-    body: 'Mitglieder beteiligen sich aktiv an der bürgerlichen Revolution. Nach deren Scheitern folgt das Verbot der Burschenschaften.',
+    body: 'Mitglieder beteiligen sich aktiv an der bürgerlichen Revolution, kämpfen im badischen Volksheer für eine deutsche Verfassung. Nach deren Scheitern folgt das Verbot der Burschenschaften.',
   },
   {
     year: '1857',
@@ -36,9 +36,19 @@ const events = [
     body: 'Aus den Reihen Teutonias entsteht eine Schwesterverbindung, die Burschenschaft Germania Karlsruhe.',
   },
   {
+    year: '1900',
+    title: 'Mitgründer Rüdesheimer DC',
+    body: 'Teutonia ist Mitbegründerin des Rüdesheimer Deputierten-Convents — der Verbund der Burschenschaften an technischen Hochschulen.',
+  },
+  {
+    year: 'nach 1918',
+    title: 'Deutsche Burschenschaft',
+    body: 'Mit Gründung der DB übernimmt Teutonia den zweiten Vorsitz.',
+  },
+  {
     year: '1937–1945',
     title: 'Kameradschaft Egerland',
-    body: 'Wie alle Burschenschaften wird Teutonia 1935 zwangsweise als Verbindung aufgelöst. Mitglieder organisieren sich notgedrungen als „Kameradschaft Egerland". Diese Phase gehört zur Geschichte — sie ist Teil davon, warum wir heute die politische Linie ziehen, die wir ziehen.',
+    body: 'Wie alle Burschenschaften wird Teutonia zwangsweise aufgelöst. Mitglieder organisieren sich notgedrungen als „Kameradschaft Egerland". Diese Phase gehört zur Geschichte — sie prägt, warum wir heute die politische Linie ziehen, die wir ziehen.',
   },
   {
     year: '1950',
@@ -52,33 +62,43 @@ const events = [
   },
   {
     year: '1971',
-    title: 'Abschaffung der Bestimmungsmensur',
-    body: 'Wir schaffen die Bestimmungsmensur ab. Wer fechten möchte, kann es privat tun — ein Pflichtteil der Mitgliedschaft ist es nicht mehr und war es seitdem nicht.',
+    title: 'Bestimmungsmensur abgeschafft',
+    body: 'Wir schaffen die Bestimmungsmensur — die Pflichtpartie — ab. Verabredungsmensuren mit befreundeten Korporationen werden seitdem freiwillig gefochten. Den Umgang mit dem Korbschläger lernt allerdings weiterhin jedes Mitglied — als Disziplin, nicht als Probe.',
   },
   {
-    year: '1997',
-    title: 'Austritt aus der Deutschen Burschenschaft',
-    body: 'Teutonia tritt aus der Deutschen Burschenschaft (DB) aus — als Reaktion auf eine politische Drift im Dachverband, die nicht mehr mit unserer liberalen Tradition vereinbar war.',
+    year: '1977',
+    title: 'Darmstädter Arbeitskreis',
+    body: 'Teutonia ist Gründungsmitglied des Darmstädter Arbeitskreises liberal-konservativer Burschenschaften innerhalb der DB.',
+  },
+  {
+    year: '1990',
+    title: 'Liberale Interessengemeinschaft',
+    body: 'Kurzlebige liberale Initiative innerhalb der DB. Bereits nach einem Jahr wieder aufgelöst.',
+  },
+  {
+    year: '30. Juni 1997',
+    title: 'Hambacher Kreis & DB-Austritt',
+    body: 'Teutonia gründet den Hambacher Kreis mit und tritt zum 30. Juni 1997 aus der Deutschen Burschenschaft aus — als Reaktion auf eine politische Drift im Dachverband, die nicht mehr mit unserer liberalen Tradition vereinbar war.',
   },
   {
     year: '1998',
-    title: 'Beitritt zur Neuen Deutschen Burschenschaft',
+    title: 'Beitritt zur NDB',
     body: 'Beitritt zur damaligen Alternative — der Neuen Deutschen Burschenschaft (NDB).',
   },
   {
-    year: '2011',
+    year: '30. Juni 2011',
     title: 'Austritt aus der NDB',
     body: 'Auch die NDB verlassen wir wieder, als sich auch dort die Linie verschiebt. Folgejahre: Eigenständigkeit, keine vorschnelle Anbindung.',
   },
   {
     year: '2013',
     title: 'Viererbund',
-    body: 'Gründung eines kleinen, klar definierten Verbundes mit drei anderen Burschenschaften. Pragmatisch, nicht ideologisch.',
+    body: 'Pragmatischer Verbund mit Germania Braunschweig, Hilaritas Stuttgart und Arminia-Rhenania München. Klein, definiert, nicht ideologisch.',
   },
   {
-    year: '2016',
-    title: 'Allgemeine Deutsche Burschenschaft (ADB)',
-    body: 'Mitbegründung der ADB — ein Dachverband mit klar verfassungstreuer, liberaler Linie. Hier sind wir bis heute zuhause.',
+    year: '2. Okt. 2016',
+    title: 'Allgemeine Deutsche Burschenschaft',
+    body: 'Mitgründung der ADB — ein Dachverband mit klar verfassungstreuer, liberaler Linie. Hier sind wir bis heute zuhause.',
   },
 ];
 

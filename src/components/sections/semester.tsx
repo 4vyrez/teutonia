@@ -14,10 +14,10 @@ const events: Array<{
 }> = [
   {
     kind: 'stiftungsfest',
-    date: 'Oktober',
-    title: 'Stiftungsfest 1843',
+    date: '10. Oktober',
+    title: 'Stiftungsfest',
     detail:
-      'Jährliches Fest zum Gründungstag — mit Festkommers, Ball und Empfang. Alte Herren reisen aus dem ganzen Land an. Offizieller, formaler Rahmen.',
+      'Jährliches Fest zum Gründungstag — Festkommers, Ball, Empfang. Alte Herren reisen aus dem ganzen Land an. Formaler Rahmen, viele Generationen am Tisch.',
     open: 'Auf Einladung',
   },
   {
@@ -25,7 +25,7 @@ const events: Array<{
     date: 'monatlich',
     title: 'Vortragsabend',
     detail:
-      'Ein Bundesbruder oder Gast spricht 45 Minuten, anschließend Fragen und Gespräch. Themen quer durch die Fächer — Technik, Politik, Wirtschaft, Geschichte.',
+      'Ein Bundesbruder oder Gast spricht 45 Minuten, anschließend Diskussion. Themen quer durch die Fächer — Technik, Politik, Wirtschaft, Geschichte. Gäste willkommen.',
     open: 'Schnuppern möglich',
   },
   {
@@ -38,10 +38,10 @@ const events: Array<{
   },
   {
     kind: 'wandertag',
-    date: 'Sommer',
-    title: 'Wandertag im Schwarzwald',
+    date: 'Semester',
+    title: 'Wandern, Ski & Segel',
     detail:
-      'Ein Tag draußen, am Stück. Eine Strecke, ein Ziel, abends Hütteneinkehr. Tradition seit Jahrzehnten — sportlich, aber nicht ehrgeizig.',
+      'Wanderwochenenden im Schwarzwald, Skiausflüge in die Alpen, Segeltörns im Sommer. Plus Stammtische und gemeinsame Reisen — das Programm draußen kommt dazu.',
     open: 'Öffentlich',
   },
 ];

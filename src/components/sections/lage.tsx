@@ -4,86 +4,66 @@ import { Caption } from '@/components/primitives/caption';
 import { cn } from '@/lib/utils';
 
 /**
- * Pin positions are projected from real WGS84 coordinates onto the
- * static map asset bounds (see public/lage/karlsruhe-light.json).
- *   bounds: NW (49.02706, 8.40454) — SE (49.00184, 8.44299)
- *   image:  1792×1792 px, zoom 16 OSM tiles, duotone-recolored.
+ * Pin positions projected from real WGS84 onto the static map bounds.
+ *   Center: 49.0130 N, 8.4150 E (offset west of Parkstraße 1)
+ *   Bounds: NW (49.02706, 8.39355) — SE (49.00184, 8.43201)
+ *   Image:  1792×1792 px, OSM zoom 16, Editorial Duotone.
+ *
+ * Side-placement keeps labels off each other; primary pin sits right of
+ * center so most context (KIT, Bibs, Tram) reads left-to-right toward it.
  */
+type PinSide = 'left' | 'right' | 'above' | 'below';
 type MapPoint = {
   label: string;
   sub: string;
-  x: number; // % from left
-  y: number; // % from top
+  x: number;
+  y: number;
   primary?: boolean;
-  side?: 'left' | 'right' | 'above' | 'below';
+  side: PinSide;
 };
 
 const points: MapPoint[] = [
+  // Hardtwald — visible at the top of the frame
+  { label: 'Hardtwald', sub: 'Direkt hinterm Haus', x: 50.5, y: 20.0, side: 'below' },
+  // Informatik-Bib — close to Parkstraße, label above to avoid clash
+  { label: 'Informatik-Bib', sub: '2 min · zu Fuß', x: 67.3, y: 51.3, side: 'above' },
+  // Parkstraße 1 — the anchor, label to the left so it reads "into the city"
   {
     label: 'Parkstraße 1',
     sub: 'Hier wohnst du',
-    x: 47.23,
-    y: 49.84,
+    x: 75.8,
+    y: 49.8,
     primary: true,
-    side: 'right',
-  },
-  {
-    label: 'KIT Hauptbau',
-    sub: '5 min · zu Fuß',
-    x: 18.36,
-    y: 69.75,
     side: 'left',
   },
-  {
-    label: 'KIT-Bibliothek',
-    sub: '7 min · 24 / 7',
-    x: 30.79,
-    y: 63.08,
-    side: 'below',
-  },
-  {
-    label: 'Informatik-Bib',
-    sub: '2 min · zu Fuß',
-    x: 38.78,
-    y: 51.32,
-    side: 'right',
-  },
-  {
-    label: 'Tram 4 / 5',
-    sub: '5 min · Durlacher Tor',
-    x: 31.49,
-    y: 72.16,
-    side: 'below',
-  },
-  {
-    label: 'Hardtwald',
-    sub: 'Direkt hinterm Haus',
-    x: 42.0,
-    y: 24.0,
-    side: 'above',
-  },
+  // KIT-Bibliothek — center-south, label left
+  { label: 'KIT-Bibliothek', sub: '7 min · 24 / 7', x: 59.4, y: 63.1, side: 'left' },
+  // KIT Hauptbau — south-west, label above to keep south edge clean
+  { label: 'KIT Hauptbau', sub: '5 min · zu Fuß', x: 46.9, y: 69.8, side: 'above' },
+  // Durlacher Tor (Tram 4/5) — south, label below
+  { label: 'Tram 4 / 5', sub: 'Durlacher Tor · 5 min', x: 60.1, y: 72.2, side: 'below' },
 ];
 
 const distances = [
-  { place: 'KIT Hauptcampus', time: '5 min', mode: 'zu Fuß' },
   { place: 'Informatik-Bibliothek', time: '2 min', mode: 'zu Fuß' },
-  { place: 'Universitätsbibliothek (24 / 7)', time: '7 min', mode: 'zu Fuß' },
+  { place: 'KIT Hauptcampus', time: '5 min', mode: 'zu Fuß' },
   { place: 'Straßenbahn (Linien 4 / 5)', time: '5 min', mode: 'zu Fuß' },
+  { place: 'Universitätsbibliothek (24 / 7)', time: '7 min', mode: 'zu Fuß' },
   { place: 'Marktplatz', time: '9 min', mode: 'Tram' },
   { place: 'Hardtwald', time: '0 min', mode: 'direkt hinten' },
 ];
 
-function pinTransform(side: MapPoint['side']) {
+function labelPosition(side: PinSide): string {
   switch (side) {
     case 'left':
-      return 'right-full mr-3 -translate-y-1/2 top-1/2 flex-row-reverse';
+      return 'right-full top-1/2 mr-3 -translate-y-1/2';
     case 'right':
-      return 'left-full ml-3 -translate-y-1/2 top-1/2';
+      return 'left-full top-1/2 ml-3 -translate-y-1/2';
     case 'above':
-      return 'left-1/2 -translate-x-1/2 bottom-full mb-2 flex-col';
+      return 'left-1/2 bottom-full mb-2 -translate-x-1/2';
     case 'below':
     default:
-      return 'left-1/2 -translate-x-1/2 top-full mt-2 flex-col';
+      return 'left-1/2 top-full mt-2 -translate-x-1/2';
   }
 }
 
@@ -130,55 +110,55 @@ export function Lage() {
             <div className="relative aspect-[5/5]">
               <Image
                 src="/lage/karlsruhe-light.webp"
-                alt="Karte: Parkstraße 1 zwischen KIT-Campus, Hardtwald und Innenstadt"
+                alt="Karte: Parkstraße 1 — KIT, Bibliotheken, Tram und Hardtwald in Gehweite"
                 fill
                 sizes="(min-width: 1024px) 58vw, 100vw"
                 className="object-cover"
               />
-              {/* Subtle paper tint to align with light section */}
+              {/* Subtle paper tint at top + bottom for label legibility */}
               <div
                 aria-hidden
-                className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background-veil/35"
+                className="absolute inset-0 bg-gradient-to-b from-background-veil/20 via-transparent to-background-veil/30"
               />
 
               {/* Pin layer */}
-              <div className="absolute inset-0 pointer-events-none">
+              <div className="pointer-events-none absolute inset-0">
                 {points.map((p) => (
                   <div
                     key={p.label}
                     className="absolute"
                     style={{ left: `${p.x}%`, top: `${p.y}%` }}
                   >
-                    {/* Pin marker — center on coordinate */}
+                    {/* Pin marker — centered on the geographic point */}
                     <span
                       aria-hidden
                       className={cn(
-                        'block -translate-x-1/2 -translate-y-1/2',
+                        'absolute left-0 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full',
                         p.primary
-                          ? 'h-3 w-3 rounded-full bg-couleur-burgund ring-[3px] ring-couleur-gold/65 shadow-[0_2px_6px_oklch(0.22_0.014_45/30%)]'
-                          : 'h-2 w-2 rounded-full bg-couleur-burgund/85 ring-2 ring-background-elev',
+                          ? 'h-3.5 w-3.5 bg-couleur-burgund ring-[3px] ring-couleur-gold/80 shadow-[0_2px_8px_oklch(0.22_0.014_45/40%)]'
+                          : 'h-2 w-2 bg-couleur-burgund/90 ring-2 ring-background-elev shadow-[0_1px_3px_oklch(0.22_0.014_45/35%)]',
                       )}
                     />
 
-                    {/* Label card */}
+                    {/* Label card — positioned per side */}
                     <div
                       className={cn(
-                        'absolute flex items-center gap-2',
-                        pinTransform(p.side),
+                        'absolute whitespace-nowrap',
+                        labelPosition(p.side),
                       )}
                     >
                       <div
                         className={cn(
-                          'rounded-md border bg-background-elev/95 px-2.5 py-1.5 shadow-sm backdrop-blur-sm',
+                          'rounded-md border bg-background-elev/95 px-2.5 py-1.5 shadow-[0_2px_8px_oklch(0.22_0.014_45/15%)] backdrop-blur-sm',
                           p.primary
                             ? 'border-couleur-gold/70'
                             : 'border-border-strong',
                         )}
                       >
-                        <div className="font-display whitespace-nowrap text-xs leading-tight text-foreground sm:text-sm">
+                        <div className="font-display text-xs leading-tight text-foreground sm:text-sm">
                           {p.label}
                         </div>
-                        <div className="whitespace-nowrap text-[10px] uppercase tracking-[0.16em] text-couleur-burgund/80">
+                        <div className="text-[10px] uppercase tracking-[0.16em] text-couleur-burgund/80">
                           {p.sub}
                         </div>
                       </div>
@@ -194,8 +174,8 @@ export function Lage() {
             </div>
           </figure>
           <Caption number="Tafel 02.">
-            Echter Kartenausschnitt um die Parkstraße 1. Maßstab: ~1,7 km
-            Bildbreite. Gehzeiten sind real gemessen, nicht geschätzt.
+            Karte um die Parkstraße 1 — etwa 1,7 km Bildbreite. Gehzeiten
+            sind real gemessen, nicht geschätzt.
           </Caption>
         </div>
       </div>
