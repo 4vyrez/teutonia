@@ -5,6 +5,9 @@
 
 # testing
 /coverage
+/test-results
+/playwright-report
+/playwright/.cache
 
 # next.js
 /.next/
@@ -28,6 +31,16 @@ pnpm-debug.log*
 
 # typescript
 *.tsbuildinfo
+next-env.d.ts
 
 # Legacy backup
 _legacy_v1/
+
+# Local screenshots / playwright artifacts
+/teutonia-*.png
+/teutonia-*.jpeg
+/.playwright-mcp/
+
+# Local Claude session state
+/.claude/
+/.superpowers/

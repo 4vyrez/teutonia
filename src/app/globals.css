@@ -1,0 +1,206 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------
+ * KB! Teutonia — Private Library / Editorial Dark
+ *
+ *   --background        warm-shifted Anthrazit (kein Reinschwarz)
+ *   --foreground        papierhaftes Off-White
+ *   --couleur-burgund   Couleur-Rot als Burgunder (primary)
+ *   --couleur-gold      Couleur-Gold (Vorstoß, Hairlines, Akzente)
+ *
+ * Die Site läuft bewusst nur in Dark — die redaktionelle Tiefe
+ * trägt das Wertversprechen. Kein .dark-Toggle.
+ * --------------------------------------------------------------- */
+
+@theme inline {
+  --color-background: var(--background);
+  --color-background-elev: var(--background-elev);
+  --color-background-veil: var(--background-veil);
+  --color-foreground: var(--foreground);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-foreground-dim: var(--foreground-dim);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-ring: var(--ring);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-dim: var(--accent-dim);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-couleur-burgund: var(--couleur-burgund);
+  --color-couleur-burgund-hi: var(--couleur-burgund-hi);
+  --color-couleur-gold: var(--couleur-gold);
+  --color-couleur-gold-dim: var(--couleur-gold-dim);
+  --color-couleur-black: var(--couleur-black);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    'Segoe UI', sans-serif;
+  --font-display: var(--font-fraunces), 'Source Serif 4', Georgia, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --radius-sm: 0.25rem;
+  --radius: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+}
+
+:root {
+  /* Warm-shifted dark background — nie Reinschwarz */
+  --background: oklch(0.115 0.012 45);
+  --background-elev: oklch(0.145 0.013 45);
+  --background-veil: oklch(0.085 0.01 45);
+
+  /* Foreground: papierhaftes warmes Off-White */
+  --foreground: oklch(0.945 0.012 82);
+  --foreground-muted: oklch(0.74 0.018 70);
+  --foreground-dim: oklch(0.56 0.016 60);
+
+  /* Borders + Ring */
+  --border: oklch(0.945 0.012 82 / 10%);
+  --border-strong: oklch(0.945 0.012 82 / 22%);
+  --ring: oklch(0.58 0.18 22);
+
+  /* Couleur — Burgunder statt Signal-Rot */
+  --couleur-burgund: oklch(0.42 0.16 22);
+  --couleur-burgund-hi: oklch(0.55 0.19 22);
+  --couleur-gold: oklch(0.78 0.14 78);
+  --couleur-gold-dim: oklch(0.62 0.10 78);
+  --couleur-black: oklch(0.085 0.01 45);
+
+  /* Semantic primary + accent */
+  --primary: var(--couleur-burgund);
+  --primary-foreground: oklch(0.97 0.008 82);
+  --primary-hover: var(--couleur-burgund-hi);
+  --accent: var(--couleur-gold);
+  --accent-foreground: oklch(0.12 0.012 45);
+  --accent-dim: var(--couleur-gold-dim);
+
+  --card: var(--background-elev);
+  --card-foreground: var(--foreground);
+
+  color-scheme: dark;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    border-color: var(--border);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: 'cv11', 'ss01';
+    font-optical-sizing: auto;
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: oklch(0.42 0.16 22 / 55%);
+    color: var(--foreground);
+  }
+
+  /* Editorial display headings */
+  .font-display {
+    font-family: var(--font-display);
+    font-feature-settings: 'ss01', 'ss02';
+    font-optical-sizing: auto;
+    font-variation-settings: 'opsz' 144, 'SOFT' 50, 'WONK' 0;
+    letter-spacing: -0.012em;
+  }
+
+  /* Pull-Quote bar */
+  .pullquote-bar {
+    background: linear-gradient(
+      to bottom,
+      var(--couleur-gold) 0%,
+      var(--couleur-gold-dim) 100%
+    );
+  }
+
+  /* Subtle hairline rule with gold dim */
+  .gold-rule {
+    border-color: var(--couleur-gold-dim);
+    opacity: 0.45;
+  }
+
+  /* Grain Overlay — sehr subtil, gibt Foto-Look */
+  .grain::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.045;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+    z-index: 0;
+  }
+
+  /* Focus visible */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Editorial column width — ~65ch for ideal reading */
+  .max-w-prose-tight {
+    max-width: 56ch;
+  }
+  .max-w-prose-wide {
+    max-width: 72ch;
+  }
+
+  /* Gold underline for inline emphasis */
+  .underline-gold {
+    text-decoration: underline;
+    text-decoration-color: var(--couleur-gold-dim);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+  }
+}
