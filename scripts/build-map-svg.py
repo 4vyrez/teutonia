@@ -32,15 +32,15 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT_DIR = ROOT / "public" / "lage"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
-# Color palette — matches Editorial Light theme
-BG_FILL = "#F2EAD6"  # warm papier
-PARK_FILL = "#E0D8BD"  # subtle warm green-beige
-WOOD_FILL = "#D6CCAE"  # slightly deeper forest tint
-WATER_FILL = "#DCD6BD"
-ROAD_MAJOR = "#5C4C38"  # warm anthrazit
-ROAD_MINOR = "#9E8D6A"  # quieter taupe
-ROAD_RES = "#C2B695"  # very subtle residential
-TRAM_LINE = "#8C6A3D"  # bronze for tram
+# Color palette — Editorial Light v3 (neutral, Apple-grey leaning)
+BG_FILL = "#F4F4F6"  # neutrales Light, sehr leicht cool
+PARK_FILL = "#E6E6EA"  # subtiler grau-Park-tone
+WOOD_FILL = "#DEDFE3"  # Hardtwald (etwas tiefer)
+WATER_FILL = "#D5D6DB"
+ROAD_MAJOR = "#1F1F22"  # nahezu schwarz, neutral
+ROAD_MINOR = "#5D5D63"  # mid neutral
+ROAD_RES = "#9A9AA1"  # very subtle residential
+TRAM_LINE = "#9B3B3B"  # Burgund-Akzent für Tram
 
 
 def deg2num(lat_deg: float, lon_deg: float, zoom: int) -> tuple[float, float]:

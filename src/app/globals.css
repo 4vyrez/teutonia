@@ -1,14 +1,15 @@
 @import 'tailwindcss';
 
 /* ---------------------------------------------------------------
- * KB! Teutonia — Editorial Hybrid (Dark + Papier-Light)
+ * KB! Teutonia — Editorial Hybrid v3 (Neutral Apple-grey + Burgund)
  *
  *   Sections deklarieren via [data-theme="dark|light"] ihre Palette.
  *   Default (:root) ist Dark — Hero + Identität bleiben dunkel.
  *   Andere Sections setzen explizit data-theme="light".
  *
- *   Tokens hängen am Selector-Scope; @theme inline referenziert
- *   nur var(--*) — Components bleiben unverändert.
+ *   v3: Hue verschoben von 82 (warm-yellow) auf 265 (neutral leicht-cool).
+ *       Couleur-Gold zu Bronze (hue 70, gedämpft).
+ *       Light-Mode bekommt pure white als background-elev.
  * --------------------------------------------------------------- */
 
 @theme inline {
@@ -50,32 +51,32 @@
   --radius-xl: 1rem;
 }
 
-/* Dark — Default + explicit [data-theme="dark"] */
+/* Dark — Hero + Identität (Default :root) */
 :root,
 [data-theme='dark'] {
-  --background: oklch(0.115 0.012 45);
-  --background-elev: oklch(0.145 0.013 45);
-  --background-veil: oklch(0.085 0.01 45);
+  --background: oklch(0.135 0.006 265);
+  --background-elev: oklch(0.175 0.006 265);
+  --background-veil: oklch(0.095 0.006 265);
 
-  --foreground: oklch(0.945 0.012 82);
-  --foreground-muted: oklch(0.74 0.018 70);
-  --foreground-dim: oklch(0.56 0.016 60);
+  --foreground: oklch(0.965 0.003 265);
+  --foreground-muted: oklch(0.76 0.004 265);
+  --foreground-dim: oklch(0.58 0.004 265);
 
-  --border: oklch(0.945 0.012 82 / 10%);
-  --border-strong: oklch(0.945 0.012 82 / 22%);
+  --border: oklch(0.965 0.003 265 / 11%);
+  --border-strong: oklch(0.965 0.003 265 / 22%);
   --ring: oklch(0.58 0.18 22);
 
-  --couleur-burgund: oklch(0.42 0.16 22);
-  --couleur-burgund-hi: oklch(0.55 0.19 22);
-  --couleur-gold: oklch(0.78 0.14 78);
-  --couleur-gold-dim: oklch(0.62 0.1 78);
-  --couleur-black: oklch(0.085 0.01 45);
+  --couleur-burgund: oklch(0.46 0.165 22);
+  --couleur-burgund-hi: oklch(0.58 0.19 22);
+  --couleur-gold: oklch(0.66 0.075 70);
+  --couleur-gold-dim: oklch(0.52 0.055 70);
+  --couleur-black: oklch(0.085 0.006 265);
 
   --primary: var(--couleur-burgund);
-  --primary-foreground: oklch(0.97 0.008 82);
+  --primary-foreground: oklch(0.98 0.002 265);
   --primary-hover: var(--couleur-burgund-hi);
   --accent: var(--couleur-gold);
-  --accent-foreground: oklch(0.12 0.012 45);
+  --accent-foreground: oklch(0.12 0.006 265);
   --accent-dim: var(--couleur-gold-dim);
 
   --card: var(--background-elev);
@@ -84,31 +85,31 @@
   color-scheme: dark;
 }
 
-/* Light — Warm-Papier (NICHT cream), bei ~95% Lightness */
+/* Light — alle anderen Sections */
 [data-theme='light'] {
-  --background: oklch(0.955 0.008 82);
-  --background-elev: oklch(0.985 0.005 82);
-  --background-veil: oklch(0.925 0.01 78);
+  --background: oklch(0.975 0.003 265);
+  --background-elev: oklch(1 0 0); /* pure white, lifts cards softly */
+  --background-veil: oklch(0.945 0.004 265);
 
-  --foreground: oklch(0.22 0.014 45);
-  --foreground-muted: oklch(0.38 0.014 50);
-  --foreground-dim: oklch(0.52 0.012 55);
+  --foreground: oklch(0.18 0.006 265);
+  --foreground-muted: oklch(0.42 0.006 265);
+  --foreground-dim: oklch(0.58 0.006 265);
 
-  --border: oklch(0.22 0.014 45 / 12%);
-  --border-strong: oklch(0.22 0.014 45 / 22%);
+  --border: oklch(0.18 0.006 265 / 12%);
+  --border-strong: oklch(0.18 0.006 265 / 22%);
   --ring: oklch(0.42 0.16 22);
 
-  --couleur-burgund: oklch(0.38 0.17 22);
-  --couleur-burgund-hi: oklch(0.46 0.185 22);
-  --couleur-gold: oklch(0.62 0.13 78);
-  --couleur-gold-dim: oklch(0.51 0.09 78);
-  --couleur-black: oklch(0.12 0.012 45);
+  --couleur-burgund: oklch(0.4 0.17 22);
+  --couleur-burgund-hi: oklch(0.48 0.185 22);
+  --couleur-gold: oklch(0.55 0.06 70);
+  --couleur-gold-dim: oklch(0.45 0.045 70);
+  --couleur-black: oklch(0.12 0.006 265);
 
   --primary: var(--couleur-burgund);
-  --primary-foreground: oklch(0.97 0.008 82);
+  --primary-foreground: oklch(0.98 0.002 265);
   --primary-hover: var(--couleur-burgund-hi);
   --accent: var(--couleur-gold);
-  --accent-foreground: oklch(0.18 0.012 45);
+  --accent-foreground: oklch(0.98 0.002 265);
   --accent-dim: var(--couleur-gold-dim);
 
   --card: var(--background-elev);
@@ -151,7 +152,6 @@
     color: var(--foreground);
   }
 
-  /* Editorial display headings */
   .font-display {
     font-family: var(--font-display);
     font-feature-settings: 'ss01', 'ss02';
@@ -173,7 +173,7 @@
     opacity: 0.45;
   }
 
-  /* Grain Overlay */
+  /* Grain Overlay — kept for warm photo sections */
   .grain::before {
     content: '';
     position: absolute;
@@ -185,7 +185,6 @@
     z-index: 0;
   }
 
-  /* Light-Mode: grain darker for legibility */
   [data-theme='light'] .grain::before {
     opacity: 0.025;
     mix-blend-mode: multiply;
@@ -232,5 +231,33 @@
     text-decoration-color: var(--couleur-gold-dim);
     text-decoration-thickness: 1px;
     text-underline-offset: 0.25em;
+  }
+
+  /* Cinematic clip-reveal — used by interactive map pins */
+  @keyframes clip-reveal {
+    from {
+      clip-path: inset(0 100% 0 0);
+      opacity: 0;
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+      opacity: 1;
+    }
+  }
+  .animate-clip-reveal {
+    animation: clip-reveal 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+
+  @keyframes pin-pulse {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 oklch(var(--couleur-burgund-l, 0.4) 0.17 22 / 50%);
+    }
+    50% {
+      box-shadow: 0 0 0 8px oklch(var(--couleur-burgund-l, 0.4) 0.17 22 / 0%);
+    }
+  }
+  .animate-pin-pulse {
+    animation: pin-pulse 2.4s ease-in-out infinite;
   }
 }
