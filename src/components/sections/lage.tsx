@@ -6,68 +6,101 @@ import { LagePins, type MapPin } from './lage-pin';
  * Pin positions projected from real WGS84 onto the SVG map bounds.
  *   Center: 49.0130 N, 8.4172 E (offset west of Parkstraße 1)
  *   Bounds: NW (49.02346, 8.40454) — SE (49.00545, 8.43201)
- *   Image:  1280×1280 px SVG, rendered from OSM Overpass vector data,
- *           neutral Apple-grey palette (no buildings, no labels).
+ *   Image:  1280×1280 px SVG, OSM Overpass vector data, Editorial palette.
  *
- * Pins are interactive client components — hover/focus/tap reveals a
- * popover with a one-line story per location. Tram pin removed (closer
- * stops exist; full transit info lives in the distance list to the left).
+ * Coordinates geocoded via Nominatim (places) and Overpass railway=tram_stop
+ * (tram). All x/y values are computed from the real lat/lon via:
+ *   x% = (lon - nw_lon) / (se_lon - nw_lon) * 100
+ *   y% = (lat - nw_lat) / (se_lat - nw_lat) * 100
  */
 const pins: MapPin[] = [
   {
+    // 49.01449, 8.42270 — Parkstraße 1, KB! Teutonia
     id: 'parkstrasse',
     label: 'Parkstraße 1',
     headline: 'Dein Zuhause.',
     body: '20 Zimmer mit eigenem Bad, Bibliothek, Bar, Lernzimmer. Vorn die Universität, hinten der Hardtwald.',
     x: 66.1,
     y: 49.8,
-    primary: true,
+    kind: 'primary',
     side: 'left',
   },
   {
+    // 49.00947, 8.41160 — Kaiserstraße 12, KIT Hauptgebäude
     id: 'kit-haupt',
     label: 'KIT Hauptbau',
     headline: 'Audimax & Hörsäle.',
     body: 'Wo die Vorlesungen sind. Fünf Minuten zu Fuß durch den Schlossgarten.',
     x: 25.7,
     y: 77.7,
+    kind: 'place',
     side: 'above',
   },
   {
+    // 49.01115, 8.41638 — Straße am Forum 2, KIT-Bibliothek
     id: 'kit-bib',
     label: 'KIT-Bibliothek',
     headline: '24 / 7 Lernen.',
     body: 'Universitätsbibliothek, durchgehend geöffnet. Sieben Minuten zu Fuß.',
     x: 43.1,
     y: 68.4,
+    kind: 'place',
     side: 'left',
   },
   {
+    // 49.01412, 8.41945 — Am Fasanengarten 5, Informatikbau
     id: 'info-bib',
     label: 'Informatik-Bib',
     headline: 'Spezialbibliothek.',
     body: 'Im Informatikbau am Fasanengarten. Zwei Minuten von der Haustür.',
     x: 54.3,
     y: 51.9,
+    kind: 'place',
     side: 'right',
   },
   {
+    // ~49.018, 8.418 — Eingang Hardtwald (Hertzstraße)
     id: 'hardtwald',
     label: 'Hardtwald',
     headline: 'Direkt hinterm Haus.',
     body: 'Lauf- und Spazierrevier. Die ersten 200 Meter sind quasi dein Vorgarten.',
     x: 49.0,
-    y: 19.2,
+    y: 28.1,
+    kind: 'place',
     side: 'below',
+  },
+  {
+    // 49.01131, 8.42320 — Tramhaltestelle Karl-Wilhelm-Platz
+    id: 'tram-kwp',
+    label: 'Karl-Wilhelm-Platz',
+    headline: 'Tram um die Ecke.',
+    body: 'Nächste Haltestelle, drei Minuten zu Fuß. Trifft die Stadt direkt.',
+    meta: 'Linien 4 · 5',
+    x: 67.9,
+    y: 67.5,
+    kind: 'tram',
+    side: 'left',
+  },
+  {
+    // 49.00893, 8.41712 — Tramhaltestelle Durlacher Tor / KIT-Campus Süd
+    id: 'tram-dt',
+    label: 'Durlacher Tor',
+    headline: 'Der große Verkehrsknoten.',
+    body: 'Zum KIT-Campus Süd und in den Rest von Karlsruhe. Sechs Minuten.',
+    meta: 'Linien 1 · 2 · 4 · S2 · S5',
+    x: 45.8,
+    y: 80.7,
+    kind: 'tram',
+    side: 'above',
   },
 ];
 
 const distances = [
   { place: 'Informatik-Bibliothek', time: '2 min', mode: 'zu Fuß' },
+  { place: 'Karl-Wilhelm-Platz (Tram 4 / 5)', time: '3 min', mode: 'zu Fuß' },
   { place: 'KIT Hauptcampus', time: '5 min', mode: 'zu Fuß' },
+  { place: 'Durlacher Tor (Tram-Knoten)', time: '6 min', mode: 'zu Fuß' },
   { place: 'Universitätsbibliothek (24 / 7)', time: '7 min', mode: 'zu Fuß' },
-  { place: 'Nächste Tram-Haltestelle', time: '3 min', mode: 'zu Fuß' },
-  { place: 'Marktplatz', time: '9 min', mode: 'Tram' },
   { place: 'Hardtwald', time: '0 min', mode: 'direkt hinten' },
 ];
 
