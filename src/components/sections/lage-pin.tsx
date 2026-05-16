@@ -23,49 +23,56 @@ type LagePinsProps = {
   pins: MapPin[];
 };
 
+/** ms-delay before a popover closes when the pointer leaves the pin —
+ *  gives the user grace to glance toward a neighbouring pin without flicker. */
+const CLOSE_DELAY = 220;
+
 function popoverPosition(side: PinSide): string {
   switch (side) {
     case 'left':
-      return 'right-full top-1/2 mr-4 -translate-y-1/2';
+      return 'right-full top-1/2 mr-3.5 -translate-y-1/2';
     case 'right':
-      return 'left-full top-1/2 ml-4 -translate-y-1/2';
+      return 'left-full top-1/2 ml-3.5 -translate-y-1/2';
     case 'above':
-      return 'left-1/2 bottom-full mb-3 -translate-x-1/2';
+      return 'left-1/2 bottom-full mb-2.5 -translate-x-1/2';
     default:
-      return 'left-1/2 top-full mt-3 -translate-x-1/2';
+      return 'left-1/2 top-full mt-2.5 -translate-x-1/2';
   }
 }
 
 function connectorClass(side: PinSide): string {
   switch (side) {
     case 'left':
-      return 'right-0 top-1/2 -translate-y-1/2 h-px w-4 origin-right bg-couleur-burgund/55';
+      return 'right-0 top-1/2 -translate-y-1/2 h-px w-3.5 origin-right bg-couleur-burgund/55';
     case 'right':
-      return 'left-0 top-1/2 -translate-y-1/2 h-px w-4 origin-left bg-couleur-burgund/55';
+      return 'left-0 top-1/2 -translate-y-1/2 h-px w-3.5 origin-left bg-couleur-burgund/55';
     case 'above':
-      return 'bottom-0 left-1/2 -translate-x-1/2 w-px h-3 origin-bottom bg-couleur-burgund/55';
+      return 'bottom-0 left-1/2 -translate-x-1/2 w-px h-2.5 origin-bottom bg-couleur-burgund/55';
     default:
-      return 'top-0 left-1/2 -translate-x-1/2 w-px h-3 origin-top bg-couleur-burgund/55';
+      return 'top-0 left-1/2 -translate-x-1/2 w-px h-2.5 origin-top bg-couleur-burgund/55';
   }
 }
 
-function originForReveal(side: PinSide): string {
+/** Enter-from translate (when closed → opening, popover slides from pin-side) */
+function closedTranslate(side: PinSide): string {
   switch (side) {
     case 'left':
-      return 'origin-right';
+      return 'translate-x-1.5';
     case 'right':
-      return 'origin-left';
+      return '-translate-x-1.5';
     case 'above':
-      return 'origin-bottom';
+      return 'translate-y-1.5';
     default:
-      return 'origin-top';
+      return '-translate-y-1.5';
   }
 }
 
 export function LagePins({ pins }: LagePinsProps) {
   const [activeId, setActiveId] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  // Click outside / Escape closes any open popover
   useEffect(() => {
     if (!activeId) return;
     function onPointerDown(event: PointerEvent) {
@@ -86,6 +93,29 @@ export function LagePins({ pins }: LagePinsProps) {
     };
   }, [activeId]);
 
+  // Cleanup pending close-timers on unmount
+  useEffect(() => {
+    return () => {
+      if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    };
+  }, []);
+
+  function openPin(id: string) {
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+    setActiveId(id);
+  }
+
+  function schedulePinClose(id: string) {
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    closeTimerRef.current = setTimeout(() => {
+      setActiveId((current) => (current === id ? null : current));
+      closeTimerRef.current = null;
+    }, CLOSE_DELAY);
+  }
+
   return (
     <div ref={containerRef} className="absolute inset-0">
       {pins.map((pin) => {
@@ -98,20 +128,17 @@ export function LagePins({ pins }: LagePinsProps) {
             key={pin.id}
             className="absolute"
             style={{ left: `${pin.x}%`, top: `${pin.y}%` }}
-            onPointerEnter={() => setActiveId(pin.id)}
-            onPointerLeave={(e) => {
-              const next = e.relatedTarget as Node | null;
-              if (next && containerRef.current?.contains(next)) return;
-              setActiveId((current) => (current === pin.id ? null : current));
-            }}
           >
-            {/* Pin marker — circle for places, rotated square for tram */}
+            {/* Pin — only thing with pointer-events. Hover opens, leave schedules close. */}
             <button
               type="button"
               aria-expanded={isActive}
               aria-label={`${pin.label} — Details öffnen`}
-              onClick={() => setActiveId(isActive ? null : pin.id)}
-              onFocus={() => setActiveId(pin.id)}
+              onClick={() => (isActive ? setActiveId(null) : openPin(pin.id))}
+              onPointerEnter={() => openPin(pin.id)}
+              onPointerLeave={() => schedulePinClose(pin.id)}
+              onFocus={() => openPin(pin.id)}
+              onBlur={() => schedulePinClose(pin.id)}
               className={cn(
                 'absolute left-0 top-0 -translate-x-1/2 -translate-y-1/2',
                 'transition-transform duration-[280ms] ease-[cubic-bezier(0.16,1,0.3,1)]',
@@ -122,7 +149,7 @@ export function LagePins({ pins }: LagePinsProps) {
                   'h-2.5 w-2.5 rounded-full bg-couleur-burgund ring-2 ring-background-elev shadow-[0_1px_4px_oklch(0.18_0.006_265/30%)]',
                 isTram &&
                   'h-2.5 w-2.5 rotate-45 bg-foreground ring-2 ring-background-elev shadow-[0_1px_4px_oklch(0.18_0.006_265/30%)]',
-                isActive && 'scale-[1.18]',
+                isActive && 'scale-[1.22]',
               )}
             >
               {isPrimary && (
@@ -134,16 +161,21 @@ export function LagePins({ pins }: LagePinsProps) {
             </button>
 
             {/* Persistent label for the primary pin only */}
-            {isPrimary && !isActive && (
+            {isPrimary && (
               <span
                 aria-hidden
-                className="pointer-events-none absolute left-full top-1/2 ml-3 -translate-y-1/2 whitespace-nowrap font-display text-xs font-medium text-couleur-burgund opacity-90 transition-opacity duration-200"
+                className={cn(
+                  'pointer-events-none absolute left-full top-1/2 ml-3 -translate-y-1/2 whitespace-nowrap font-display text-xs font-medium text-couleur-burgund',
+                  'transition-opacity duration-200',
+                  isActive ? 'opacity-0' : 'opacity-90',
+                )}
               >
                 {pin.label}
               </span>
             )}
 
-            {/* Popover */}
+            {/* Popover — pointer-events-none always, so it never blocks other pins.
+                State + animation driven entirely by the pin button. */}
             <div
               role="dialog"
               aria-label={pin.headline}
@@ -151,73 +183,55 @@ export function LagePins({ pins }: LagePinsProps) {
               className={cn(
                 'pointer-events-none absolute z-20 w-56 sm:w-64',
                 popoverPosition(pin.side),
-                // Reserve layout space + animate in/out
-                'transition-[opacity,transform] duration-[300ms] ease-[cubic-bezier(0.16,1,0.3,1)]',
-                isActive
-                  ? 'pointer-events-auto opacity-100 translate-y-0'
-                  : 'opacity-0',
-                !isActive && pin.side === 'above' && 'translate-y-1',
-                !isActive && pin.side === 'below' && '-translate-y-1',
-                !isActive && pin.side === 'left' && 'translate-x-1',
-                !isActive && pin.side === 'right' && '-translate-x-1',
               )}
             >
-              {/* Connector hairline — scales in from the pin */}
-              <span
-                aria-hidden
-                className={cn(
-                  'absolute transition-transform duration-[280ms] ease-[cubic-bezier(0.16,1,0.3,1)]',
-                  connectorClass(pin.side),
-                  isActive
-                    ? 'scale-100'
-                    : pin.side === 'above' || pin.side === 'below'
-                      ? 'scale-y-0'
-                      : 'scale-x-0',
-                )}
-              />
-
-              {/* Card — clip-path reveal */}
               <div
                 className={cn(
-                  'rounded-lg border border-border-strong bg-background-elev/95 px-4 py-3 shadow-[0_10px_40px_oklch(0.18_0.006_265/22%)] backdrop-blur-md',
-                  'transition-[clip-path,transform] duration-[360ms] ease-[cubic-bezier(0.16,1,0.3,1)]',
-                  originForReveal(pin.side),
+                  'relative will-change-transform',
+                  'transition-[opacity,transform] duration-[380ms]',
+                  'ease-[cubic-bezier(0.22,1,0.36,1)]',
                   isActive
-                    ? 'scale-100 [clip-path:inset(0_0_0_0)]'
-                    : 'scale-[0.97] [clip-path:inset(0_100%_0_0)]',
+                    ? 'opacity-100 translate-x-0 translate-y-0 scale-100'
+                    : ['opacity-0 scale-[0.97]', closedTranslate(pin.side)],
                 )}
-                style={
-                  isActive
-                    ? undefined
-                    : pin.side === 'right'
-                      ? { clipPath: 'inset(0 0 0 100%)' }
-                      : pin.side === 'above'
-                        ? { clipPath: 'inset(100% 0 0 0)' }
-                        : pin.side === 'below'
-                          ? { clipPath: 'inset(0 0 100% 0)' }
-                          : undefined
-                }
               >
-                <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-couleur-burgund/85">
-                  {isTram && (
-                    <span
-                      aria-hidden
-                      className="inline-block h-1.5 w-1.5 rotate-45 bg-foreground"
-                    />
+                {/* Connector hairline — scales in/out separately */}
+                <span
+                  aria-hidden
+                  className={cn(
+                    'absolute transition-transform duration-[320ms] ease-[cubic-bezier(0.22,1,0.36,1)]',
+                    connectorClass(pin.side),
+                    isActive
+                      ? 'scale-100'
+                      : pin.side === 'above' || pin.side === 'below'
+                        ? 'scale-y-0'
+                        : 'scale-x-0',
                   )}
-                  {pin.label}
-                </div>
-                <div className="font-display mt-1 text-base leading-snug text-foreground">
-                  {pin.headline}
-                </div>
-                <p className="mt-2 text-[12.5px] leading-relaxed text-foreground-muted">
-                  {pin.body}
-                </p>
-                {pin.meta && (
-                  <div className="mt-3 border-t border-border pt-2 text-[10.5px] uppercase tracking-[0.18em] text-foreground-dim">
-                    {pin.meta}
+                />
+
+                {/* Card */}
+                <div className="rounded-lg border border-border-strong bg-background-elev/96 px-4 py-3 shadow-[0_18px_50px_-12px_oklch(0.18_0.006_265/28%)] backdrop-blur-md">
+                  <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-couleur-burgund/85">
+                    {isTram && (
+                      <span
+                        aria-hidden
+                        className="inline-block h-1.5 w-1.5 rotate-45 bg-foreground"
+                      />
+                    )}
+                    {pin.label}
                   </div>
-                )}
+                  <div className="font-display mt-1 text-base leading-snug text-foreground">
+                    {pin.headline}
+                  </div>
+                  <p className="mt-2 text-[12.5px] leading-relaxed text-foreground-muted">
+                    {pin.body}
+                  </p>
+                  {pin.meta && (
+                    <div className="mt-3 border-t border-border pt-2 text-[10.5px] uppercase tracking-[0.18em] text-foreground-dim">
+                      {pin.meta}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>

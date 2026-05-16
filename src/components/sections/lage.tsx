@@ -26,13 +26,13 @@ const pins: MapPin[] = [
     side: 'left',
   },
   {
-    // 49.00947, 8.41160 — Kaiserstraße 12, KIT Hauptgebäude
-    id: 'kit-haupt',
-    label: 'KIT Hauptbau',
-    headline: 'Audimax & Hörsäle.',
-    body: 'Wo die Vorlesungen sind. Fünf Minuten zu Fuß durch den Schlossgarten.',
-    x: 25.7,
-    y: 77.7,
+    // 49.01277, 8.41563 — Audimax (Hörsaalgebäude am Forum, Geb. 30.95)
+    id: 'audimax',
+    label: 'Audimax',
+    headline: 'Hörsäle & Vorlesungen.',
+    body: 'Das größte Auditorium der Uni — fünf Minuten durch den Schlossgarten.',
+    x: 40.3,
+    y: 59.2,
     kind: 'place',
     side: 'above',
   },
@@ -98,7 +98,7 @@ const pins: MapPin[] = [
 const distances = [
   { place: 'Informatik-Bibliothek', time: '2 min', mode: 'zu Fuß' },
   { place: 'Karl-Wilhelm-Platz (Tram 4 / 5)', time: '3 min', mode: 'zu Fuß' },
-  { place: 'KIT Hauptcampus', time: '5 min', mode: 'zu Fuß' },
+  { place: 'Audimax & Hörsäle', time: '5 min', mode: 'zu Fuß' },
   { place: 'Durlacher Tor (Tram-Knoten)', time: '6 min', mode: 'zu Fuß' },
   { place: 'Universitätsbibliothek (24 / 7)', time: '7 min', mode: 'zu Fuß' },
   { place: 'Hardtwald', time: '0 min', mode: 'direkt hinten' },
