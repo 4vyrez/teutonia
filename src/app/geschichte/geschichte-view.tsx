@@ -209,28 +209,15 @@ const heroStats = [
   { v: '17', l: 'Schlüsselereignisse' },
 ];
 
-/* ── Fortschrittsbalken + Laser-Schiene ── scroll-getrieben (rAF). Bei
- * prefers-reduced-motion: Balken bleibt statisch, Schiene zeigt sich voll. */
-function useScrollProgress(
-  barRef: React.RefObject<HTMLDivElement | null>,
-  railRef: React.RefObject<HTMLDivElement | null>,
-  fillRef: React.RefObject<HTMLDivElement | null>,
-) {
+/* ── Fortschrittsbalken ── scroll-getrieben (rAF). */
+function useScrollProgress(barRef: React.RefObject<HTMLDivElement | null>) {
   useEffect(() => {
     const reduce =
       typeof window !== 'undefined' &&
       typeof window.matchMedia === 'function' &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    if (reduce) {
-      const fill = fillRef.current;
-      const rail = railRef.current;
-      if (fill && rail) {
-        fill.style.height = `${rail.offsetHeight}px`;
-        fill.style.opacity = '1';
-      }
-      return;
-    }
+    if (reduce) return;
 
     let raf = false;
     const onScroll = () => {
@@ -242,17 +229,6 @@ function useScrollProgress(
         const dh = document.documentElement.scrollHeight - window.innerHeight;
         const bar = barRef.current;
         if (bar) bar.style.width = `${dh > 0 ? ((sy / dh) * 100).toFixed(2) : 0}%`;
-
-        // Schiene füllt sich bis zur aktuellen Leseposition (Viewport-Mitte).
-        const rail = railRef.current;
-        const fill = fillRef.current;
-        if (rail && fill) {
-          const r = rail.getBoundingClientRect();
-          const read = window.innerHeight * 0.5;
-          const h = Math.max(0, Math.min(rail.offsetHeight, read - r.top));
-          fill.style.height = `${h}px`;
-          fill.style.opacity = h > 4 ? '1' : '0';
-        }
       });
     };
     onScroll();
@@ -262,15 +238,13 @@ function useScrollProgress(
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
     };
-  }, [barRef, railRef, fillRef]);
+  }, [barRef]);
 }
 
 export function GeschichteView() {
   const barRef = useRef<HTMLDivElement>(null);
-  const railRef = useRef<HTMLDivElement>(null);
-  const fillRef = useRef<HTMLDivElement>(null);
 
-  useScrollProgress(barRef, railRef, fillRef);
+  useScrollProgress(barRef);
 
   return (
     <>
@@ -407,23 +381,11 @@ export function GeschichteView() {
           <section aria-label="Chronik" className="mx-auto max-w-[56rem] px-[2.5rem]">
             {/* Bühne: [1px Schiene] [2.5rem Gap] [Inhalt]. */}
             <div className="flex items-stretch gap-[2.5rem]">
-              {/* Schiene — vertikale Linie + Laser-Trail. */}
-              <div ref={railRef} aria-hidden className="relative flex-[0_0_1px]">
-                {/* Grundfaden. */}
+              {/* Schiene — statische vertikale Linie. */}
+              <div aria-hidden className="relative flex-[0_0_1px]">
                 <div
                   className="absolute inset-0"
                   style={{ background: 'oklch(0.18 0.006 265 / 9%)' }}
-                />
-                {/* Laser-Trail: Fenster, Unterkante = Leseposition. */}
-                <div
-                  ref={fillRef}
-                  className="pointer-events-none absolute left-[-0.5px] top-0 z-[1] w-[2px] opacity-0"
-                  style={{
-                    height: 0,
-                    background:
-                      'linear-gradient(to bottom, transparent 0%, oklch(0.46 0.165 22 / 8%) 12%, oklch(0.46 0.165 22 / 32%) 45%, oklch(0.55 0.06 70 / 72%) 74%, oklch(0.72 0.11 72 / 95%) 90%, oklch(0.92 0.16 76) 100%)',
-                    boxShadow: '0 0 5px 2px oklch(0.65 0.09 70 / 22%)',
-                  }}
                 />
               </div>
 

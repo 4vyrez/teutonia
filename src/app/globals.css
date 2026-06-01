@@ -173,6 +173,17 @@
     opacity: 0.45;
   }
 
+  /* Footer links — explicit color so they resolve in the footer's own theme
+   * context; otherwise they inherit the body's computed :root/dark color and
+   * render white-on-white on the light footer. */
+  .footer-link {
+    color: var(--foreground-muted);
+    transition: color 200ms;
+  }
+  .footer-link:hover {
+    color: var(--foreground);
+  }
+
   /* Grain Overlay — kept for warm photo sections */
   .grain::before {
     content: '';
