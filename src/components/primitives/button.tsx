@@ -1,57 +1,80 @@
 import { cva, type VariantProps } from 'class-variance-authority';
-import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 
-const buttonStyles = cva(
-  [
-    'group inline-flex items-center justify-center gap-2 rounded-md',
-    'font-sans text-sm font-medium leading-none tracking-wide',
-    'transition-[background-color,color,border-color,box-shadow,transform] duration-200',
-    'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring',
-    'disabled:pointer-events-none disabled:opacity-50',
-  ],
-  {
-    variants: {
-      variant: {
-        primary: [
-          'bg-couleur-burgund text-primary-foreground',
-          'hover:bg-couleur-burgund-hi',
-          'shadow-[0_1px_0_oklch(1_0_0/8%)_inset,0_8px_24px_-12px_oklch(0.42_0.16_22/55%)]',
-        ],
-        ghost: [
-          'border border-border-strong text-foreground',
-          'hover:border-couleur-gold-dim hover:text-foreground',
-          'hover:bg-foreground/5',
-        ],
-        link: ['p-0 text-foreground underline-gold hover:text-couleur-gold'],
-      },
-      size: {
-        sm: 'h-9 px-4',
-        md: 'h-11 px-6',
-        lg: 'h-12 px-8 text-[0.9375rem]',
-      },
+/**
+ * Button — Werte 1:1 aus design_reference/styles.css (.btn .btn-primary
+ * .btn-ghost .btn-pill). Die mehrschichtigen Schatten + ::before-Glow +
+ * ::after-Highlight + .arrow-Hover liegen als @layer components in globals.css;
+ * cva mappt hier nur die Klassen-Kombinationen.
+ *
+ * Backward-compatible: `variant` (primary/ghost/link) und `size` (sm/md/lg)
+ * bleiben unverändert. Neu ergänzt: `variant: 'pill'` (+ `tone` für pill
+ * dark/light) und das `<Arrow>`-Span für den Hover-Translate.
+ */
+const buttonStyles = cva('', {
+  variants: {
+    variant: {
+      primary: 'btn btn-primary',
+      ghost: 'btn btn-ghost',
+      pill: 'btn-pill',
+      // `link` hat im Design keine .btn-Entsprechung — eigenständig, wie bisher.
+      link: [
+        'group inline-flex items-center justify-center gap-2 p-0',
+        'font-sans text-sm font-medium leading-none tracking-wide',
+        'text-foreground underline-gold transition-colors duration-200',
+        'hover:text-couleur-gold',
+        'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring',
+      ],
     },
-    defaultVariants: {
-      variant: 'primary',
-      size: 'md',
+    /** Größen-Modifier (.sm/.lg) der Prototyp-Buttons. md = Basis (kein Modifier). */
+    size: {
+      sm: 'sm',
+      md: '',
+      lg: 'lg',
+    },
+    /** Pill-Tonalität — folgt sonst dem Section-Theme manuell. */
+    tone: {
+      dark: 'btn-pill-dark',
+      light: 'btn-pill-light',
     },
   },
-);
+  compoundVariants: [
+    // tone gilt nur für die Pill-Variante.
+    { variant: 'pill', tone: 'dark', class: 'btn-pill-dark' },
+    { variant: 'pill', tone: 'light', class: 'btn-pill-light' },
+  ],
+  defaultVariants: {
+    variant: 'primary',
+    size: 'md',
+  },
+});
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
-  VariantProps<typeof buttonStyles> & { children: ReactNode };
+// `tone` nur anwenden, wenn variant === 'pill' (sonst hängt es .btn-pill-* an
+// Nicht-Pill-Buttons). Wir filtern das in den Komponenten unten.
+type Variants = VariantProps<typeof buttonStyles>;
 
-export function Button({
-  className,
-  variant,
-  size,
-  children,
-  ...props
-}: ButtonProps) {
+function resolveClass({ variant, size, tone }: Variants, className?: string): string {
+  const isPill = variant === 'pill';
+  const isLink = variant === 'link';
+  return cn(
+    buttonStyles({
+      variant,
+      // size-Modifier macht nur für primary/ghost Sinn.
+      size: isPill || isLink ? undefined : size,
+      tone: isPill ? (tone ?? 'dark') : undefined,
+    }),
+    className,
+  );
+}
+
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & Variants & { children: ReactNode };
+
+export function Button({ className, variant, size, tone, children, ...props }: ButtonProps) {
   return (
     <button
       type={props.type ?? 'button'}
-      className={cn(buttonStyles({ variant, size }), className)}
+      className={resolveClass({ variant, size, tone }, className)}
       {...props}
     >
       {children}
@@ -59,20 +82,39 @@ export function Button({
   );
 }
 
-type LinkButtonProps = React.AnchorHTMLAttributes<HTMLAnchorElement> &
-  VariantProps<typeof buttonStyles> & { children: ReactNode };
+type LinkButtonProps = AnchorHTMLAttributes<HTMLAnchorElement> & Variants & { children: ReactNode };
 
 export function LinkButton({
   className,
   variant,
   size,
+  tone,
   children,
   ...props
 }: LinkButtonProps) {
   return (
-    <a className={cn(buttonStyles({ variant, size }), className)} {...props}>
+    <a className={resolveClass({ variant, size, tone }, className)} {...props}>
       {children}
     </a>
+  );
+}
+
+/**
+ * Arrow — Pfeil-Span mit Hover-Translate (siehe .btn .arrow in globals.css).
+ * In Button/LinkButton legen, z. B. `<LinkButton>Mehr <Arrow /></LinkButton>`.
+ * `direction="down"` nutzt den vertikalen Translate (.arrow-down).
+ */
+export function Arrow({
+  direction = 'right',
+  children,
+}: {
+  direction?: 'right' | 'down';
+  children?: ReactNode;
+}) {
+  return (
+    <span aria-hidden className={direction === 'down' ? 'arrow arrow-down' : 'arrow'}>
+      {children ?? (direction === 'down' ? '↓' : '→')}
+    </span>
   );
 }
 

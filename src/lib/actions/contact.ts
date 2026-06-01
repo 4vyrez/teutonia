@@ -1,10 +1,10 @@
 'use server';
 
 import 'server-only';
-import { z } from 'zod';
 import { Resend } from 'resend';
-import { getServerEnv } from '@/lib/env';
+import { z } from 'zod';
 import { ContactEmail } from '@/lib/email/contact-email';
+import { getServerEnv } from '@/lib/env';
 
 const ContactSchema = z.object({
   name: z.string().min(2, 'Bitte vollständigen Namen angeben').max(120),
@@ -83,8 +83,7 @@ export async function submitContact(
   if (!checkRateLimit(parsed.data.email.toLowerCase())) {
     return {
       status: 'error',
-      message:
-        'Bitte warte einen Moment, bevor du eine weitere Anfrage absendest.',
+      message: 'Bitte warte einen Moment, bevor du eine weitere Anfrage absendest.',
     };
   }
 
@@ -99,8 +98,7 @@ export async function submitContact(
     });
     return {
       status: 'success',
-      message:
-        'Danke — wir haben deine Nachricht erhalten und melden uns bald.',
+      message: 'Danke — wir haben deine Nachricht erhalten und melden uns bald.',
     };
   }
 
@@ -133,15 +131,13 @@ export async function submitContact(
 
     return {
       status: 'success',
-      message:
-        'Danke — wir haben deine Nachricht erhalten und melden uns bald.',
+      message: 'Danke — wir haben deine Nachricht erhalten und melden uns bald.',
     };
   } catch (err) {
     console.error('[contact] Unexpected error:', err);
     return {
       status: 'error',
-      message:
-        'Etwas lief schief. Bitte direkt an zimmer@kbteutonia.de schreiben.',
+      message: 'Etwas lief schief. Bitte direkt an zimmer@kbteutonia.de schreiben.',
     };
   }
 }

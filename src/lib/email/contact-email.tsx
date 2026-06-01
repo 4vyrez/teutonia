@@ -18,13 +18,7 @@ type ContactEmailProps = {
   receivedAt: string;
 };
 
-export function ContactEmail({
-  name,
-  email,
-  topic,
-  message,
-  receivedAt,
-}: ContactEmailProps) {
+export function ContactEmail({ name, email, topic, message, receivedAt }: ContactEmailProps) {
   return (
     <Html lang="de">
       <Head />
@@ -72,13 +66,27 @@ export function ContactEmail({
           </Text>
           <Hr style={{ borderColor: '#3a2e23', margin: '24px 0' }} />
           <Section>
-            <Text style={{ margin: '0 0 4px 0', fontSize: '12px', color: '#b4a78f', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+            <Text
+              style={{
+                margin: '0 0 4px 0',
+                fontSize: '12px',
+                color: '#b4a78f',
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+              }}
+            >
               Name
             </Text>
-            <Text style={{ margin: '0 0 16px 0', fontSize: '15px' }}>
-              {name}
-            </Text>
-            <Text style={{ margin: '0 0 4px 0', fontSize: '12px', color: '#b4a78f', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+            <Text style={{ margin: '0 0 16px 0', fontSize: '15px' }}>{name}</Text>
+            <Text
+              style={{
+                margin: '0 0 4px 0',
+                fontSize: '12px',
+                color: '#b4a78f',
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+              }}
+            >
               E-Mail
             </Text>
             <Text style={{ margin: '0 0 16px 0', fontSize: '15px' }}>
@@ -86,13 +94,27 @@ export function ContactEmail({
                 {email}
               </a>
             </Text>
-            <Text style={{ margin: '0 0 4px 0', fontSize: '12px', color: '#b4a78f', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+            <Text
+              style={{
+                margin: '0 0 4px 0',
+                fontSize: '12px',
+                color: '#b4a78f',
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+              }}
+            >
               Thema
             </Text>
-            <Text style={{ margin: '0 0 16px 0', fontSize: '15px' }}>
-              {topic}
-            </Text>
-            <Text style={{ margin: '0 0 4px 0', fontSize: '12px', color: '#b4a78f', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+            <Text style={{ margin: '0 0 16px 0', fontSize: '15px' }}>{topic}</Text>
+            <Text
+              style={{
+                margin: '0 0 4px 0',
+                fontSize: '12px',
+                color: '#b4a78f',
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+              }}
+            >
               Nachricht
             </Text>
             <Text

@@ -3,7 +3,7 @@ import type { Metadata, Viewport } from 'next';
 import { Fraunces, Inter } from 'next/font/google';
 import { Toaster } from 'sonner';
 import { JsonLd } from '@/components/primitives/json-ld';
-import { defaultMetadata, buildLocalBusinessJsonLd } from '@/lib/seo';
+import { buildLocalBusinessJsonLd, defaultMetadata } from '@/lib/seo';
 
 const fraunces = Fraunces({
   subsets: ['latin'],
@@ -28,17 +28,9 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="de"
-      className={`${fraunces.variable} ${inter.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang="de" className={`${fraunces.variable} ${inter.variable}`} suppressHydrationWarning>
       <head>
         <JsonLd data={buildLocalBusinessJsonLd()} />
       </head>

@@ -53,9 +53,11 @@ export const siteConfig = {
   },
   navigation: [
     { label: 'Das Haus', href: '#haus' },
-    { label: 'Wer wir sind', href: '#identitaet' },
+    { label: 'Gemeinschaft', href: '#saeulen' },
+    { label: 'Lage', href: '#lage' },
     { label: 'Mitgliedschaft', href: '#mitgliedschaft' },
-    { label: 'Semester', href: '#semester' },
+    { label: 'Programm', href: '#semester' },
+    { label: 'Geschichte', href: '#geschichte' },
     { label: 'Kontakt', href: '#kontakt' },
   ],
 } as const;

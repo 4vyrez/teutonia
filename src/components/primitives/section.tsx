@@ -9,9 +9,19 @@ type SectionProps = {
   as?: 'section' | 'div' | 'article' | 'aside';
   eyebrow?: string;
   fullBleed?: boolean;
+  /** Hintergrund auf --background-veil setzen (design_reference Section `veil`). */
+  veil?: boolean;
   theme?: 'light' | 'dark';
 };
 
+/**
+ * Section — Sektions-Wrapper. Werte 1:1 aus design_reference/styles.css:
+ * .section padding clamp(80px,11vw,160px) 0; .container max-width 1320px,
+ * padding 0 clamp(20px,4vw,56px). Setzt data-theme für den Header-Scroll-Sync.
+ *
+ * Prop-API unverändert (id/children/className/containerClassName/as/eyebrow/
+ * fullBleed/theme); `veil` ist optional ergänzt.
+ */
 export function Section({
   id,
   children,
@@ -19,6 +29,7 @@ export function Section({
   containerClassName,
   as: Tag = 'section',
   fullBleed = false,
+  veil = false,
   theme,
 }: SectionProps) {
   return (
@@ -26,7 +37,8 @@ export function Section({
       id={id}
       data-theme={theme}
       className={cn(
-        'relative bg-background py-24 text-foreground sm:py-28 lg:py-32',
+        'relative py-[clamp(80px,11vw,160px)] text-foreground',
+        veil ? 'bg-background-veil' : 'bg-background',
         className,
       )}
     >
@@ -35,7 +47,7 @@ export function Section({
       ) : (
         <div
           className={cn(
-            'mx-auto w-full max-w-7xl px-6 sm:px-8 lg:px-12',
+            'mx-auto w-full max-w-[1320px] px-[clamp(20px,4vw,56px)]',
             containerClassName,
           )}
         >
@@ -51,16 +63,11 @@ type EyebrowProps = {
   className?: string;
 };
 
+/**
+ * Eyebrow — Kapitälchen-Label mit Gold-Strich. Nutzt die `.eyebrow`-Klasse
+ * (globals.css): burgund, 11px, ls 0.26em, 32px-Strich vorne. `children` +
+ * `className` bleiben unverändert.
+ */
 export function Eyebrow({ children, className }: EyebrowProps) {
-  return (
-    <div
-      className={cn(
-        'flex items-center gap-3 text-xs uppercase tracking-[0.22em] text-couleur-gold-dim',
-        className,
-      )}
-    >
-      <span aria-hidden className="inline-block h-px w-8 bg-couleur-gold-dim" />
-      <span className="font-medium">{children}</span>
-    </div>
-  );
+  return <div className={cn('eyebrow', className)}>{children}</div>;
 }
