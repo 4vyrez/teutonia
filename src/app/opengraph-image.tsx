@@ -1,5 +1,12 @@
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { ImageResponse } from 'next/og';
 import { siteConfig } from '@/lib/site-config';
+
+// Real Wappen, embedded at build time (this OG image is prerendered static).
+const wappenDataUrl = `data:image/png;base64,${readFileSync(
+  join(process.cwd(), 'public/logo.png'),
+).toString('base64')}`;
 
 export const alt = `${siteConfig.name} — ${siteConfig.tagline}`;
 export const size = { width: 1200, height: 630 };
@@ -41,6 +48,16 @@ export default async function OgImage() {
           background:
             'radial-gradient(ellipse at bottom left, rgba(183, 58, 58, 0.30) 0%, transparent 60%)',
         }}
+      />
+
+      {/* Wappen — top right */}
+      {/* biome-ignore lint/performance/noImgElement: <img> is required inside next/og ImageResponse (satori); next/image is not supported here */}
+      <img
+        src={wappenDataUrl}
+        width={156}
+        height={156}
+        alt=""
+        style={{ position: 'absolute', top: 52, right: 64 }}
       />
 
       {/* Top eyebrow */}

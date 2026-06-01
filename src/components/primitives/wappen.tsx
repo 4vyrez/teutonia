@@ -28,8 +28,8 @@ export function Wappen({ className, variant = 'couleur', light = false }: Wappen
       <Image
         src="/haus/wappen.png"
         alt="KB! Teutonia"
-        width={256}
-        height={320}
+        width={1450}
+        height={1350}
         priority={false}
         className={cn('h-8 w-auto', light && 'mix-blend-multiply', className)}
       />
