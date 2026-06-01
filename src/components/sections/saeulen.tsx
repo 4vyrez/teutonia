@@ -373,6 +373,13 @@ export function Saeulen() {
           .tt-temple [style] { transition: none !important; }
           .tt-temple .tt-halo,
           .tt-temple .tt-col-anim { animation: none !important; }
+          /* No motion: reveal every pillar body instead of clipping it shut
+             (mirrors the design's reduced-motion .t-pillar-body open state). */
+          .tt-pillar-body {
+            transition: none !important;
+            grid-template-rows: 1fr !important;
+            opacity: 1 !important;
+          }
         }
       `}</style>
 
@@ -490,17 +497,22 @@ export function Saeulen() {
           {pillars.map((p, i) => {
             const isHot = openIndex === i;
             return (
-              // Decorative mirror of the pillar state: the column lifts/glows
-              // when its caption (below) is hovered or focused. Interaction is
-              // owned by the captioned <article>, so this stays non-interactive.
+              // Mirrors the pillar state: the column lifts/glows when its caption
+              // (below) is hovered/focused. Per the design's `.t-col`, the column
+              // itself is also a pointer-only hover trigger — hovering it opens the
+              // same pillar. Kept aria-hidden (decorative for AT); keyboard a11y
+              // stays on the caption <button> below.
               <div
                 key={p.label}
                 aria-hidden
                 className="tt-col-anim"
+                onMouseEnter={() => setHovered(i)}
+                onMouseLeave={() => setHovered(-1)}
                 style={{
                   display: 'flex',
                   justifyContent: 'center',
                   position: 'relative',
+                  cursor: 'pointer',
                   ...colStyle(i, isHot),
                 }}
               >
@@ -597,6 +609,9 @@ export function Saeulen() {
           margin: '4px auto 0',
           display: 'grid',
           gridTemplateColumns: 'repeat(3, 1fr)',
+          // `start` so an expanded card sizes to its own content instead of
+          // stretching its two siblings to match (grid default is `stretch`).
+          alignItems: 'start',
           gap: 'clamp(20px, 2.5vw, 36px)',
           padding: '0 24px',
         }}
@@ -702,18 +717,20 @@ export function Saeulen() {
                 </h3>
               </div>
 
-              {/* body — collapsed by default, expands on hover/focus */}
+              {/* body — collapsed by default, expands on hover/focus.
+                  grid-template-rows 0fr→1fr animates to the exact content height
+                  (no fixed-px guess, no clip/overshoot); inner track needs
+                  minHeight:0 + overflow:hidden to clip while collapsed. */}
               <div
+                className="tt-pillar-body"
                 style={{
-                  maxHeight: isOpen ? 540 : 0,
-                  overflow: 'hidden',
+                  display: 'grid',
+                  gridTemplateRows: isOpen ? '1fr' : '0fr',
                   opacity: isOpen ? 1 : 0,
-                  transition: isOpen
-                    ? `max-height 620ms ${EASE}, opacity 480ms ease 80ms`
-                    : `max-height 560ms ${EASE}, opacity 320ms ease`,
+                  transition: `grid-template-rows 560ms ${EASE}, opacity 360ms ease`,
                 }}
               >
-                <div>
+                <div style={{ minHeight: 0, overflow: 'hidden' }}>
                   <p
                     style={{
                       marginTop: 16,

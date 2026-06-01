@@ -9,7 +9,6 @@ import { Saeulen } from '@/components/sections/saeulen';
 import { Semester } from '@/components/sections/semester';
 import { SiteFooter } from '@/components/sections/site-footer';
 import { SiteHeader } from '@/components/sections/site-header';
-import { Zimmer } from '@/components/sections/zimmer';
 
 export const dynamic = 'force-static';
 
@@ -20,7 +19,6 @@ export default function HomePage() {
       <main className="relative">
         <Hero />
         <Haus />
-        <Zimmer />
         <Saeulen />
         <Lage />
         <Mitgliedschaft />
