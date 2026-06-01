@@ -5,14 +5,18 @@ type GoldRuleProps = {
   variant?: 'solid' | 'dotted' | 'double';
 };
 
+/**
+ * GoldRule — goldener Trennstrich. design_reference/styles.css `.gold-rule`:
+ * border-top 1px var(--gold-dim), opacity 0.4. `variant` + `className` bleiben.
+ */
 export function GoldRule({ className, variant = 'solid' }: GoldRuleProps) {
   return (
     <hr
       aria-hidden
       className={cn(
-        'h-px w-full border-0 bg-couleur-gold-dim opacity-30',
-        variant === 'dotted' && 'bg-[length:6px_1px] bg-repeat-x bg-transparent border-t border-dotted border-couleur-gold-dim',
-        variant === 'double' && 'h-[3px] border-y border-couleur-gold-dim bg-transparent',
+        'h-px w-full border-0 border-t border-couleur-gold-dim bg-transparent opacity-40',
+        variant === 'dotted' && 'border-dotted',
+        variant === 'double' && 'h-[3px] border-y',
         className,
       )}
     />

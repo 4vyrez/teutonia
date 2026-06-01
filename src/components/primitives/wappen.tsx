@@ -1,16 +1,41 @@
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 
 type WappenProps = {
   className?: string;
-  variant?: 'mono' | 'couleur';
+  /**
+   * 'image'  → echtes Wappen-Foto (design_reference: assets/wappen.png).
+   * 'couleur'→ stilisiertes Inline-SVG (Default, abwärtskompatibel).
+   * 'mono'   → einfarbiges Inline-SVG.
+   */
+  variant?: 'image' | 'mono' | 'couleur';
+  /** Für helle Sektionen: mix-blend multiply (entspricht `light` im Prototyp). */
+  light?: boolean;
 };
 
 /**
- * Stylized Teutonia shield — Burgund/Gold/Schwarz Couleur in SVG.
- * Bewusst minimalistisch, nicht prominent. Wird klein in Header/Footer
- * sowie als Marke in der Identitäts-Sektion verwendet.
+ * Wappen — KB! Teutonia.
+ *
+ * Der maßgebliche Design-Soll-Zustand nutzt das Raster-Wappen
+ * (public/haus/wappen.png) via `variant="image"`. Die bestehenden
+ * Inline-SVG-Varianten ('couleur' Default, 'mono') bleiben unverändert,
+ * damit aktuelle Header/Footer-Importe (<Wappen className="h-8 w-auto" />)
+ * weiterlaufen.
  */
-export function Wappen({ className, variant = 'couleur' }: WappenProps) {
+export function Wappen({ className, variant = 'couleur', light = false }: WappenProps) {
+  if (variant === 'image') {
+    return (
+      <Image
+        src="/haus/wappen.png"
+        alt="KB! Teutonia"
+        width={1450}
+        height={1350}
+        priority={false}
+        className={cn('h-8 w-auto', light && 'mix-blend-multiply', className)}
+      />
+    );
+  }
+
   if (variant === 'mono') {
     return (
       <svg

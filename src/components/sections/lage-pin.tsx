@@ -11,8 +11,6 @@ export type MapPin = {
   label: string;
   headline: string;
   body: string;
-  /** Optional tag line below body (e.g. tram lines) */
-  meta?: string;
   x: number;
   y: number;
   kind: PinKind;
@@ -124,11 +122,7 @@ export function LagePins({ pins }: LagePinsProps) {
         const isTram = pin.kind === 'tram';
 
         return (
-          <div
-            key={pin.id}
-            className="absolute"
-            style={{ left: `${pin.x}%`, top: `${pin.y}%` }}
-          >
+          <div key={pin.id} className="absolute" style={{ left: `${pin.x}%`, top: `${pin.y}%` }}>
             {/* Pin — only thing with pointer-events. Hover opens, leave schedules close. */}
             <button
               type="button"
@@ -140,39 +134,26 @@ export function LagePins({ pins }: LagePinsProps) {
               onFocus={() => openPin(pin.id)}
               onBlur={() => schedulePinClose(pin.id)}
               className={cn(
-                'absolute left-0 top-0 -translate-x-1/2 -translate-y-1/2',
-                'transition-transform duration-[280ms] ease-[cubic-bezier(0.16,1,0.3,1)]',
-                'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring',
+                'absolute left-0 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-background-elev',
+                'transition-transform duration-[220ms] ease-[cubic-bezier(0.16,1,0.3,1)]',
+                'hover:scale-[1.4] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring',
                 isPrimary &&
-                  'h-3.5 w-3.5 rounded-full bg-couleur-burgund ring-[3px] ring-couleur-gold/85 shadow-[0_2px_10px_oklch(0.18_0.006_265/40%)]',
-                pin.kind === 'place' &&
-                  'h-2.5 w-2.5 rounded-full bg-couleur-burgund ring-2 ring-background-elev shadow-[0_1px_4px_oklch(0.18_0.006_265/30%)]',
-                isTram &&
-                  'h-2.5 w-2.5 rotate-45 bg-foreground ring-2 ring-background-elev shadow-[0_1px_4px_oklch(0.18_0.006_265/30%)]',
-                isActive && 'scale-[1.22]',
+                  'h-5 w-5 bg-couleur-burgund shadow-[0_0_0_0_var(--couleur-burgund),0_0_12px_2px_oklch(0.46_0.165_22/35%)] animate-pin-pulse',
+                pin.kind === 'place' && 'h-3 w-3 bg-foreground',
+                isTram && 'h-3 w-3 bg-couleur-gold',
+                isActive && 'scale-[1.4]',
               )}
             >
-              {isPrimary && (
-                <span
-                  aria-hidden
-                  className="absolute inset-0 rounded-full animate-pin-pulse"
-                />
-              )}
-            </button>
-
-            {/* Persistent label for the primary pin only */}
-            {isPrimary && (
+              {/* Hover/active ring — 1px hairline, fades in (design .map-pin .ring) */}
               <span
                 aria-hidden
                 className={cn(
-                  'pointer-events-none absolute left-full top-1/2 ml-3 -translate-y-1/2 whitespace-nowrap font-display text-xs font-medium text-couleur-burgund',
-                  'transition-opacity duration-200',
-                  isActive ? 'opacity-0' : 'opacity-90',
+                  'pointer-events-none absolute -inset-1 rounded-full border border-border-strong',
+                  'transition-opacity duration-[220ms]',
+                  isActive ? 'opacity-100' : 'opacity-0',
                 )}
-              >
-                {pin.label}
-              </span>
-            )}
+              />
+            </button>
 
             {/* Popover — pointer-events-none always, so it never blocks other pins.
                 State + animation driven entirely by the pin button. */}
@@ -181,7 +162,7 @@ export function LagePins({ pins }: LagePinsProps) {
               aria-label={pin.headline}
               aria-hidden={!isActive}
               className={cn(
-                'pointer-events-none absolute z-20 w-56 sm:w-64',
+                'pointer-events-none absolute z-20 w-[200px] sm:w-[260px]',
                 popoverPosition(pin.side),
               )}
             >
@@ -209,28 +190,17 @@ export function LagePins({ pins }: LagePinsProps) {
                   )}
                 />
 
-                {/* Card */}
-                <div className="rounded-lg border border-border-strong bg-background-elev/96 px-4 py-3 shadow-[0_18px_50px_-12px_oklch(0.18_0.006_265/28%)] backdrop-blur-md">
-                  <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-couleur-burgund/85">
-                    {isTram && (
-                      <span
-                        aria-hidden
-                        className="inline-block h-1.5 w-1.5 rotate-45 bg-foreground"
-                      />
-                    )}
+                {/* Card — design .map-callout: flat bg-elev, 14px radius, soft drop */}
+                <div className="rounded-[14px] border border-border-strong bg-background-elev px-4 py-3.5 shadow-[0_12px_40px_-16px_oklch(0_0_0/30%)]">
+                  <div className="text-[9px] uppercase tracking-[0.26em] text-couleur-burgund">
                     {pin.label}
                   </div>
-                  <div className="font-display mt-1 text-base leading-snug text-foreground">
+                  <div className="font-display mt-1.5 text-[17px] leading-snug text-foreground [font-variation-settings:_'opsz'_24,_'SOFT'_30]">
                     {pin.headline}
                   </div>
-                  <p className="mt-2 text-[12.5px] leading-relaxed text-foreground-muted">
+                  <p className="mt-2 text-[12.5px] leading-[1.55] text-foreground-muted">
                     {pin.body}
                   </p>
-                  {pin.meta && (
-                    <div className="mt-3 border-t border-border pt-2 text-[10.5px] uppercase tracking-[0.18em] text-foreground-dim">
-                      {pin.meta}
-                    </div>
-                  )}
                 </div>
               </div>
             </div>

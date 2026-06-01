@@ -1,14 +1,14 @@
-import { SiteHeader } from '@/components/sections/site-header';
-import { Hero } from '@/components/sections/hero';
+import { FAQ } from '@/components/sections/faq';
+import { GeschichtePreview } from '@/components/sections/geschichte-preview';
 import { Haus } from '@/components/sections/haus';
-import { Identitaet } from '@/components/sections/identitaet';
-import { Saeulen } from '@/components/sections/saeulen';
+import { Hero } from '@/components/sections/hero';
+import { Kontakt } from '@/components/sections/kontakt';
 import { Lage } from '@/components/sections/lage';
 import { Mitgliedschaft } from '@/components/sections/mitgliedschaft';
+import { Saeulen } from '@/components/sections/saeulen';
 import { Semester } from '@/components/sections/semester';
-import { GeschichtePreview } from '@/components/sections/geschichte-preview';
-import { Kontakt } from '@/components/sections/kontakt';
 import { SiteFooter } from '@/components/sections/site-footer';
+import { SiteHeader } from '@/components/sections/site-header';
 
 export const dynamic = 'force-static';
 
@@ -19,12 +19,12 @@ export default function HomePage() {
       <main className="relative">
         <Hero />
         <Haus />
-        <Identitaet />
         <Saeulen />
         <Lage />
         <Mitgliedschaft />
         <Semester />
         <GeschichtePreview />
+        <FAQ />
         <Kontakt />
       </main>
       <SiteFooter />

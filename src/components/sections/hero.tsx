@@ -1,96 +1,131 @@
-import { ArrowDownRight, ArrowUpRight } from 'lucide-react';
-import { Stat } from '@/components/primitives/stat';
-import { GoldRule } from '@/components/primitives/gold-rule';
-import { siteConfig } from '@/lib/site-config';
+import Image from 'next/image';
 
+/* Running-facts strip — verbatim copy from design_reference/home-top.jsx (Hero).
+ * Values mirror siteConfig.facts (rooms 20, rentEur 280, walkUniMin 5); the
+ * "Jahre" and "frei" figures are editorial copy carried over from the design. */
+const facts: ReadonlyArray<{
+  v: string;
+  u: string;
+  s: string;
+  accent?: boolean;
+}> = [
+  { v: '20', u: 'Zimmer', s: '4 Etagen · eigenes Bad' },
+  { v: 'ab 280', u: '€/Monat', s: 'warm, inkl. Internet' },
+  { v: '5', u: 'min', s: 'zu Fuß zum KIT' },
+  { v: '183', u: 'Jahre', s: 'seit 10. Oktober 1843' },
+  { v: '3', u: 'frei', s: 'Wintersemester 26/27', accent: true },
+];
+
+/**
+ * Hero — editorial cover. Ported 1:1 from design_reference/home-top.jsx (Hero):
+ * 7fr/5fr type-column + background Wappen, masthead eyebrow, balanced display
+ * headline (opsz 144 / SOFT 50), lede, two CTAs, and a five-column running-facts
+ * strip with a live accent. Server Component — no state; the `.reveal` classes
+ * are above-the-fold so they paint instantly (the reveal hook never arms them).
+ */
 export function Hero() {
   return (
     <section
       id="top"
       data-theme="dark"
-      className="relative isolate min-h-[100svh] overflow-hidden bg-background text-foreground"
+      className="relative flex min-h-screen flex-col overflow-hidden bg-background"
     >
-      {/* Layered atmospheric backdrop — no glass, no AI-blob */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        {/* Subtle gold light from upper-right */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_oklch(0.78_0.14_78_/_8%)_0%,_transparent_55%)]" />
-        {/* Burgund glow bottom-left */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_oklch(0.42_0.16_22_/_18%)_0%,_transparent_60%)]" />
-        {/* Editorial grain */}
-        <div className="grain absolute inset-0" />
-        {/* Vertical hairlines as editorial rhythm */}
-        <div className="absolute inset-y-0 left-1/2 hidden w-px -translate-x-1/2 bg-border lg:block" />
-        <div className="absolute inset-y-0 right-1/4 hidden w-px bg-border xl:block" />
+      {/* Ambient layers */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_78%_18%,_oklch(0.7_0.12_78_/_13%)_0%,_transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_8%_96%,_oklch(0.42_0.16_22_/_30%)_0%,_transparent_60%)]" />
+        {/* Wappen — groß, rechts angeschnitten, Screen-Blend mit Originalfarben */}
+        <Image
+          src="/haus/wappen.png"
+          alt=""
+          aria-hidden
+          width={860}
+          height={1075}
+          priority
+          className="pointer-events-none absolute top-1/2 right-[clamp(-220px,-20vw,-80px)] h-auto w-[clamp(520px,62vw,860px)] -translate-y-1/2 select-none opacity-[0.09] mix-blend-screen [filter:sepia(0.35)_saturate(1.4)]"
+        />
       </div>
 
-      <div className="relative mx-auto flex min-h-[100svh] w-full max-w-7xl flex-col px-6 pt-32 sm:px-8 lg:px-12 lg:pt-40">
-        {/* Eyebrow */}
-        <div className="flex items-center gap-3 text-xs uppercase tracking-[0.28em] text-couleur-gold-dim">
-          <span aria-hidden className="h-px w-10 bg-couleur-gold-dim" />
-          <span>Karlsruher Burschenschaft · Parkstraße 1</span>
-        </div>
+      {/* Main spread */}
+      <div className="relative z-[2] mx-auto grid w-full max-w-[1320px] flex-1 grid-cols-1 gap-[clamp(36px,5vw,72px)] px-[clamp(20px,4vw,56px)] pt-[clamp(96px,14vh,130px)] pb-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
+        {/* LEFT — Type */}
+        <div className="relative z-[1] flex flex-col justify-between">
+          <div>
+            <div className="reveal text-[9px] uppercase tracking-[0.4em] text-couleur-gold-dim">
+              Karlsruher Burschenschaft
+            </div>
+            <h1 className="reveal reveal-d1 font-display mt-7 font-light leading-[0.94] tracking-[-0.028em] text-balance text-foreground text-[clamp(2.5rem,8vw,6.5rem)] [font-variation-settings:'opsz'_144,'SOFT'_50]">
+              Mehr als
+              <br />
+              ein Zimmer.
+              <br />
+              <span className="italic-gold">Eine Lerngemeinschaft</span>
+              <br />
+              seit 1843.
+            </h1>
 
-        {/* Headline */}
-        <div className="mt-10 flex flex-1 flex-col">
-          <h1 className="font-display max-w-5xl text-balance text-[clamp(2.75rem,7vw,5.75rem)] font-light leading-[1.02] tracking-tight text-foreground">
-            Mehr als ein Zimmer.{' '}
-            <span className="block italic text-couleur-gold-dim">
-              Eine Lerngemeinschaft seit 1843.
-            </span>
-          </h1>
+            <div className="reveal reveal-d3 mt-10 max-w-[560px]">
+              <p className="text-[17px] leading-[1.72] text-foreground-muted text-pretty">
+                20 möblierte Zimmer mit eigenem Bad, fünf Minuten zu Fuß zum KIT. Eine Bibliothek
+                mit drei Jahrzehnten Randnotizen, ein Lernzimmer das nie schläft, eine Bar ohne
+                Kommerz — und ein Netzwerk, das nach dem Examen nicht aufhört.
+              </p>
+            </div>
 
-          <p className="mt-8 max-w-xl text-pretty text-base leading-relaxed text-foreground-muted sm:text-lg">
-            20 möblierte Zimmer mit eigenem Bad, fünf Minuten zum KIT.
-            Bibliothek, Bar, Lernzimmer — und eine Generation Studierender,
-            die seit 165 Jahren weitergibt, was hier funktioniert.
-          </p>
-
-          {/* CTAs */}
-          <div className="mt-10 flex flex-wrap items-center gap-3">
-            <a
-              href="#kontakt"
-              className="group inline-flex h-12 items-center gap-2 rounded-md bg-couleur-burgund px-7 text-sm font-medium text-primary-foreground shadow-[0_1px_0_oklch(1_0_0/8%)_inset,0_8px_24px_-12px_oklch(0.42_0.16_22/65%)] transition-colors hover:bg-couleur-burgund-hi focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
-            >
-              Schnupperabend besuchen
-              <ArrowUpRight
-                aria-hidden
-                className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-              />
-            </a>
-            <a
-              href="#haus"
-              className="group inline-flex h-12 items-center gap-2 rounded-md border border-border-strong px-7 text-sm font-medium text-foreground transition-colors hover:border-couleur-gold-dim hover:text-couleur-gold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
-            >
-              Zimmer ansehen
-              <ArrowDownRight aria-hidden className="h-4 w-4" />
-            </a>
+            <div className="reveal reveal-d4 mt-11 flex flex-wrap items-center gap-3">
+              <a href="#kontakt" className="btn btn-primary lg">
+                Schnupperabend besuchen
+                <span className="arrow">↗</span>
+              </a>
+              <a href="#haus" className="btn btn-ghost">
+                Das Haus ansehen
+                <span className="arrow arrow-down">↓</span>
+              </a>
+            </div>
           </div>
         </div>
 
-        {/* Stat-Bar — concrete numbers */}
-        <div className="mt-20 pb-12 sm:mt-28">
-          <GoldRule />
-          <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4">
-            <Stat
-              value={siteConfig.facts.rooms}
-              label="Zimmer im Haus"
-            />
-            <Stat
-              value={`ab ${siteConfig.facts.rentEur}`}
-              unit="€/M"
-              label="Miete · warm"
-            />
-            <Stat
-              value={siteConfig.facts.roomSizeSqm}
-              unit="m²"
-              label="Möbliert · eigenes Bad"
-            />
-            <Stat
-              value={siteConfig.facts.walkUniMin}
-              unit="min"
-              label="zu Fuß zum KIT"
-            />
-          </div>
+        {/* RIGHT — leere Spalte; Wappen liegt im Hintergrund */}
+        <div aria-hidden />
+      </div>
+
+      {/* Running facts strip */}
+      <div className="relative z-[2] mx-auto w-full max-w-[1320px] px-[clamp(20px,4vw,56px)] pb-[clamp(28px,4vh,48px)]">
+        <div className="reveal reveal-d5 grid grid-cols-2 items-center gap-6 border-y border-border-strong py-[22px] sm:grid-cols-3 md:grid-cols-5">
+          {facts.map((x, i) => (
+            <div
+              key={x.s}
+              className="flex flex-col gap-1.5"
+              style={{
+                paddingLeft: i === 0 ? 0 : 18,
+                borderLeft: i === 0 ? 'none' : '1px solid var(--border)',
+              }}
+            >
+              <div className="flex items-baseline gap-1.5">
+                {x.accent ? (
+                  <span
+                    aria-hidden
+                    className="mr-1 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-couleur-burgund animate-pin-pulse"
+                  />
+                ) : null}
+                <span
+                  className={`font-display tabnum font-light leading-none tracking-[-0.02em] text-[clamp(26px,3vw,40px)] [font-variation-settings:'opsz'_72] ${
+                    x.accent ? 'text-couleur-burgund-hi' : 'text-foreground'
+                  }`}
+                >
+                  {x.v}
+                </span>
+                <span
+                  className={`text-[10px] uppercase tracking-[0.22em] ${
+                    x.accent ? 'text-couleur-burgund' : 'text-foreground-dim'
+                  }`}
+                >
+                  {x.u}
+                </span>
+              </div>
+              <div className="text-[11px] tracking-[0.01em] text-foreground-muted">{x.s}</div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

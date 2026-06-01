@@ -1,9 +1,10 @@
 'use client';
 
-import { useActionState, useEffect, useRef } from 'react';
 import { ArrowUpRight, Loader2 } from 'lucide-react';
+import { useActionState, useEffect, useRef } from 'react';
 import { toast } from 'sonner';
-import { submitContact, type ContactState } from '@/lib/actions/contact';
+import { type ContactState, submitContact } from '@/lib/actions/contact';
+import { siteConfig } from '@/lib/site-config';
 import { cn } from '@/lib/utils';
 
 const initialState: ContactState = { status: 'idle' };
@@ -14,11 +15,11 @@ const topics: Array<{ value: 'zimmer' | 'schnupperabend' | 'allgemein'; label: s
   { value: 'allgemein', label: 'Allgemeine Frage' },
 ];
 
+const FIELD_CLASS =
+  'h-12 w-full rounded-xl border border-border-strong bg-background px-4 text-sm text-foreground placeholder:text-foreground-dim outline-none transition-colors focus:border-couleur-burgund';
+
 export function ContactForm() {
-  const [state, formAction, isPending] = useActionState(
-    submitContact,
-    initialState,
-  );
+  const [state, formAction, isPending] = useActionState(submitContact, initialState);
   const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
@@ -38,31 +39,29 @@ export function ContactForm() {
       ref={formRef}
       action={formAction}
       noValidate
-      className="grid gap-6"
+      className="reveal reveal-d1 rounded-2xl border border-border bg-background-elev p-9"
     >
+      {/* Card header */}
+      <div className="flex items-baseline justify-between gap-4">
+        <div className="text-[10px] uppercase tracking-[0.26em] text-couleur-burgund">
+          Direktanfrage
+        </div>
+        <div className="text-[11px] text-foreground-dim">Antwort in ≈ 48 Std.</div>
+      </div>
+      <h3 className="font-display mt-3.5 text-[26px] text-foreground [font-variation-settings:'opsz'_48,'SOFT'_40]">
+        Zimmer anfragen
+      </h3>
+
       {/* Honeypot */}
       <div className="hidden" aria-hidden>
         <label htmlFor="website">Website</label>
-        <input
-          type="text"
-          id="website"
-          name="website"
-          tabIndex={-1}
-          autoComplete="off"
-        />
+        <input type="text" id="website" name="website" tabIndex={-1} autoComplete="off" />
       </div>
 
-      <Field
-        label="Thema"
-        name="topic"
-        error={state.errors?.topic?.[0]}
-      >
+      <Field label="Thema" name="topic" error={state.errors?.topic?.[0]} className="mt-6">
         <div className="flex flex-wrap gap-2" role="radiogroup" aria-label="Thema">
           {topics.map((t) => (
-            <label
-              key={t.value}
-              className="cursor-pointer"
-            >
+            <label key={t.value} className="cursor-pointer">
               <input
                 type="radio"
                 name="topic"
@@ -70,7 +69,7 @@ export function ContactForm() {
                 defaultChecked={t.value === 'zimmer'}
                 className="peer sr-only"
               />
-              <span className="inline-flex h-10 items-center rounded-md border border-border-strong px-4 text-xs uppercase tracking-[0.18em] text-foreground-muted transition-colors hover:border-couleur-gold-dim hover:text-foreground peer-checked:border-couleur-gold peer-checked:bg-couleur-burgund/15 peer-checked:text-foreground peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-ring">
+              <span className="inline-flex h-10 items-center rounded-xl border border-border-strong px-4 text-xs uppercase tracking-[0.18em] text-foreground-muted transition-colors hover:border-couleur-gold-dim hover:text-foreground peer-checked:border-couleur-gold peer-checked:bg-couleur-burgund/15 peer-checked:text-foreground peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-ring">
                 {t.label}
               </span>
             </label>
@@ -78,44 +77,48 @@ export function ContactForm() {
         </div>
       </Field>
 
-      <div className="grid gap-6 sm:grid-cols-2">
-        <Field
-          label="Name"
+      <Field label="Name" name="name" error={state.errors?.name?.[0]} className="mt-[18px]">
+        <input
+          type="text"
+          id="name"
           name="name"
-          error={state.errors?.name?.[0]}
-        >
-          <input
-            type="text"
-            id="name"
-            name="name"
-            autoComplete="name"
-            required
-            minLength={2}
-            placeholder="Vorname Nachname"
-            className="h-11 w-full bg-transparent border-b border-border-strong px-0 text-base text-foreground placeholder:text-foreground-dim focus:border-couleur-gold focus:outline-none"
-          />
-        </Field>
-        <Field
-          label="E-Mail"
-          name="email"
-          error={state.errors?.email?.[0]}
-        >
+          autoComplete="name"
+          required
+          minLength={2}
+          placeholder="Dein Name"
+          className={FIELD_CLASS}
+        />
+      </Field>
+
+      <div className="mt-[18px] grid gap-3.5 sm:grid-cols-2">
+        <Field label="E-Mail" name="email" error={state.errors?.email?.[0]}>
           <input
             type="email"
             id="email"
             name="email"
             autoComplete="email"
             required
-            placeholder="du@beispiel.de"
-            className="h-11 w-full bg-transparent border-b border-border-strong px-0 text-base text-foreground placeholder:text-foreground-dim focus:border-couleur-gold focus:outline-none"
+            placeholder="deine@mail.de"
+            className={FIELD_CLASS}
+          />
+        </Field>
+        <Field label="Studiengang" name="studiengang">
+          <input
+            type="text"
+            id="studiengang"
+            name="studiengang"
+            autoComplete="off"
+            placeholder="z. B. Maschinenbau"
+            className={FIELD_CLASS}
           />
         </Field>
       </div>
 
       <Field
-        label="Deine Nachricht"
+        label="Nachricht (optional)"
         name="message"
         error={state.errors?.message?.[0]}
+        className="mt-[18px]"
       >
         <textarea
           id="message"
@@ -123,40 +126,41 @@ export function ContactForm() {
           required
           minLength={10}
           maxLength={4000}
-          rows={5}
-          placeholder="Was möchtest du wissen?"
-          className="w-full resize-y bg-transparent border-b border-border-strong px-0 py-2 text-base text-foreground placeholder:text-foreground-dim focus:border-couleur-gold focus:outline-none"
+          rows={3}
+          placeholder="Wann möchtest du vorbeikommen? Hast du Fragen?"
+          className="min-h-[110px] w-full resize-y rounded-xl border border-border-strong bg-background px-4 py-3 text-sm text-foreground placeholder:text-foreground-dim outline-none transition-colors focus:border-couleur-burgund"
         />
       </Field>
 
-      <div className="flex flex-col gap-4 pt-4 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-xs text-foreground-dim sm:max-w-md">
-          Wir antworten meist innerhalb von zwei bis drei Tagen direkt von
-          einem Bundesbruder. Deine Daten verwenden wir nur, um zu antworten.
-        </p>
-        <button
-          type="submit"
-          disabled={isPending}
-          className="group inline-flex h-12 items-center justify-center gap-2 self-end rounded-md bg-couleur-burgund px-8 text-sm font-medium text-primary-foreground shadow-[0_1px_0_oklch(1_0_0/8%)_inset,0_8px_24px_-12px_oklch(0.42_0.16_22/55%)] transition-colors hover:bg-couleur-burgund-hi focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring disabled:opacity-60"
+      <button
+        type="submit"
+        disabled={isPending}
+        className="group mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-couleur-burgund px-8 text-sm font-medium text-primary-foreground shadow-[0_1px_0_oklch(1_0_0/8%)_inset,0_8px_24px_-12px_oklch(0.42_0.16_22/55%)] transition-colors hover:bg-couleur-burgund-hi focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring disabled:opacity-60"
+      >
+        {isPending ? (
+          <>
+            <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
+            Senden…
+          </>
+        ) : (
+          <>
+            Anfrage senden
+            <ArrowUpRight
+              aria-hidden
+              className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            />
+          </>
+        )}
+      </button>
+
+      <div className="mt-3.5 text-center text-[11px] text-foreground-dim">
+        Oder direkt:{' '}
+        <a
+          href={`mailto:${siteConfig.contact.emails.zimmer}`}
+          className="text-couleur-burgund hover:text-couleur-burgund-hi"
         >
-          {isPending ? (
-            <>
-              <Loader2
-                className="h-4 w-4 animate-spin"
-                aria-hidden
-              />
-              Senden…
-            </>
-          ) : (
-            <>
-              Nachricht senden
-              <ArrowUpRight
-                aria-hidden
-                className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-              />
-            </>
-          )}
-        </button>
+          {siteConfig.contact.emails.zimmer}
+        </a>
       </div>
     </form>
   );
@@ -166,26 +170,22 @@ type FieldProps = {
   label: string;
   name: string;
   error?: string;
+  className?: string;
   children: React.ReactNode;
 };
 
-function Field({ label, name, error, children }: FieldProps) {
+function Field({ label, name, error, className, children }: FieldProps) {
   return (
-    <div>
+    <div className={className}>
       <label
         htmlFor={name}
-        className="text-[11px] uppercase tracking-[0.22em] text-couleur-gold-dim"
+        className="block text-[10px] uppercase tracking-[0.22em] text-foreground-dim"
       >
         {label}
       </label>
       <div className="mt-2">{children}</div>
       {error ? (
-        <p
-          className={cn(
-            'mt-2 text-xs italic text-couleur-burgund-hi',
-          )}
-          role="alert"
-        >
+        <p className={cn('mt-2 text-xs italic text-couleur-burgund-hi')} role="alert">
           {error}
         </p>
       ) : null}

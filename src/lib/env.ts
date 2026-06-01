@@ -1,23 +1,14 @@
 import { z } from 'zod';
 
 const PublicEnvSchema = z.object({
-  NEXT_PUBLIC_SITE_URL: z
-    .string()
-    .url()
-    .default('http://localhost:3000'),
-  NEXT_PUBLIC_APP_URL: z
-    .string()
-    .url()
-    .default('https://teutonia-app.vercel.app'),
+  NEXT_PUBLIC_SITE_URL: z.string().url().default('http://localhost:3000'),
+  NEXT_PUBLIC_APP_URL: z.string().url().default('https://teutonia-app.vercel.app'),
 });
 
 const ServerEnvSchema = z.object({
   RESEND_API_KEY: z.string().optional(),
   CONTACT_TO_EMAIL: z.string().email().default('zimmer@kbteutonia.de'),
-  CONTACT_FROM_EMAIL: z
-    .string()
-    .email()
-    .default('website@kbteutonia.de'),
+  CONTACT_FROM_EMAIL: z.string().email().default('website@kbteutonia.de'),
 });
 
 const publicEnvResult = PublicEnvSchema.safeParse({

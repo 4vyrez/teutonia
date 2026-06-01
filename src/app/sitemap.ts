@@ -4,6 +4,8 @@ import { siteConfig } from '@/lib/site-config';
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteConfig.url;
   const now = new Date();
+  // Only indexable routes belong in the sitemap. /impressum and /datenschutz
+  // are noindex (robots index:false) and are therefore intentionally omitted.
   return [
     {
       url: `${base}/`,
@@ -12,22 +14,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
+      url: `${base}/mitgliedschaft`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
       url: `${base}/geschichte`,
       lastModified: now,
       changeFrequency: 'yearly',
       priority: 0.6,
-    },
-    {
-      url: `${base}/impressum`,
-      lastModified: now,
-      changeFrequency: 'yearly',
-      priority: 0.2,
-    },
-    {
-      url: `${base}/datenschutz`,
-      lastModified: now,
-      changeFrequency: 'yearly',
-      priority: 0.2,
     },
   ];
 }

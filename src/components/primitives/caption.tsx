@@ -15,9 +15,7 @@ export function Caption({ children, className, number }: CaptionProps) {
         className,
       )}
     >
-      {number ? (
-        <span className="font-display text-couleur-gold-dim">{number}</span>
-      ) : null}
+      {number ? <span className="font-display text-couleur-gold-dim">{number}</span> : null}
       <span className="text-pretty">{children}</span>
     </p>
   );

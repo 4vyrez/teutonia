@@ -1,6 +1,6 @@
-import { Section, Eyebrow } from '@/components/primitives/section';
 import { EditorialColumn } from '@/components/primitives/editorial-column';
 import { GoldRule } from '@/components/primitives/gold-rule';
+import { Eyebrow, Section } from '@/components/primitives/section';
 
 const principles = [
   {
@@ -33,13 +33,11 @@ export function Identitaet() {
           <Eyebrow>02 — Identität</Eyebrow>
           <h2 className="font-display mt-6 text-balance text-[clamp(2rem,4.5vw,3.25rem)] font-light leading-[1.08] text-foreground">
             Wer wir sind. <br />
-            <span className="italic text-couleur-gold-dim">
-              Und wer wir nicht sind.
-            </span>
+            <span className="italic text-couleur-gold-dim">Und wer wir nicht sind.</span>
           </h2>
           <p className="mt-8 max-w-prose-tight text-pretty text-base leading-relaxed text-foreground-muted">
-            „Burschenschaft" ist ein Wort mit Beifang. Deshalb hier präzise,
-            ohne Pathos: vier Punkte, die uns einordnen.
+            „Burschenschaft" ist ein Wort mit Beifang. Deshalb hier präzise, ohne Pathos: vier
+            Punkte, die uns einordnen.
           </p>
         </div>
 
@@ -60,9 +58,7 @@ export function Identitaet() {
                   <EditorialColumn className="mt-3 text-base">
                     <p>{p.detail}</p>
                   </EditorialColumn>
-                  {i < principles.length - 1 ? (
-                    <GoldRule className="mt-10" />
-                  ) : null}
+                  {i < principles.length - 1 ? <GoldRule className="mt-10" /> : null}
                 </div>
               </li>
             ))}
